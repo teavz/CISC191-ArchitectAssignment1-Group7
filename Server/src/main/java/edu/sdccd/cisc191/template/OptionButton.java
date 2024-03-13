@@ -32,28 +32,28 @@ public class OptionButton extends Button {
     public void changeTextColor(int i){
         switch (i) {
             case 0:
-                setTextFill(Color.web("#FF0000"));
-                setStyle("-fx-background-color: #ff7777");
+                setTextFill(Color.web("#880000"));
+                setStyle("-fx-background-color: #de6363");
                 break;
             case 1:
                 setTextFill(Color.web("#0000FF"));
                 setStyle("-fx-background-color: #7789ff");
                 break;
             case 2:
-                setTextFill(Color.web("#FFFF00"));
-                setStyle("-fx-background-color: #ffcf77");
+                setTextFill(Color.web("#ffbe38"));
+                setStyle("-fx-background-color: rgba(255,231,109,0.7)");
                 break;
             case 3:
-                setTextFill(Color.web("#00FF00"));
-                setStyle("-fx-background-color: #ff7777");
+                setTextFill(Color.web("#379411"));
+                setStyle("-fx-background-color: #7bc95a");
                 break;
             case 4:
-                setTextFill(Color.web("#FFA500"));
-                setStyle("-fx-background-color: #ff7777");
+                setTextFill(Color.web("#bd5e15"));
+                setStyle("-fx-background-color: #ff9041");
                 break;
             case 5:
-                setTextFill(Color.web("#A020F0"));
-                setStyle("-fx-background-color: #ff7777");
+                setTextFill(Color.web("#4f1fa1"));
+                setStyle("-fx-background-color: #a37fea");
             default:
         }
     }
