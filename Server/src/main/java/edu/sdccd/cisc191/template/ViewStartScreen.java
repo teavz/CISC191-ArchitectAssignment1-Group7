@@ -565,7 +565,7 @@ public class ViewStartScreen extends Application {
         }
         return subjectSave;
     }
-
+    //we finally implemented 2d arrays
     public void convertPlainTextToSubject() {
         // Create a TextArea on new page for the user to input the schedule text
         TextArea scheduleText = new TextArea();
@@ -578,6 +578,7 @@ public class ViewStartScreen extends Application {
         confirmButton.setOnAction((ActionEvent e) -> {
             String[] tokens = scheduleText.getText().split("\n");
             String[] tokens1;
+            //TODO make a 2d array out of this somehow and implement it perchance
             for (int i = 0; i < tokens.length; i++) {
                 tokens1 = tokens[i].split(",");
                 Subject tempSubject = new Subject(tokens1[0], Boolean.parseBoolean(tokens1[2]), Double.parseDouble(tokens1[1]));
@@ -607,7 +608,7 @@ public class ViewStartScreen extends Application {
     }
 
     //yikes.
-    public String convertEverythingToString(ArrayList<Subject> a) {
+    public static String convertEverythingToString(ArrayList<Subject> a) {
         String finalString = "";
         String temp = "";
         for (int i = 0; i < a.size(); i++) {
