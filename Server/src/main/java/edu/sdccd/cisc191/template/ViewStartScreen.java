@@ -34,6 +34,23 @@ public class ViewStartScreen extends Application {
     private Scene sceneClassName;
     private ArrayList<Subject> subjectArrayList = new ArrayList<>();
 
+    public void addSubject(Subject temp){
+        subjectArrayList.add(temp);
+    }
+
+    public ArrayList<Subject> getSubjectArray() {
+        return subjectArrayList;
+    }
+
+    public Scene getScene() {
+        return sceneClassName;
+    }
+
+    public void setScene(Scene temp) {
+        sceneClassName = temp;
+    }
+
+
     private static String savedSchedule;
 
     /**
