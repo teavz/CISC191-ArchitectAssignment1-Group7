@@ -541,11 +541,11 @@ public class ViewStartScreen extends Application {
                 }
                 tempSubject.setAssignmentList(assignments);
                 subjectSave.add(tempSubject);
-
+                subjectArrayList = subjectSave;
             }
             try {
                 // After processing the text, switch to the main screen
-                runMainScreen(subjectSave, selectedIndex);
+                runMainScreen(subjectArrayList, selectedIndex);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
