@@ -34,7 +34,7 @@ public class ViewStartScreen extends Application {
     private Scene sceneClassName;
     private ArrayList<Subject> subjectArrayList = new ArrayList<>();
 
-    private String savedSchedule;
+    private static String savedSchedule;
 
     /**
      * @param stage the primary stage for this application, onto which
@@ -586,7 +586,7 @@ public class ViewStartScreen extends Application {
             switchScene(sceneClassName, "Choose Save Option");
         stage.show();
     }
-    public String getSavedSchedule() {
+    public static String getSavedSchedule() {
         return savedSchedule;
     }
 }
