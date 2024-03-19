@@ -18,6 +18,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -45,11 +46,14 @@ public class ViewStartScreen extends Application {
     public Scene getScene() {
         return sceneClassName;
     }
+    public Stage getStage() {
+        return stage;
+    }
 
     public void setScene(Scene temp) {
         sceneClassName = temp;
     }
-
+    public void setStage(Stage stage) {this.stage = stage;}
 
     private static String savedSchedule;
 
@@ -265,6 +269,7 @@ public class ViewStartScreen extends Application {
     public void switchScene(Scene scene, String title) {
         stage.setScene(scene);
         stage.setTitle(title);
+        sceneClassName = scene;
     }
 
     /**
@@ -568,6 +573,7 @@ public class ViewStartScreen extends Application {
      * @return string consisting of all schedule info
      */
     public String convertEverythingToString(ArrayList<Subject> a) {
+        //IGNORE METHOD. New implementation of networking on web server itself.
         String finalString = "";
         String temp = "";
         for (Subject subject : a) {
@@ -594,7 +600,8 @@ public class ViewStartScreen extends Application {
         });
 
         saveRemote.setOnAction((ActionEvent e) -> {
-           //TODO figure this out for me logan
+           //DOES NOT WORK. Alternate networking implementation:
+            // File Upload/Download on web server
            savedSchedule = convertEverythingToString(a);
         });
         //set layout
@@ -603,7 +610,14 @@ public class ViewStartScreen extends Application {
             switchScene(sceneClassName, "Choose Save Option");
         stage.show();
     }
-    public static String getSavedSchedule() {
-        return savedSchedule;
+
+
+    public boolean checkSceneEquals(Scene scene1, Scene scene2) {
+        if (scene1.getWidth() == scene2.getWidth() && scene1.getHeight() == scene2.getHeight()) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

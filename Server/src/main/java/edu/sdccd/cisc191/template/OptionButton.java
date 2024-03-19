@@ -25,6 +25,7 @@ public class OptionButton extends Button {
     public void changeTextColor(Paint color){
         setTextFill(color);
     }
+
     public void setTextColor(int i){
 
     }

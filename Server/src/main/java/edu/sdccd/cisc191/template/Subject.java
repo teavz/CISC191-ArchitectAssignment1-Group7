@@ -99,7 +99,7 @@ public class Subject {
      * for the 2D array thing also should we have javadocs for any of these methods in our project
      *
      * @return
-     * @author Simon Nguyen
+     *
      */
     public String[][] convertAssignmentListTo2DArray() {
         int numRows = assignmentList.size();
@@ -131,7 +131,7 @@ public class Subject {
         return assignmentArray;
         }
 
-    public ArrayList<Assignment> convert2DArrayToAssignmentLIst(String[][] a) {
+    public ArrayList<Assignment> convert2DArrayToAssignmentList(String[][] a) {
         ArrayList<Assignment> assignments = new ArrayList<>();
         for (int i = 0; i < a.length; i++) {
             Assignment tempAssignment = new Assignment();
@@ -144,10 +144,12 @@ public class Subject {
             if (a[i].length > 3)
                 tempAssignment.setTotalPoints(Integer.parseInt(a[i][3]));
             if (a[i].length > 4)
-                tempAssignment.setAssignmentPercentage(Double.parseDouble(a[i][4]));
-            if (a[i].length > 5)
-                tempAssignment.setAssignmentPercentage(Double.parseDouble(a[i][5]));
+                tempAssignment.setBusyWork(Boolean.parseBoolean(a[i][4]));
+
+            assignments.add(tempAssignment);
         }
+
+
 
         return assignments;
     }

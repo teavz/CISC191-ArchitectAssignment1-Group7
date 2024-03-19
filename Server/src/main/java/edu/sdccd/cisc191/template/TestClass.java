@@ -6,10 +6,11 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+import javafx.scene.paint.Paint;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -50,38 +51,67 @@ public class TestClass {
     }
 
 
-
-
     @Test
-    void module3() {
+    void module2() {
 
         ViewStartScreen testClass = new ViewStartScreen();
 
+
         Subject testSubject = new Subject("AP Physics", false, 76);
-        Assignment testAssignment = new Assignment();
-        testClass.addSubject(testSubject);
-        ArrayList <Subject> testSubjectArray = testClass.getSubjectArray();
 
-        //test out the first Subject (sample for this test) with index 0
-        testClass.viewAssignmentList(0);
-
-
-        Parent root1 = new StackPane();
-        Scene scene1 = new Scene(root1, 400, 300);
-        testClass.setScene(scene1);
-
-        Parent root2 = new StackPane();
-        Scene scene2 = new Scene(root2, 400, 300);
-
-        testClass.switchScene(scene2, "testTitle");
-        Scene testScene = testClass.getScene();
+        Assignment testAssignment = new Assignment("Test 1");
+        testAssignment.setBusyWork(true);
+        testAssignment.setTotalPoints(80);
+        testAssignment.setPointsOfAssignment(70);
+        testAssignment.setDaysUntilDueDate(9);
 
 
-        Assertions.assertEquals(scene2, testClass.getScene());
+        Assignment testAssignment2 = new Assignment("Test 2");
+        testAssignment2.setBusyWork(false);
+        testAssignment2.setTotalPoints(70);
+        testAssignment2.setPointsOfAssignment(50);
+        testAssignment2.setDaysUntilDueDate(5);
+
+        ArrayList<Assignment> testArrayList1 = new ArrayList<Assignment>();
+        testArrayList1.add(testAssignment);
 
 
+        ArrayList<Assignment> expectedAssignments = new ArrayList<>();
+        expectedAssignments.add(testAssignment);
+        expectedAssignments.add(testAssignment2);
 
+        String[][] testAssignmentArray =
+                {{"Test 1", "9", "70", "80", "true"}, {"Test 2", "5", "50", "70", "false"}};
+
+        ArrayList<Assignment> testArrayList = testSubject.convert2DArrayToAssignmentList(testAssignmentArray);
+
+
+        ArrayList<Assignment> actualAssignments = testSubject.convert2DArrayToAssignmentList(testAssignmentArray);
+
+        assertEquals(expectedAssignments.size(), testArrayList.size());
+        // Compare the lists by iterating over each element
+        for (int i = 0; i < expectedAssignments.size(); i++) {
+            Assignment expected = testArrayList.get(i);
+            Assignment actual = testSubject.convert2DArrayToAssignmentList(testAssignmentArray).get(i);
+
+            assertEquals(expected.getNameOfAssignment(), actual.getNameOfAssignment());
+            assertEquals(expected.getDaysUntilDueDate(), actual.getDaysUntilDueDate());
+            assertEquals(expected.getPointsOfAssignment(), actual.getPointsOfAssignment());
+            assertEquals(expected.getTotalPoints(), actual.getTotalPoints());
+            assertEquals(expected.isBusyWork(), actual.isBusyWork());
+
+        }
     }
+
+
+    /**
+     * See if our application updates information for labels accordingly, like around line 311
+     */
+    @Test
+    void module3() {
+        //tbd
+    }
+
 
     @Test
     void module4() {
@@ -100,9 +130,9 @@ public class TestClass {
     void module5() {
         ViewStartScreen testClass = new ViewStartScreen();
 
-        Subject testSubject = new Subject("Subject", true, 94);
+        Subject testSubject = new Subject("Subject", true, 94.0);
         testSubject.setColor(0);
-        Subject testSubject2 = new Subject("Subject2", false, 89);
+        Subject testSubject2 = new Subject("Subject2", false, 89.0);
         testSubject2.setColor(1);
 
         ArrayList<Subject> testArray = new ArrayList<Subject>();
@@ -117,11 +147,17 @@ public class TestClass {
         testClass.convertSubjectToCSV(testArray);
         //file created is My_Schedule.txt???
 
+        String test = "";
         try {
             Scanner readFile = new Scanner(testFile);
             readFile.useDelimiter(",");
 
-                assertEquals(actual, readFile.next());
+            while (readFile.hasNextLine()) {
+                String temp = readFile.nextLine();
+                test += temp;
+            }
+                assertEquals(actual, test);
+
         }
         catch (FileNotFoundException ex) {
             throw new RuntimeException(ex);
@@ -130,8 +166,5 @@ public class TestClass {
 
     }
 
-    @Test
-    void module6() {
 
-    }
 }
