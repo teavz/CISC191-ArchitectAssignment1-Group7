@@ -5,6 +5,7 @@
 </head>
 <body>
 <h2>Stored Schedules:</h2>
-    <% out.println("This is a java print function. Potentially call methods using java"); %>
+    <p>text</p>
+    <% out.println(ViewStartScreen.getSavedSchedule()); %>
 </body>
 </html>
