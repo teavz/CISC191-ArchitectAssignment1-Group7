@@ -289,7 +289,7 @@ public class ViewStartScreen extends Application {
         });
         OptionButton saveSchedule = new OptionButton("Save Schedule", screenWidth / 3, screenHeight / 17.5);
         saveSchedule.setOnAction((ActionEvent e) -> {
-            convertSubjectToCSV(a);
+            chooseSchedule(a);
         });
         HBox bottomButtons = new HBox(screenWidth / 1.5, addClass, saveSchedule);
         bottomButtons.setAlignment(Pos.BOTTOM_LEFT);
@@ -570,6 +570,7 @@ public class ViewStartScreen extends Application {
         OptionButton saveRemote = new OptionButton("Save Remotely", screenWidth/3.0, screenHeight/2.0);
         HBox buttons = new HBox(50,saveFile, saveRemote);
         buttons.setAlignment(Pos.CENTER);
+        buttons.setStyle("-fx-background-color: #FFF1DC;");
 
         saveFile.setOnAction((ActionEvent e) -> {
             convertSubjectToCSV(a);
