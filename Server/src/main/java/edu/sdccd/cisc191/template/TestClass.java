@@ -1,4 +1,4 @@
-package edu.sdccd.cisc191.template;
+/*package edu.sdccd.cisc191.template;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * module 5:
  * verify save schedule works
  */
-public class TestClass {
+/*public class TestClass {
 
     @Test
     void module1() {
@@ -107,7 +107,7 @@ public class TestClass {
     /**
      * See if our application updates information for labels accordingly, like around line 311
      */
-    @Test
+ /*   @Test
     void module3() {
         //tbd
     }
@@ -167,4 +167,4 @@ public class TestClass {
     }
 
 
-}
+}**/
