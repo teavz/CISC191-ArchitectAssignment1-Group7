@@ -1,10 +1,13 @@
-/*package edu.sdccd.cisc191.template;
+package edu.sdccd.cisc191.template;
 
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import javafx.scene.paint.Paint;
 import java.awt.*;
@@ -19,17 +22,26 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
- * Module 1:
- * verify at least one of the methods relating to an arraylist
- * module 3:
- * verify a label is properly assigned like on line 311
- * module 4:
- * verify the assignment arraylist translates well into the Subject class
- * module 5:
- * verify save schedule works
+ * Unit tests for homework planner
  */
-/*public class TestClass {
+public class TestClass {
 
+    //fixes the illegalstateexception toolkit error.
+    @BeforeAll
+    public static void setUp() {
+        new JFXPanel();
+    }
+
+
+    /** Unit Test 1
+     * 1. creates a new ViewStartScreen class for test screen
+     * 2. Create a new subject and an assignment for this test
+     * 3. Try adding subject to the array for academic subjects
+     * 4. assert that the subject inside the test array is
+     * equal to the original test subject we created
+     *
+     * @author Simon Nguyen
+     */
     @Test
     void module1() {
 
@@ -39,18 +51,30 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
         Assignment testAssignment = new Assignment();
 
+
+
         testClass.addSubject(testSubject);
-
-
         ArrayList <Subject> testSubjectArray = testClass.getSubjectArray();
 
         assertEquals(testSubject, testClass.getSubjectArray().get(0));
-
-
-
     }
 
 
+
+
+    /** Unit Test 2
+     *  1. Create new test ViewStartScreen, subject for unit test
+     *  2. Create two sample assignments with whatever attributes I want.
+     *  3. Create a sample arraylist with the 2 assignments to compare to later
+     *  4. Create a sample 2D array to be able to test our 2darray to arraylist method
+     *  5.  Use the method to create another test array list.
+     *  6.  With iteration, compare the sample arraylist with the newly created arraylist
+     *  created by the convert 2d array to arraylist method.
+     *  7.  Assert the two arraylists and all their contents are equal, thus ensuring
+     *  the method converting 2d array to arraylist works correctly
+     *
+     * @author Simon Nguyen
+     */
     @Test
     void module2() {
 
@@ -72,9 +96,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         testAssignment2.setPointsOfAssignment(50);
         testAssignment2.setDaysUntilDueDate(5);
 
-        ArrayList<Assignment> testArrayList1 = new ArrayList<Assignment>();
-        testArrayList1.add(testAssignment);
-
 
         ArrayList<Assignment> expectedAssignments = new ArrayList<>();
         expectedAssignments.add(testAssignment);
@@ -85,8 +106,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
         ArrayList<Assignment> testArrayList = testSubject.convert2DArrayToAssignmentList(testAssignmentArray);
 
-
-        ArrayList<Assignment> actualAssignments = testSubject.convert2DArrayToAssignmentList(testAssignmentArray);
 
         assertEquals(expectedAssignments.size(), testArrayList.size());
         // Compare the lists by iterating over each element
@@ -104,32 +123,113 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
     }
 
 
-    /**
-     * See if our application updates information for labels accordingly, like around line 311
+
+
+    /** Unit 3 Test
+     * -  like test 5, Platform.runLater makes sure the UI stuff runs on JavaFX thread.  This
+     *  fixed the annoying IllegalStateException error
+     * 1. create a sample test class, and make some sample subjects and assignments.
+     * 2.  Create a new stage and new scene, and set our testClass with that.
+     * 3.  Create a new scene2 with different dimensions, and use our switchScene method to
+     * change our ViewSmartScreen test class's scene to scene 2
+     * 4.  Assert, using getter method, that the testClass's current scene is the same as scene 2,
+     * which verifies that all our setter, getter and swtichScene methods work.
+     *
+     * @author Simon Nguyen
      */
- /*   @Test
+    @Test
     void module3() {
-        //tbd
+
+        Platform.runLater(() -> {
+
+
+            ViewStartScreen testClass = new ViewStartScreen();
+
+            Subject testSubject = new Subject("AP Physics", false, 76);
+            Assignment testAssignment = new Assignment();
+            testSubject.addAssignment(testAssignment);
+            testClass.addSubject(testSubject);
+            ArrayList<Subject> testSubjectArray = testClass.getSubjectArray();
+
+
+            Stage testStage = new Stage();
+            testClass.setStage(testStage);
+
+            Parent root1 = new StackPane();
+            Scene scene1 = new Scene(root1, 400, 300);
+            testClass.setScene(scene1);
+
+            Parent root2 = new StackPane();
+            Scene scene2 = new Scene(root2, 400, 300);
+
+            testClass.switchScene(scene2, "testTitle");
+
+
+            Assertions.assertEquals(scene2, testClass.getScene());
+
+
+        });
     }
 
 
+
+
+
+    /** Unit Test 4
+     * - goal is to verify that moving between different classes work, thus
+     * proving Object-Oriented Programming.  Or so I think.
+     * 1. Create a new subject and a sample assignment, which will be added to the
+     * subject's array list.
+     * 2.  Using getters, assert that all content of the assignment taken from
+     * our subject's assignment list is the same as our original assignment's
+     * attributes
+     *
+     * @author Simon Nguyen
+     */
     @Test
     void module4() {
+
+        ViewStartScreen testClass = new ViewStartScreen();
+
         Subject testSubject = new Subject();
-        Assignment testAssignment = new Assignment();
+        Assignment testAssignment = new Assignment("Test 1");
+        testAssignment.setBusyWork(true);
+        testAssignment.setTotalPoints(80);
+        testAssignment.setPointsOfAssignment(70);
+        testAssignment.setDaysUntilDueDate(9);
 
         testSubject.addAssignment(testAssignment);
 
-        // see if methods work
-        Assignment sampleAssignment = testSubject.getAssignmentList().get(0);
+        // purposely left it at testSubject.get(0) to test all the getters and setters
 
-        assertEquals(testAssignment, sampleAssignment);
+        assertEquals(testAssignment, testSubject.getAssignmentList().get(0));
+        assertEquals(testAssignment.getTotalPoints(), testSubject.getAssignmentList().get(0).getTotalPoints());
+        assertEquals(testAssignment.getPointsOfAssignment(), testSubject.getAssignmentList().get(0).getPointsOfAssignment());
+        assertEquals(testAssignment.getDaysUntilDueDate(), testSubject.getAssignmentList().get(0).getDaysUntilDueDate());
+        assertEquals(testAssignment.isBusyWork(), testSubject.getAssignmentList().get(0).isBusyWork());
     }
 
+
+    /** Unit Test 5
+     * - Platform.runLater makes sure the UI stuff runs on JavaFX thread.  This
+     * fixed the annoying IllegalStateException error
+     *
+     * 1. create new testClass and two sample test subjects with different attributes
+     * for testing.  Put these subjects in an arraylist.
+     * 2.  Create a sample string of what the CSV file is supposed to look like.
+     * 3. Test our arraylist to CSV method by plugging in the sample arraylist.
+     * 4. using a Scanner, the unit test will read the file.
+     * 5. With iteration, read each line of file and build the string.
+     * 6. Assert that the sample created from reading the CSV file is identical to the
+     * sample string we created earlier.
+     *
+     * @author Simon Nguyen
+     */
     @Test
     void module5() {
 
-        ViewStartScreen testClass = new ViewStartScreen();
+        Platform.runLater(() -> {
+            ViewStartScreen testClass = new ViewStartScreen();
 
         Subject testSubject = new Subject("Subject", true, 94.0);
         testSubject.setColor(0);
@@ -142,11 +242,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
         File testFile = new File("My_Schedule.txt");
-
         String actual = "Subject,94.0,false,0,\nSubject2,89.0,false,1,";
 
         testClass.convertSubjectToCSV(testArray);
-        //file created is My_Schedule.txt???
+        //file created is My_Schedule.txt right
 
         String test = "";
         try {
@@ -163,9 +262,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         catch (FileNotFoundException ex) {
             throw new RuntimeException(ex);
         }
-
-
+        });
     }
 
 
-}**/
+}
