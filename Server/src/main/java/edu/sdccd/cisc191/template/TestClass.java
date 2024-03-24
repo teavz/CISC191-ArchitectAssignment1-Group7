@@ -94,47 +94,16 @@ public class TestClass {
     void module2() {
 
         ViewStartScreen testClass = new ViewStartScreen();
-
-
+        Calendar calendar = new Calendar();
         Subject testSubject = new Subject("AP Physics", false, 76);
+        Assignment testAssignment = new Assignment("Test 1", 9, 70, true, 80);
+        calendar.addAssignment(24, testAssignment);
 
-        Assignment testAssignment = new Assignment("Test 1");
-        testAssignment.setBusyWork(true);
-        testAssignment.setTotalPoints(80);
-        testAssignment.setPointsOfAssignment(70);
-        testAssignment.setDaysUntilDueDate(9);
+        Assignment testAssignment2 = new Assignment("Test 2", 5, 50, false, 70);
+        calendar.addAssignment(24, testAssignment2);
 
+            assertEquals(calendar.getAssignments(0, 4, 4), testAssignment);
 
-        Assignment testAssignment2 = new Assignment("Test 2");
-        testAssignment2.setBusyWork(false);
-        testAssignment2.setTotalPoints(70);
-        testAssignment2.setPointsOfAssignment(50);
-        testAssignment2.setDaysUntilDueDate(5);
-
-
-        ArrayList<Assignment> expectedAssignments = new ArrayList<>();
-        expectedAssignments.add(testAssignment);
-        expectedAssignments.add(testAssignment2);
-
-        String[][] testAssignmentArray =
-                {{"Test 1", "9", "70", "80", "true"}, {"Test 2", "5", "50", "70", "false"}};
-
-        ArrayList<Assignment> testArrayList = testSubject.convert2DArrayToAssignmentList(testAssignmentArray);
-
-
-        assertEquals(expectedAssignments.size(), testArrayList.size());
-        // Compare the lists by iterating over each element
-        for (int i = 0; i < expectedAssignments.size(); i++) {
-            Assignment expected = testArrayList.get(i);
-            Assignment actual = testSubject.convert2DArrayToAssignmentList(testAssignmentArray).get(i);
-
-            assertEquals(expected.getNameOfAssignment(), actual.getNameOfAssignment());
-            assertEquals(expected.getDaysUntilDueDate(), actual.getDaysUntilDueDate());
-            assertEquals(expected.getPointsOfAssignment(), actual.getPointsOfAssignment());
-            assertEquals(expected.getTotalPoints(), actual.getTotalPoints());
-            assertEquals(expected.isBusyWork(), actual.isBusyWork());
-
-        }
     }
 
 

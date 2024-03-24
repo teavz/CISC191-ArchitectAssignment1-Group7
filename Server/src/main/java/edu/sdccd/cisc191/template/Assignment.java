@@ -21,6 +21,14 @@ public class Assignment {
         totalPoints = 0;
         assignmentPercentage = 0;
     }
+    public Assignment(String name, int days, int points, boolean busy, int totalPoints){
+        nameOfAssignment = name;
+        daysUntilDueDate = days;
+        pointsOfAssignment = points;
+        busyWork = busy;
+        totalPoints = this.totalPoints;
+
+    }
 
     public Assignment(String name) {
         nameOfAssignment = name;
