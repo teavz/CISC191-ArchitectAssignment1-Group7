@@ -18,6 +18,9 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,8 +35,12 @@ public class ViewStartScreen extends Application {
     private int selectedIndex;
     private BorderPane layout;
     private Stage stage;
+    private Date date;
+    private SimpleDateFormat dateFormat;
+    private Label time;
     private Scene sceneClassName;
     private ArrayList<Subject> subjectArrayList = new ArrayList<>();
+    private boolean done = false;
 
     public void addSubject(Subject temp){
         subjectArrayList.add(temp);
@@ -75,13 +82,13 @@ public class ViewStartScreen extends Application {
         screenWidth = 1000;
         screenHeight = 1000;
         Font font = Font.font("Montserrat", FontWeight.BOLD, 36);
+        Font smallFont = Font.font("Montserrat", 36);
 
         //button to direct the user to set up
         OptionButton setupButton = new OptionButton("Make your Schedule", 500, 100);
         setupButton.changeTextColor(Color.web("#34A3ED"));
         setupButton.changeBackGroundColor();
         setupButton.setFont(font);
-        setupButton.setWrapText(true);
 
         //button for import of csv file of saved schedule
         OptionButton importCSVButton = new OptionButton("Import from File", 500, 100);
@@ -98,17 +105,22 @@ public class ViewStartScreen extends Application {
         importTextButton.setWrapText(true);
 
         //title and credits to the authors
-        Label title = new Label("Schedule and Homework Tracker");
+        Label title = new Label("Schedule & Homework Tracker");
         Label credits = new Label("Credits: Logan, Simon, Theo, Willy");
+        date = new Date();
+        dateFormat = new SimpleDateFormat("MMMM/dd/y hh:mm:ss a");
+        time = new Label(dateFormat.format((date)));
+        credits.setFont(font);
         title.setFont(font);
         //organize title and setup button to be spaced accordingly, set it in center
-        VBox buttons = new VBox((double) screenHeight / 120, title, setupButton, importCSVButton, importTextButton);
         Image image = new Image(Files.newInputStream(Paths.get("Server/src/main/java/edu/sdccd/cisc191/template/Homework-modified.png")));
         Image color = new Image(Files.newInputStream(Paths.get("Server/src/main/java/edu/sdccd/cisc191/template/Homework.png")));
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(150);
         imageView.setFitWidth(150);
-        buttons.getChildren().addAll(imageView);
+        VBox buttons = new VBox((double) screenHeight / 120, title, setupButton, importCSVButton, importTextButton, imageView, credits);
+
+
 
         buttonEffects(glow, setupButton, image, color, imageView);
 
@@ -118,6 +130,7 @@ public class ViewStartScreen extends Application {
 
         setupButton.setOnAction((ActionEvent e) -> {
             try {
+                done = true;
                 runSetup2();
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
@@ -127,6 +140,7 @@ public class ViewStartScreen extends Application {
         importCSVButton.setOnAction((ActionEvent e) -> {
             subjectArrayList = convertCSVFileToSubject();
             try {
+                done = true;
                 runMainScreen(subjectArrayList, selectedIndex);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
@@ -135,6 +149,7 @@ public class ViewStartScreen extends Application {
 
         importTextButton.setOnAction((ActionEvent e) -> {
             try {
+                done = true;
                 convertPlainTextToSubject();
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
@@ -144,15 +159,31 @@ public class ViewStartScreen extends Application {
         buttons.setStyle("-fx-background-color: #FFF1DC");
         buttons.setAlignment(Pos.CENTER);
         layout = new BorderPane(buttons);
-
         buttons = new VBox(credits);
+        buttons.setStyle("-fx-background-color: #FFF1DC");
+        layout.setBottom(buttons);
+        buttons = new VBox(time);
         buttons.setAlignment(Pos.BOTTOM_RIGHT);
         layout.setBottom(buttons);
         Scene startScene = new Scene(layout, screenWidth, screenHeight);
         startScene.setFill(Color.web("#81c483"));
-        stage.setTitle("Schedule and Homework Tracker");
+        stage.setTitle("Schedule & Homework Tracker");
         stage.setScene(startScene);
         stage.show();
+        setTime();
+
+    }
+    public void setTime(){
+        while(done == false) {
+            String currentTime = dateFormat.format(Calendar.getInstance().getTime());
+            System.out.println(currentTime);
+            time.setText(currentTime);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
