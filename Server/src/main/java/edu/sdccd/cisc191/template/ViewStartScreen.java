@@ -41,6 +41,7 @@ public class ViewStartScreen extends Application {
     private Scene sceneClassName;
     private ArrayList<Subject> subjectArrayList = new ArrayList<>();
     private boolean done = false;
+    private Calendar calendar;
 
     public void addSubject(Subject temp){
         subjectArrayList.add(temp);

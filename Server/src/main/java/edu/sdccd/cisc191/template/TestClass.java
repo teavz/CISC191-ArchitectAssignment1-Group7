@@ -79,30 +79,44 @@ public class TestClass {
 
     /** Unit Test 2
      *  1. Create new test ViewStartScreen, subject for unit test
-     *  2. Create two sample assignments with whatever attributes I want.
-     *  3. Create a sample arraylist with the 2 assignments to compare to later
-     *  4. Create a sample 2D array to be able to test our 2darray to arraylist method
-     *  5.  Use the method to create another test array list.
-     *  6.  With iteration, compare the sample arraylist with the newly created arraylist
-     *  created by the convert 2d array to arraylist method.
-     *  7.  Assert the two arraylists and all their contents are equal, thus ensuring
-     *  the method converting 2d array to arraylist works correctly
-     *
-     * @author Simon Nguyen
+     *  2. Create a Calendar object which contains a 2D Array of Arraylists of Assignments
+     *  3. This means an infinite amount of assignments can be added to a day with no bounds
+     *  4. Add multiple assignments to one day and confirm a variety of 2D Array methods
+     *  5. Do the same for another day to confirm that the 2D Array works
+     * @author Willy Do
      */
     @Test
     void module2() {
-
+        //Example date number 1 (The 24th)
         ViewStartScreen testClass = new ViewStartScreen();
         Calendar calendar = new Calendar();
+        calendar.createArrayList();
         Subject testSubject = new Subject("AP Physics", false, 76);
         Assignment testAssignment = new Assignment("Test 1", 9, 70, true, 80);
         calendar.addAssignment(24, testAssignment);
-
+        assertEquals(calendar.getAssignment(24, 0), testAssignment);
         Assignment testAssignment2 = new Assignment("Test 2", 5, 50, false, 70);
         calendar.addAssignment(24, testAssignment2);
+        assertEquals(calendar.getAssignment(24,1), testAssignment2);
+        Assignment testAssignment3 = new Assignment("Test 3", 6, 50, false, 100);
+        calendar.addAssignment(24, testAssignment3);
+        Assignment testAssignment4 = new Assignment("Test 4", 1, 30, false, 100);
+        Assignment testAssignment5 = new Assignment("Test 5", 2, 90, false, 100);
+        Assignment testAssignment6 = new Assignment("Test 6", 3, 50, true, 100);
+        calendar.addAssignment(24, testAssignment4);
+        calendar.setAssignment(24, 2, testAssignment5);
+        assertEquals(calendar.getAssignment(24, 2), testAssignment5);
+        assertEquals(calendar.getAssignment(24, 3), testAssignment4);
+        calendar.removeAssignment(24, 3);
+        calendar.addAssignment(24, testAssignment6);
+        assertEquals(calendar.getAssignment(24, 3), testAssignment6);
+        //Example date number 2 (The 13th)
+        Assignment testAssignment7 = new Assignment("Test 7", 4, 50, false, 100);
+        calendar.addAssignment(13, testAssignment7);
+        Assignment testAssignment8 = new Assignment("Test 8", 7, 10, false, 100);
+        calendar.addAssignment(13, testAssignment8);
+        assertEquals(calendar.findIndex(13, testAssignment8), 1);
 
-            assertEquals(calendar.getAssignments(0, 4, 4), testAssignment);
 
     }
 
