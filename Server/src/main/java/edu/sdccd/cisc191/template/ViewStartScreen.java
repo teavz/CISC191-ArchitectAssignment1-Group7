@@ -9,6 +9,7 @@ import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -66,8 +67,8 @@ public class ViewStartScreen extends Application {
         VBox vBox = new VBox(height, label, button);
         return vBox;
     }
-    public void createLayout(VBox vBox){
-        layout = new BorderPane(vBox);
+    public BorderPane createLayout(VBox vBox){
+        return layout = new BorderPane(vBox);
     }
 
     public Scene getScene() {

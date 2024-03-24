@@ -5,7 +5,9 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -127,13 +129,11 @@ public class TestClass {
      * -  like test 5, Platform.runLater makes sure the UI stuff runs on JavaFX thread.  This
      *  fixed the annoying IllegalStateException error
      * 1. create a sample test class, and make some sample subjects and assignments.
-     * 2.  Create a new stage and new scene, and set our testClass with that.
-     * 3.  Create a new scene2 with different dimensions, and use our switchScene method to
-     * change our ViewSmartScreen test class's scene to scene 2
-     * 4.  Assert, using getter method, that the testClass's current scene is the same as scene 2,
-     * which verifies that all our setter, getter and swtichScene methods work.
+     * 2.  Create a new stage and new scene and button for our class
+     * 3. Replicates the same stage
+     * 4. Confirms that the two stages are the same.
      *
-     * @author Simon Nguyen
+     * @author Simon Nguyen & Willy Do
      */
     @Test
     void module3() {
@@ -153,21 +153,16 @@ public class TestClass {
             Stage testStage = new Stage();
             testClass.setStage(testStage);
             Font font = Font.font("Montserrat", FontWeight.BOLD, 36);
-            Parent root1 = new StackPane();
-            Scene scene1 = new Scene(root1, 400, 300);
             OptionButton testButton = new OptionButton("Start Making Schedule", 100, 100);
             testButton.changeBackGroundColor();
             testButton.setFont(font);
             Label testLabel = new Label("Welcome!");
             testLabel.setFont(font);
-            testClass.createLayout(testClass.createVBox(50.0, testLabel, testButton));
 
-            testClass.setScene(scene1);
-
-            Parent root2 = new StackPane();
-            Scene scene2 = new Scene(root2, 400, 300);
-
-            testClass.switchScene(scene1, "testTitle"); //Used to say scene2 which wouldn't make sense
+            testClass.setScene(new Scene(testClass.createLayout(testClass.createVBox(50.0, testLabel, testButton))));
+            VBox vBox = new VBox(50.0, testLabel, testButton);
+            BorderPane layout = new BorderPane(vBox);
+            Scene scene2 = new Scene(layout, 400, 300);
 
 
             Assertions.assertEquals(scene2, testClass.getScene());
