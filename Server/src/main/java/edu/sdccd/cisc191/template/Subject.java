@@ -67,6 +67,9 @@ public class Subject {
     public double getGradeInClass() {
         return gradeInClass;
     }
+    public boolean getWeighted(){
+        return weighted;
+    }
 
     public void setGradeInClass(double gradeInClass) {
         this.gradeInClass = gradeInClass;

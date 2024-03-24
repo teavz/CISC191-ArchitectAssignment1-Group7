@@ -45,9 +45,28 @@ public class ViewStartScreen extends Application {
     public void addSubject(Subject temp){
         subjectArrayList.add(temp);
     }
+    public void removeSubject(int index){
+        subjectArrayList.remove(index);
+    }
+    public int findIndex(Subject find){
+        return subjectArrayList.indexOf(find);
+    }
+    public void setSubject(int i, Subject subject){
+        subjectArrayList.set(i, subject);
+    }
+    public Subject getAtIndex(int index){
+        return subjectArrayList.get(index);
+    }
 
     public ArrayList<Subject> getSubjectArray() {
         return subjectArrayList;
+    }
+    public VBox createVBox(Double height, Label label, OptionButton button){
+        VBox vBox = new VBox(height, label, button);
+        return vBox;
+    }
+    public void createLayout(VBox vBox){
+        layout = new BorderPane(vBox);
     }
 
     public Scene getScene() {

@@ -4,7 +4,11 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -35,28 +39,39 @@ public class TestClass {
 
     /** Unit Test 1
      * 1. creates a new ViewStartScreen class for test screen
-     * 2. Create a new subject and an assignment for this test
-     * 3. Try adding subject to the array for academic subjects
-     * 4. assert that the subject inside the test array is
-     * equal to the original test subject we created
+     * 2. Create subjects to be put into an ArrayList
+     * 3. Adds subjects into ArrayLists
+     * 4. Methods involving ArrayList
+     * 5. assert that the items within the ArrayList are consistent with the methods that modified it
      *
-     * @author Simon Nguyen
+     * @author Simon Nguyen & Willy Do
      */
     @Test
     void module1() {
 
         ViewStartScreen testClass = new ViewStartScreen();
 
-        Subject testSubject = new Subject("AP Physics", false, 76);
-
-        Assignment testAssignment = new Assignment();
+        Subject testSubject = new Subject("AP Physics", true, 76);
+        Subject testSubject2 = new Subject("AP Calculus BC", true, 91);
+        Subject testSubject3 = new Subject("Culinary 1-2", false, 95);
+        Subject testSubject4 = new Subject("Honors Biotechnology 1-2", true, 93);
+        Subject testSubject5 = new Subject("AP US History", true, 45);
+        Subject testSubject6 = new Subject("CISC191", true, 22);
 
 
 
         testClass.addSubject(testSubject);
-        ArrayList <Subject> testSubjectArray = testClass.getSubjectArray();
-
-        assertEquals(testSubject, testClass.getSubjectArray().get(0));
+        testClass.addSubject(testSubject2);
+        testClass.addSubject(testSubject3);
+        testClass.addSubject(testSubject4);
+        testClass.addSubject(testSubject5);
+        testClass.addSubject(testSubject6);
+        assertEquals(testClass.getAtIndex(3), testSubject4);
+        testClass.removeSubject(2);
+        assertEquals(testClass.getAtIndex(3), testSubject5);
+        assertEquals(testClass.findIndex(testSubject2), 1);
+        testClass.setSubject(4, testSubject3);
+        assertEquals(testClass.getAtIndex(4), testSubject3);
     }
 
 
@@ -154,15 +169,22 @@ public class TestClass {
 
             Stage testStage = new Stage();
             testClass.setStage(testStage);
-
+            Font font = Font.font("Montserrat", FontWeight.BOLD, 36);
             Parent root1 = new StackPane();
             Scene scene1 = new Scene(root1, 400, 300);
+            OptionButton testButton = new OptionButton("Start Making Schedule", 100, 100);
+            testButton.changeBackGroundColor();
+            testButton.setFont(font);
+            Label testLabel = new Label("Welcome!");
+            testLabel.setFont(font);
+            testClass.createLayout(testClass.createVBox(50.0, testLabel, testButton));
+
             testClass.setScene(scene1);
 
             Parent root2 = new StackPane();
             Scene scene2 = new Scene(root2, 400, 300);
 
-            testClass.switchScene(scene2, "testTitle");
+            testClass.switchScene(scene1, "testTitle"); //Used to say scene2 which wouldn't make sense
 
 
             Assertions.assertEquals(scene2, testClass.getScene());
