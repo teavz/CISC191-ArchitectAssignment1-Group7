@@ -102,8 +102,8 @@ public class ViewStartScreen extends Application {
         // 720x1200 resolution
         screenWidth = 1000;
         screenHeight = 1000;
-        Font font = Font.font("Montserrat", FontWeight.BOLD, 36);
-        Font smallFont = Font.font("Montserrat", 36);
+        Font font = Font.font("Montserrat", FontWeight.EXTRA_BOLD, 36);
+        Font smallFont = Font.font("Montserrat", FontWeight.BOLD, 18);
 
         //button to direct the user to set up
         OptionButton setupButton = new OptionButton("Make your Schedule", 500, 100);
@@ -131,7 +131,7 @@ public class ViewStartScreen extends Application {
         date = new Date();
         dateFormat = new SimpleDateFormat("MMMM/dd/y hh:mm:ss a");
         time = new Label(dateFormat.format((date)));
-        credits.setFont(font);
+        credits.setFont(smallFont);
         title.setFont(font);
         //organize title and setup button to be spaced accordingly, set it in center
         Image image = new Image(Files.newInputStream(Paths.get("Server/src/main/java/edu/sdccd/cisc191/template/Homework-modified.png")));
@@ -182,16 +182,16 @@ public class ViewStartScreen extends Application {
         layout = new BorderPane(buttons);
         buttons = new VBox(credits);
         buttons.setStyle("-fx-background-color: #FFF1DC");
-        layout.setBottom(buttons);
-        buttons = new VBox(time);
         buttons.setAlignment(Pos.BOTTOM_RIGHT);
+        layout.setBottom(buttons);
+        //buttons = new VBox(time);
+        //buttons.setAlignment(Pos.BOTTOM_RIGHT);
         layout.setBottom(buttons);
         Scene startScene = new Scene(layout, screenWidth, screenHeight);
         startScene.setFill(Color.web("#81c483"));
         stage.setTitle("Schedule & Homework Tracker");
         stage.setScene(startScene);
         stage.show();
-        setTime();
 
     }
     public void setTime(){
@@ -339,7 +339,7 @@ public class ViewStartScreen extends Application {
         for (Subject subject : a) {
             OptionButton button = new OptionButton(subject.getNameOfSubject(), screenWidth / 3, screenHeight / 10);
 
-
+            button.buttonGlow();
             button.changeTextColor(subject.getColor()); // Set color based on subject
             button.setOnAction((ActionEvent e) -> {
                 try {
@@ -354,6 +354,8 @@ public class ViewStartScreen extends Application {
 
         //allows user to add another class to the list
         OptionButton addClass = new OptionButton("Add Class", screenWidth / 3, screenHeight / 17.5);
+        addClass.changeBackGroundColor();
+        addClass.buttonGlow();
         addClass.setOnAction((ActionEvent e) -> {
             try {
                 runSetup2();
@@ -365,7 +367,10 @@ public class ViewStartScreen extends Application {
         saveSchedule.setOnAction((ActionEvent e) -> {
             chooseSchedule(a);
         });
+        saveSchedule.buttonGlow();
+        saveSchedule.changeBackGroundColor();
         HBox bottomButtons = new HBox(screenWidth / 1.5, addClass, saveSchedule);
+        bottomButtons.setStyle("-fx-background-color: #FFF1DC");
         bottomButtons.setAlignment(Pos.BOTTOM_LEFT);
         layout = new BorderPane(classes);
         layout.setBottom(bottomButtons);
@@ -389,6 +394,8 @@ public class ViewStartScreen extends Application {
         assignments.setStyle("-fx-background-color: #FFF1DC;");
         assignments.setAlignment(Pos.TOP_LEFT);
         OptionButton addAssignment = new OptionButton("Add Assignment", screenWidth / 3.0, screenHeight / 17.5);
+        addAssignment.changeBackGroundColor();
+        addAssignment.buttonGlow();
         addAssignment.setOnAction((ActionEvent e) -> {
             try {
                 addAssignment(subjectArrayIndex);
@@ -397,6 +404,8 @@ public class ViewStartScreen extends Application {
             }
         });
         OptionButton backButton = new OptionButton("Back", screenWidth / 3.0, screenHeight / 17.5);
+        backButton.changeBackGroundColor();
+        backButton.buttonGlow();
         backButton.setOnAction((ActionEvent e) -> {
             try {
                 runMainScreen(subjectArrayList, selectedIndex);
@@ -408,6 +417,8 @@ public class ViewStartScreen extends Application {
             Assignment assignment = tempArray.get(i);
             OptionButton button = new OptionButton(assignment.getNameOfAssignment(), screenWidth / 3.0, screenHeight / 10.0);
             int finalI = i;
+            button.changeBackGroundColor();
+            button.buttonGlow();
             button.setOnAction((ActionEvent e) -> {
                 try {
                     viewAssignmentInfo(subjectArrayIndex, finalI);
@@ -418,6 +429,7 @@ public class ViewStartScreen extends Application {
             assignments.getChildren().add(button);
         }
         HBox bottomButtons = new HBox(screenWidth / 1.5, addAssignment, backButton);
+        bottomButtons.setStyle("-fx-background-color: #FFF1DC");
         layout = new BorderPane(assignments);
         layout.setBottom(bottomButtons);
         sceneClassName = new Scene(layout, screenWidth, screenHeight);
@@ -437,6 +449,8 @@ public class ViewStartScreen extends Application {
 
         // Create a button to go back to the assignment list
         OptionButton backButton = new OptionButton("Back to Assignment List", screenWidth / 5.0, screenHeight / 17.5);
+        backButton.buttonGlow();
+        backButton.changeBackGroundColor();
         backButton.setOnAction((ActionEvent e) -> {
             try {
                 viewAssignmentList(subjectIndex);
@@ -447,6 +461,7 @@ public class ViewStartScreen extends Application {
 
         // Create a VBox to hold the labels and button
         VBox assignmentInfoLayout = new VBox(screenHeight / 60.0, assignmentLabel, backButton);
+        assignmentInfoLayout.setStyle("-fx-background-color: #FFF1DC");
         assignmentInfoLayout.setAlignment(Pos.CENTER);
 
         // Set the layout for the scene
