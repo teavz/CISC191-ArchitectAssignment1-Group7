@@ -1,9 +1,12 @@
 package edu.sdccd.cisc191.template;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+import java.io.IOException;
 
 @WebServlet(name = "FileUploadServlet", urlPatterns = { "/fileuploadservlet" })
 @MultipartConfig(
@@ -15,7 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 public class FileUploadServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-        public void doPost(HttpServletRequest request, HttpsServletResponse response) throws ServletException, IOException {
-
+        public <HttpsServletResponse> void doPost(HttpServletRequest request, HttpsServletResponse response) throws ServletException, IOException {
+            Part filePart = request.getPart("file");
+            String fileName = filePart.getSubmittedFileName();
+            for (Part part : request.getParts()) {
+                part.write("C:\\upload\\" + fileName);
+            }
         }
 }
