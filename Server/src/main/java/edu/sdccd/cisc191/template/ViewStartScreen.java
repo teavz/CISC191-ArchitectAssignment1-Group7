@@ -43,6 +43,8 @@ public class ViewStartScreen extends Application {
     private ArrayList<Subject> subjectArrayList = new ArrayList<>();
     private boolean done = false;
     private Calendar calendar;
+    private Font font = Font.font("Montserrat", FontWeight.EXTRA_BOLD, 36);
+    private Font smallFont = Font.font("Montserrat", FontWeight.BOLD, 18);
 
     public void addSubject(Subject temp){
         subjectArrayList.add(temp);
@@ -102,8 +104,6 @@ public class ViewStartScreen extends Application {
         // 720x1200 resolution
         screenWidth = 1000;
         screenHeight = 1000;
-        Font font = Font.font("Montserrat", FontWeight.EXTRA_BOLD, 36);
-        Font smallFont = Font.font("Montserrat", FontWeight.BOLD, 18);
 
         //button to direct the user to set up
         OptionButton setupButton = new OptionButton("Make your Schedule", 500, 100);
@@ -365,7 +365,7 @@ public class ViewStartScreen extends Application {
         });
         OptionButton saveSchedule = new OptionButton("Save Schedule", screenWidth / 3, screenHeight / 17.5);
         saveSchedule.setOnAction((ActionEvent e) -> {
-            chooseSchedule(a);
+            convertSubjectToCSV(subjectArrayList);
         });
         saveSchedule.buttonGlow();
         saveSchedule.changeBackGroundColor();
@@ -445,10 +445,11 @@ public class ViewStartScreen extends Application {
         // Create labels to display assignment details
         Label assignmentLabel = new Label("Assignment Name: " + selectedAssignment.getNameOfAssignment() + "\n" +
                 "Total Points Possible: " + Double.toString(selectedAssignment.getTotalPoints()));
+        assignmentLabel.setFont(smallFont);
 
 
         // Create a button to go back to the assignment list
-        OptionButton backButton = new OptionButton("Back to Assignment List", screenWidth / 5.0, screenHeight / 17.5);
+        OptionButton backButton = new OptionButton("Back to Assignment List", screenWidth / 3, screenHeight / 17.5);
         backButton.buttonGlow();
         backButton.changeBackGroundColor();
         backButton.setOnAction((ActionEvent e) -> {
@@ -475,12 +476,14 @@ public class ViewStartScreen extends Application {
     public void addAssignment(int subjectIndex) {
         Subject subject = subjectArrayList.get(subjectIndex); // Get the subject from the ArrayList
         Label assignmentNameLabel = new Label("Enter name of Assignment:");
+        assignmentNameLabel.setFont(smallFont);
         TextField assignmentNameField = new TextField();
 
         //Label assignmentPointsLabel = new Label("Enter amount of points earned on Assignment:");
          // TextField assignmentPointsField = new TextField();
 
         Label assignmentTotalPointsLabel = new Label("Enter number of points for Assignment:");
+        assignmentTotalPointsLabel.setFont(smallFont);
         TextField assignmentTotalPointsField = new TextField();
 
         assignmentNameField.setPrefSize(screenWidth / 2.0, screenHeight / 8.0);
@@ -488,6 +491,7 @@ public class ViewStartScreen extends Application {
         assignmentTotalPointsField.setPrefSize(screenWidth / 2.0, screenHeight / 20.0);
 
         OptionButton confirmButton = new OptionButton("Confirm", screenWidth / 6.0, screenHeight / 24.0);
+        confirmButton.buttonGlow();
         confirmButton.setOnAction((ActionEvent e) -> {
             try {
                 String assignmentName = assignmentNameField.getText();
@@ -657,11 +661,22 @@ public class ViewStartScreen extends Application {
     }
     public void chooseSchedule(ArrayList<Subject> a){
         OptionButton saveFile = new OptionButton("Save as File", screenWidth/3.0, screenHeight/2.0);
+        saveFile.changeBackGroundColor();
+        saveFile.buttonGlow();
         OptionButton saveRemote = new OptionButton("Save Remotely", screenWidth/3.0, screenHeight/2.0);
-        HBox buttons = new HBox(50,saveFile, saveRemote);
+        saveRemote.changeBackGroundColor();
+        saveRemote.buttonGlow();
+        OptionButton goBack = new OptionButton("Go Back", screenWidth/5.0, screenHeight/5.0);
+        HBox buttons = new HBox(50,saveFile, saveRemote, goBack);
         buttons.setAlignment(Pos.CENTER);
         buttons.setStyle("-fx-background-color: #FFF1DC;");
-
+        goBack.setOnAction((ActionEvent e) -> {
+            try {
+                runMainScreen(subjectArrayList, selectedIndex);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         saveFile.setOnAction((ActionEvent e) -> {
             convertSubjectToCSV(a);
         });
