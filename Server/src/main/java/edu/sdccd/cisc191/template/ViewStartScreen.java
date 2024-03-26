@@ -44,36 +44,43 @@ public class ViewStartScreen extends Application {
     private boolean done = false;
     private Calendar calendar;
 
-    public void addSubject(Subject temp){
+    public void addSubject(Subject temp) {
         subjectArrayList.add(temp);
     }
-    public void removeSubject(int index){
+
+    public void removeSubject(int index) {
         subjectArrayList.remove(index);
     }
-    public int findIndex(Subject find){
+
+    public int findIndex(Subject find) {
         return subjectArrayList.indexOf(find);
     }
-    public void setSubject(int i, Subject subject){
+
+    public void setSubject(int i, Subject subject) {
         subjectArrayList.set(i, subject);
     }
-    public Subject getAtIndex(int index){
+
+    public Subject getAtIndex(int index) {
         return subjectArrayList.get(index);
     }
 
     public ArrayList<Subject> getSubjectArray() {
         return subjectArrayList;
     }
-    public VBox createVBox(Double height, Label label, OptionButton button){
+
+    public VBox createVBox(Double height, Label label, OptionButton button) {
         VBox vBox = new VBox(height, label, button);
         return vBox;
     }
-    public BorderPane createLayout(VBox vBox){
+
+    public BorderPane createLayout(VBox vBox) {
         return layout = new BorderPane(vBox);
     }
 
     public Scene getScene() {
         return sceneClassName;
     }
+
     public Stage getStage() {
         return stage;
     }
@@ -81,7 +88,10 @@ public class ViewStartScreen extends Application {
     public void setScene(Scene temp) {
         sceneClassName = temp;
     }
-    public void setStage(Stage stage) {this.stage = stage;}
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     private static String savedSchedule;
 
@@ -142,7 +152,6 @@ public class ViewStartScreen extends Application {
         VBox buttons = new VBox((double) screenHeight / 120, title, setupButton, importCSVButton, importTextButton, imageView, credits);
 
 
-
         buttonEffects(glow, setupButton, image, color, imageView);
 
         buttonEffects(glow, importCSVButton, image, color, imageView);
@@ -194,8 +203,9 @@ public class ViewStartScreen extends Application {
         stage.show();
 
     }
-    public void setTime(){
-        while(done == false) {
+
+    public void setTime() {
+        while (done == false) {
             String currentTime = dateFormat.format(Calendar.getInstance().getTime());
             System.out.println(currentTime);
             time.setText(currentTime);
@@ -208,8 +218,7 @@ public class ViewStartScreen extends Application {
     }
 
     /**
-     *
-     * @param glow, the amount of the glow when hovering/interacting with a button
+     * @param glow,        the amount of the glow when hovering/interacting with a button
      * @param setupButton, the button which will be imbued with given effects
      * @param image,
      * @param color
@@ -382,7 +391,7 @@ public class ViewStartScreen extends Application {
     /**
      * @param subjectArrayIndex index of subjectArray i.e which subject does the user want to access
      *                          dear God did I do anything correctly
-     *                                                   TODO deal with weird user inputs
+     *                                                                            TODO deal with weird user inputs
      */
     public void viewAssignmentList(int subjectArrayIndex) {
         Subject subject = new Subject(subjectArrayList.get(subjectArrayIndex));
@@ -471,14 +480,14 @@ public class ViewStartScreen extends Application {
         stage.show();
     }
 
-     // points earned is killed bc homework planner assumes assignments have not been done yet
+    // points earned is killed bc homework planner assumes assignments have not been done yet
     public void addAssignment(int subjectIndex) {
         Subject subject = subjectArrayList.get(subjectIndex); // Get the subject from the ArrayList
         Label assignmentNameLabel = new Label("Enter name of Assignment:");
         TextField assignmentNameField = new TextField();
 
         //Label assignmentPointsLabel = new Label("Enter amount of points earned on Assignment:");
-         // TextField assignmentPointsField = new TextField();
+        // TextField assignmentPointsField = new TextField();
 
         Label assignmentTotalPointsLabel = new Label("Enter number of points for Assignment:");
         TextField assignmentTotalPointsField = new TextField();
@@ -499,8 +508,7 @@ public class ViewStartScreen extends Application {
                 assignment.setTotalPoints(totalAssignmentPoints);
                 // Add the assignment to the subject's ArrayList
                 subject.addAssignment(assignment);
-            }
-            catch (Exception error) {
+            } catch (Exception error) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR");
                 alert.setHeaderText("INPUT ERROR");
@@ -636,6 +644,7 @@ public class ViewStartScreen extends Application {
 
     /**
      * used for tomcat activities
+     *
      * @param a subject array to convert
      * @return string consisting of all schedule info
      */
@@ -655,10 +664,11 @@ public class ViewStartScreen extends Application {
         }
         return finalString;
     }
-    public void chooseSchedule(ArrayList<Subject> a){
-        OptionButton saveFile = new OptionButton("Save as File", screenWidth/3.0, screenHeight/2.0);
-        OptionButton saveRemote = new OptionButton("Save Remotely", screenWidth/3.0, screenHeight/2.0);
-        HBox buttons = new HBox(50,saveFile, saveRemote);
+
+    public void chooseSchedule(ArrayList<Subject> a) {
+        OptionButton saveFile = new OptionButton("Save as File", screenWidth / 3.0, screenHeight / 2.0);
+        OptionButton saveRemote = new OptionButton("Save Remotely", screenWidth / 3.0, screenHeight / 2.0);
+        HBox buttons = new HBox(50, saveFile, saveRemote);
         buttons.setAlignment(Pos.CENTER);
         buttons.setStyle("-fx-background-color: #FFF1DC;");
 
@@ -667,14 +677,14 @@ public class ViewStartScreen extends Application {
         });
 
         saveRemote.setOnAction((ActionEvent e) -> {
-           //DOES NOT WORK. Alternate networking implementation:
+            //DOES NOT WORK. Alternate networking implementation:
             // File Upload/Download on web server
-           savedSchedule = convertEverythingToString(a);
+            savedSchedule = convertEverythingToString(a);
         });
         //set layout
         layout = new BorderPane(buttons);
         sceneClassName = new Scene(layout, screenWidth, screenHeight);
-            switchScene(sceneClassName, "Choose Save Option");
+        switchScene(sceneClassName, "Choose Save Option");
         stage.show();
     }
 
@@ -682,9 +692,9 @@ public class ViewStartScreen extends Application {
     public boolean checkSceneEquals(Scene scene1, Scene scene2) {
         if (scene1.getWidth() == scene2.getWidth() && scene1.getHeight() == scene2.getHeight()) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
+
 }
