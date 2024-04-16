@@ -697,4 +697,31 @@ public class ViewStartScreen extends Application {
         }
     }
 
+
+    /** check this please logan theo willy
+     * have not made it visible to program yet bruh
+     *
+     * @param assignments
+     * @param dueDate
+     */
+    public void displaySearchResult(ArrayList<Assignment> assignments, int dueDate) {
+        int index = Sorting.searchAssignmentByDueDate(assignments, dueDate);
+        if (index != -1) {
+
+            Assignment assignment = assignments.get(index);
+            Label resultLabel = new Label("Assignment Found:\n" +
+                    "Name: " + assignment.getNameOfAssignment() + "\n" +
+                    "Due Date: " + assignment.getDaysUntilDueDate() + "\n" +
+                    "Days Until Due: " + assignment.getDaysUntilDueDate());
+
+            layout.setCenter(resultLabel);
+        } else {
+
+            Label resultLabel = new Label("No assignment found with the specified due date.");
+            layout.setCenter(resultLabel);
+        }
+    }
+
+
+
 }
