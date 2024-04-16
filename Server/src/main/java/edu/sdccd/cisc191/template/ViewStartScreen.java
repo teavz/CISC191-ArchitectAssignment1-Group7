@@ -42,7 +42,7 @@ public class ViewStartScreen extends Application {
     private Scene sceneClassName;
     private ArrayList<Subject> subjectArrayList = new ArrayList<>();
     private boolean done = false;
-    private Calendar calendar;
+    private edu.sdccd.cisc191.template.Calendar calendar;
     private Font font = Font.font("Montserrat", FontWeight.EXTRA_BOLD, 36);
     private Font smallFont = Font.font("Montserrat", FontWeight.BOLD, 18);
 
@@ -268,9 +268,6 @@ public class ViewStartScreen extends Application {
         dropDown.getItems().add("Green");
         dropDown.getItems().add("Orange");
         dropDown.getItems().add("Purple");
-        dropDown.setOnAction((event) -> {
-            int selectedIndex = dropDown.getSelectionModel().getSelectedIndex();
-        });
             /* adds first class to subject array list
                directs to main interface
              */
@@ -353,7 +350,7 @@ public class ViewStartScreen extends Application {
         }
 
         //allows user to add another class to the list
-        OptionButton addClass = new OptionButton("Add Class", screenWidth / 3, screenHeight / 17.5);
+        OptionButton addClass = new OptionButton("Add Class", screenWidth / 2, screenHeight / 17.5);
         addClass.changeBackGroundColor();
         addClass.buttonGlow();
         addClass.setOnAction((ActionEvent e) -> {
@@ -363,13 +360,27 @@ public class ViewStartScreen extends Application {
                 throw new RuntimeException(ex);
             }
         });
-        OptionButton saveSchedule = new OptionButton("Save Schedule", screenWidth / 3, screenHeight / 17.5);
+        OptionButton saveSchedule = new OptionButton("Save Schedule", screenWidth / 2, screenHeight / 17.5);
         saveSchedule.setOnAction((ActionEvent e) -> {
             convertSubjectToCSV(subjectArrayList);
         });
+        OptionButton viewCalendar = new OptionButton("View Calendar", screenWidth/2, screenHeight/17.5);
+        viewCalendar.buttonGlow();
+        viewCalendar.changeBackGroundColor();
+        viewCalendar.setOnAction((ActionEvent e) ->{
+            try{
+                layout = calendar.createCalendar();
+                sceneClassName = new Scene(layout, screenWidth, screenHeight);
+                switchScene(sceneClassName, "Calendar");
+                stage.show();
+            }
+            catch (Exception ex){
+                throw new RuntimeException(ex);
+            }
+        });
         saveSchedule.buttonGlow();
         saveSchedule.changeBackGroundColor();
-        HBox bottomButtons = new HBox(screenWidth / 1.5, addClass, saveSchedule);
+        HBox bottomButtons = new HBox(screenWidth / 4, addClass, saveSchedule, viewCalendar);
         bottomButtons.setStyle("-fx-background-color: #FFF1DC");
         bottomButtons.setAlignment(Pos.BOTTOM_LEFT);
         layout = new BorderPane(classes);
@@ -702,4 +713,6 @@ public class ViewStartScreen extends Application {
             return false;
         }
     }
+    //Should add month paremeter
+
 }
