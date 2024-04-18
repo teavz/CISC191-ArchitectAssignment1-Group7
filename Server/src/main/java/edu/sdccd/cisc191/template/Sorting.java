@@ -32,4 +32,37 @@ public class Sorting {
         assignments.set(i + 1, tempAssignment);
         return assignments;
     }
+
+    /**
+     * binary search search assignments based on key, which is due date
+     * did I even use recursion correctly God knows
+     */
+    public static int binarySearch(ArrayList<Assignment> assignments, int startIndex, int endIndex, int key) {
+        if (endIndex >= startIndex) {
+            int mid = startIndex + (endIndex - startIndex) / 2;
+
+            if (assignments.get(mid).getDaysUntilDueDate() == key)
+                return mid;
+
+            if (assignments.get(mid).getDaysUntilDueDate() > key)
+                return binarySearch(assignments, startIndex, mid - 1, key);
+
+            return binarySearch(assignments, mid + 1, endIndex, key);
+        }
+
+        return -1;
+    }
+
+    /**
+     * Please check this guys im lowkey lost in search
+     * @param assignments
+     * @param key
+     * @return
+     */
+    public static int searchAssignmentByDueDate(ArrayList<Assignment> assignments, int key)
+    {
+        return binarySearch(assignments, 0, assignments.size() - 1, key);
+    }
+
+
 }
