@@ -19,6 +19,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -237,6 +238,23 @@ public class ViewStartScreen extends Application {
     }
 
     public static void main(String[] args) {
+        try{
+            Database database = new Database();
+            database.createTables();
+            Subject subject = new Subject("Math");
+            database.create(subject);
+
+            while(true) {
+                try {
+                    Thread.sleep(5000);
+                    System.out.println("hello");
+                }catch (InterruptedException e){
+                    throw new RuntimeException(e);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         launch();
     }
 

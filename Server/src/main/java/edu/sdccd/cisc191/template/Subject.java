@@ -7,6 +7,7 @@ public class Subject {
     private boolean weighted;
     private double gradeInClass;
     private ArrayList<Assignment> assignmentList;
+    private int id;
 
 
     private int color;
@@ -18,6 +19,11 @@ public class Subject {
         assignmentList = new ArrayList<Assignment>();
         color = 0;
     }
+    public Subject(String name, int id){
+        nameOfSubject = name;
+        this.id = id;
+    }
+
 
     public Subject(String name, boolean weight, double grade) {
         nameOfSubject = name;
@@ -46,6 +52,9 @@ public class Subject {
         assignmentList = subject.getAssignmentList();
         color = 0;
 
+    }
+    public Subject(String name){
+        nameOfSubject = name;
     }
 
     public String getNameOfSubject() {
@@ -86,6 +95,13 @@ public class Subject {
 
     public void addAssignment(Assignment assignment) {
         assignmentList.add(assignment);
+    }
+
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
     }
 
 
