@@ -7,7 +7,7 @@ import java.sql.*;
 import org.h2.tools.Server;
 
 public class Database {
-    static final String DB_URL = "jdbc:h2:tcp://localhost:9092/./Server;Database_CLOSE_ON_EXIT=FALSE;";
+    static final String DB_URL = "jdbc:h2:tcp://localhost:9092/./Server;DB_CLOSE_ON_EXIT=FALSE;";
     static final String USER = "Guest";
     static final String PASS = "AppleBanana123";
 
@@ -16,7 +16,7 @@ public class Database {
     private Statement statement;
 
     public Database() throws SQLException {
-        server = Server.createTcpServer("-tcpPort", "9092", "-tcpAllowOthers").start();
+        server = Server.createTcpServer("-tcpPort", "9092", "-tcpAllowOthers", "-ifNotExists").start();
         connection = DriverManager.getConnection(DB_URL, USER, PASS);
         statement = connection.createStatement();
     }
