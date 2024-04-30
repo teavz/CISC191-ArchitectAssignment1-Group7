@@ -1,0 +1,146 @@
+<html>
+<head>
+<title>Assignment.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Assignment.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">edu</span><span class="s2">.</span><span class="s1">sdccd</span><span class="s2">.</span><span class="s1">cisc191</span><span class="s2">.</span><span class="s1">template</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Scanner</span><span class="s2">;</span>
+<span class="s0">public class </span><span class="s1">Assignment </span><span class="s2">{</span>
+
+    <span class="s0">private </span><span class="s1">String nameOfAssignment</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">daysUntilDueDate</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">pointsOfAssignment</span><span class="s2">;</span>
+
+    <span class="s0">private double </span><span class="s1">assignmentPercentage</span><span class="s2">;</span>
+
+    <span class="s0">private int </span><span class="s1">totalPoints</span><span class="s2">;</span>
+    <span class="s3">//private int estInMinutes;</span>
+    <span class="s0">private boolean </span><span class="s1">busyWork</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">Assignment</span><span class="s2">() {</span>
+        <span class="s1">nameOfAssignment </span><span class="s2">= </span><span class="s4">&quot;&quot;</span><span class="s2">;</span>
+        <span class="s1">daysUntilDueDate </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">pointsOfAssignment </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">busyWork </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+        <span class="s1">totalPoints </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">assignmentPercentage </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s0">public </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s1">String name</span><span class="s2">, </span><span class="s0">int </span><span class="s1">days</span><span class="s2">, </span><span class="s0">int </span><span class="s1">points</span><span class="s2">, </span><span class="s0">boolean </span><span class="s1">busy</span><span class="s2">, </span><span class="s0">int </span><span class="s1">totalPoints</span><span class="s2">){</span>
+        <span class="s1">nameOfAssignment </span><span class="s2">= </span><span class="s1">name</span><span class="s2">;</span>
+        <span class="s1">daysUntilDueDate </span><span class="s2">= </span><span class="s1">days</span><span class="s2">;</span>
+        <span class="s1">pointsOfAssignment </span><span class="s2">= </span><span class="s1">points</span><span class="s2">;</span>
+        <span class="s1">busyWork </span><span class="s2">= </span><span class="s1">busy</span><span class="s2">;</span>
+        <span class="s1">totalPoints </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">totalPoints</span><span class="s2">;</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s1">String name</span><span class="s2">) {</span>
+        <span class="s1">nameOfAssignment </span><span class="s2">= </span><span class="s1">name</span><span class="s2">;</span>
+        <span class="s1">daysUntilDueDate </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">pointsOfAssignment </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">busyWork </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+        <span class="s1">totalPoints </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">assignmentPercentage </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s1">Assignment a</span><span class="s2">) {</span>
+        <span class="s1">nameOfAssignment </span><span class="s2">= </span><span class="s1">a</span><span class="s2">.</span><span class="s1">nameOfAssignment</span><span class="s2">;</span>
+        <span class="s1">daysUntilDueDate </span><span class="s2">= </span><span class="s1">a</span><span class="s2">.</span><span class="s1">daysUntilDueDate</span><span class="s2">;</span>
+        <span class="s1">pointsOfAssignment </span><span class="s2">= </span><span class="s1">a</span><span class="s2">.</span><span class="s1">pointsOfAssignment</span><span class="s2">;</span>
+        <span class="s1">busyWork </span><span class="s2">= </span><span class="s1">a</span><span class="s2">.</span><span class="s1">busyWork</span><span class="s2">;</span>
+        <span class="s1">totalPoints </span><span class="s2">= </span><span class="s1">a</span><span class="s2">.</span><span class="s1">totalPoints</span><span class="s2">;</span>
+        <span class="s1">assignmentPercentage </span><span class="s2">= </span><span class="s1">a</span><span class="s2">.</span><span class="s1">assignmentPercentage</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getNameOfAssignment</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">nameOfAssignment</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setNameOfAssignment</span><span class="s2">(</span><span class="s1">String nameOfAssignment</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">nameOfAssignment </span><span class="s2">= </span><span class="s1">nameOfAssignment</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">getPointsOfAssignment</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">pointsOfAssignment</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setPointsOfAssignment</span><span class="s2">(</span><span class="s0">int </span><span class="s1">pointsOfAssignment</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">pointsOfAssignment </span><span class="s2">= </span><span class="s1">pointsOfAssignment</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">getTotalPoints</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">totalPoints</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setTotalPoints</span><span class="s2">(</span><span class="s0">int </span><span class="s1">totalPoints</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">totalPoints </span><span class="s2">= </span><span class="s1">totalPoints</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public double </span><span class="s1">getAssignmentPercentage</span><span class="s2">() {</span>
+        <span class="s1">assignmentPercentage </span><span class="s2">= ((</span><span class="s0">double</span><span class="s2">) </span><span class="s1">pointsOfAssignment </span><span class="s2">/ </span><span class="s1">totalPoints</span><span class="s2">) * </span><span class="s5">100</span><span class="s2">;</span>
+        <span class="s0">return </span><span class="s1">assignmentPercentage</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setAssignmentPercentage</span><span class="s2">(</span><span class="s0">double </span><span class="s1">percentage</span><span class="s2">) {</span>
+        <span class="s1">assignmentPercentage </span><span class="s2">= </span><span class="s1">percentage</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+
+<span class="s3">//    public int getEstInMinutes() {</span>
+<span class="s3">//        return estInMinutes;</span>
+<span class="s3">//    }</span>
+
+<span class="s3">//    public void setEstInMinutes(int estInMinutes) {</span>
+<span class="s3">//        this.estInMinutes = estInMinutes;</span>
+<span class="s3">//    }</span>
+
+    <span class="s0">public boolean </span><span class="s1">isBusyWork</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">busyWork</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setBusyWork</span><span class="s2">(</span><span class="s0">boolean </span><span class="s1">busyWork</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">busyWork </span><span class="s2">= </span><span class="s1">busyWork</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">getDaysUntilDueDate</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">daysUntilDueDate</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setDaysUntilDueDate</span><span class="s2">(</span><span class="s0">int </span><span class="s1">daysUntilDueDate</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">daysUntilDueDate </span><span class="s2">= </span><span class="s1">daysUntilDueDate</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+
+    <span class="s0">public </span><span class="s1">String</span><span class="s2">[] </span><span class="s1">getAssignmentArray</span><span class="s2">() {</span>
+        <span class="s1">String</span><span class="s2">[] </span><span class="s1">assignmentArray </span><span class="s2">= </span><span class="s0">new </span><span class="s1">String</span><span class="s2">[</span><span class="s5">7</span><span class="s2">];</span>
+
+        <span class="s1">assignmentArray</span><span class="s2">[</span><span class="s5">0</span><span class="s2">] = </span><span class="s1">nameOfAssignment</span><span class="s2">;</span>
+        <span class="s1">assignmentArray</span><span class="s2">[</span><span class="s5">1</span><span class="s2">] = </span><span class="s1">String</span><span class="s2">.</span><span class="s1">valueOf</span><span class="s2">(</span><span class="s1">daysUntilDueDate</span><span class="s2">);</span>
+        <span class="s1">assignmentArray</span><span class="s2">[</span><span class="s5">2</span><span class="s2">] = </span><span class="s1">String</span><span class="s2">.</span><span class="s1">valueOf</span><span class="s2">(</span><span class="s1">pointsOfAssignment</span><span class="s2">);</span>
+        <span class="s1">assignmentArray</span><span class="s2">[</span><span class="s5">3</span><span class="s2">] = </span><span class="s1">String</span><span class="s2">.</span><span class="s1">valueOf</span><span class="s2">(</span><span class="s1">totalPoints</span><span class="s2">);</span>
+        <span class="s1">assignmentArray</span><span class="s2">[</span><span class="s5">4</span><span class="s2">] = </span><span class="s1">String</span><span class="s2">.</span><span class="s1">valueOf</span><span class="s2">(</span><span class="s1">assignmentPercentage</span><span class="s2">);</span>
+        <span class="s1">assignmentArray</span><span class="s2">[</span><span class="s5">5</span><span class="s2">] = </span><span class="s1">String</span><span class="s2">.</span><span class="s1">valueOf</span><span class="s2">(</span><span class="s1">busyWork</span><span class="s2">);</span>
+
+
+        <span class="s0">return </span><span class="s1">assignmentArray</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

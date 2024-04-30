@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>Calendar.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Calendar.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">edu</span><span class="s2">.</span><span class="s1">sdccd</span><span class="s2">.</span><span class="s1">cisc191</span><span class="s2">.</span><span class="s1">template</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">application</span><span class="s2">.</span><span class="s1">Application</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">geometry</span><span class="s2">.</span><span class="s1">Pos</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Scene</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">effect</span><span class="s2">.</span><span class="s1">Glow</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">Image</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">ImageView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">input</span><span class="s2">.</span><span class="s1">MouseEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">Border</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">BorderPane</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">HBox</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">VBox</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">paint</span><span class="s2">.</span><span class="s1">Color</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">Font</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">FontWeight</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">FileChooser</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">Stage</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Date</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">SimpleDateFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">File</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">FileNotFoundException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">FileWriter</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">IOException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Files</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Paths</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Scanner</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Calendar </span><span class="s2">{</span>
+    <span class="s0">private final </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Assignment</span><span class="s2">&gt;[][] </span><span class="s1">calendar </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">[</span><span class="s3">6</span><span class="s2">][</span><span class="s3">7</span><span class="s2">];</span>
+    <span class="s0">public void </span><span class="s1">createArrayList</span><span class="s2">(){</span>
+        <span class="s0">for</span><span class="s2">(</span><span class="s0">int </span><span class="s1">row </span><span class="s2">= </span><span class="s3">0</span><span class="s2">; </span><span class="s1">row </span><span class="s2">&lt; </span><span class="s1">calendar</span><span class="s2">.</span><span class="s1">length</span><span class="s2">; </span><span class="s1">row</span><span class="s2">++){</span>
+            <span class="s0">for</span><span class="s2">(</span><span class="s0">int </span><span class="s1">col </span><span class="s2">= </span><span class="s3">0</span><span class="s2">; </span><span class="s1">col </span><span class="s2">&lt; </span><span class="s1">calendar</span><span class="s2">[</span><span class="s1">row</span><span class="s2">].</span><span class="s1">length</span><span class="s2">; </span><span class="s1">col</span><span class="s2">++){</span>
+                <span class="s1">calendar</span><span class="s2">[</span><span class="s1">row</span><span class="s2">][</span><span class="s1">col</span><span class="s2">] = </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Assignment</span><span class="s2">&gt;();</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+    <span class="s0">public </span><span class="s1">BorderPane createCalendar</span><span class="s2">(){</span>
+        <span class="s1">BorderPane layout </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BorderPane</span><span class="s2">();</span>
+        <span class="s1">HBox box </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HBox</span><span class="s2">();</span>
+        <span class="s0">for</span><span class="s2">(</span><span class="s0">int </span><span class="s1">row </span><span class="s2">= </span><span class="s3">0</span><span class="s2">; </span><span class="s1">row </span><span class="s2">&lt; </span><span class="s1">calendar</span><span class="s2">.</span><span class="s1">length</span><span class="s2">; </span><span class="s1">row</span><span class="s2">++){</span>
+            <span class="s1">HBox grid </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HBox</span><span class="s2">(</span><span class="s3">10</span><span class="s2">);</span>
+            <span class="s0">for</span><span class="s2">(</span><span class="s0">int </span><span class="s1">col </span><span class="s2">= </span><span class="s3">0</span><span class="s2">; </span><span class="s1">col </span><span class="s2">&lt; </span><span class="s1">calendar</span><span class="s2">[</span><span class="s1">row</span><span class="s2">].</span><span class="s1">length</span><span class="s2">; </span><span class="s1">col</span><span class="s2">++) {</span>
+                <span class="s1">grid</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">addAll</span><span class="s2">(</span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s4">&quot;&quot;</span><span class="s2">, </span><span class="s3">12</span><span class="s2">, </span><span class="s3">10</span><span class="s2">));</span>
+            <span class="s2">}</span>
+            <span class="s1">layout </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BorderPane</span><span class="s2">(</span><span class="s1">grid</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">layout</span><span class="s2">;</span>
+
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">addAssignment</span><span class="s2">(</span><span class="s0">int </span><span class="s1">date</span><span class="s2">, </span><span class="s1">Assignment assignment</span><span class="s2">){</span>
+        <span class="s1">calendar</span><span class="s2">[</span><span class="s1">date</span><span class="s2">/</span><span class="s3">7</span><span class="s2">][</span><span class="s1">date</span><span class="s2">%</span><span class="s3">7</span><span class="s2">].</span><span class="s1">add</span><span class="s2">(</span><span class="s1">assignment</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">removeAssignment</span><span class="s2">(</span><span class="s0">int </span><span class="s1">date</span><span class="s2">, </span><span class="s0">int </span><span class="s1">index</span><span class="s2">){</span>
+        <span class="s1">calendar</span><span class="s2">[</span><span class="s1">date</span><span class="s2">/</span><span class="s3">7</span><span class="s2">][</span><span class="s1">date</span><span class="s2">%</span><span class="s3">7</span><span class="s2">].</span><span class="s1">remove</span><span class="s2">(</span><span class="s1">index</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">setAssignment</span><span class="s2">(</span><span class="s0">int </span><span class="s1">date</span><span class="s2">, </span><span class="s0">int </span><span class="s1">index</span><span class="s2">, </span><span class="s1">Assignment assignment</span><span class="s2">){</span>
+        <span class="s1">calendar</span><span class="s2">[</span><span class="s1">date</span><span class="s2">/</span><span class="s3">7</span><span class="s2">][</span><span class="s1">date</span><span class="s2">%</span><span class="s3">7</span><span class="s2">].</span><span class="s1">set</span><span class="s2">(</span><span class="s1">index</span><span class="s2">, </span><span class="s1">assignment</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s0">public int </span><span class="s1">findIndex</span><span class="s2">(</span><span class="s0">int </span><span class="s1">date</span><span class="s2">, </span><span class="s1">Assignment assignment</span><span class="s2">){</span>
+        <span class="s0">return </span><span class="s1">calendar</span><span class="s2">[</span><span class="s1">date</span><span class="s2">/</span><span class="s3">7</span><span class="s2">][</span><span class="s1">date</span><span class="s2">%</span><span class="s3">7</span><span class="s2">].</span><span class="s1">indexOf</span><span class="s2">(</span><span class="s1">assignment</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s0">public </span><span class="s1">Assignment getAssignment</span><span class="s2">(</span><span class="s0">int </span><span class="s1">date</span><span class="s2">, </span><span class="s0">int </span><span class="s1">index</span><span class="s2">){</span>
+        <span class="s0">return </span><span class="s1">calendar</span><span class="s2">[</span><span class="s1">date</span><span class="s2">/</span><span class="s3">7</span><span class="s2">][</span><span class="s1">date</span><span class="s2">%</span><span class="s3">7</span><span class="s2">].</span><span class="s1">get</span><span class="s2">(</span><span class="s1">index</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>

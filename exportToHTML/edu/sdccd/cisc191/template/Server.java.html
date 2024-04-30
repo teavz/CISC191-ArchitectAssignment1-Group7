@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Server.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #5f826b; font-style: italic;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+.s6 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Server.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">edu</span><span class="s2">.</span><span class="s1">sdccd</span><span class="s2">.</span><span class="s1">cisc191</span><span class="s2">.</span><span class="s1">template</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">net</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.*;</span>
+
+<span class="s3">/**</span>
+ <span class="s3">* This program is a server that takes connection requests on</span>
+ <span class="s3">* the port specified by the constant LISTENING_PORT.  When a</span>
+ <span class="s3">* connection is opened, the program sends the current time to</span>
+ <span class="s3">* the connected socket.  The program will continue to receive</span>
+ <span class="s3">* and process connections until it is killed (by a CONTROL-C,</span>
+ <span class="s3">* for example).  Note that this server processes each connection</span>
+ <span class="s3">* as it is received, rather than creating a separate thread</span>
+ <span class="s3">* to process the connection.</span>
+ <span class="s3">*/</span>
+<span class="s0">public class </span><span class="s1">Server </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">ServerSocket serverSocket</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Socket clientSocket</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">PrintWriter out</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">BufferedReader in</span><span class="s2">;</span>
+
+    <span class="s0">public void </span><span class="s1">start</span><span class="s2">(</span><span class="s0">int </span><span class="s1">port</span><span class="s2">) </span><span class="s0">throws </span><span class="s1">Exception </span><span class="s2">{</span>
+        <span class="s1">serverSocket </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ServerSocket</span><span class="s2">(</span><span class="s1">port</span><span class="s2">);</span>
+        <span class="s1">clientSocket </span><span class="s2">= </span><span class="s1">serverSocket</span><span class="s2">.</span><span class="s1">accept</span><span class="s2">();</span>
+        <span class="s1">out </span><span class="s2">= </span><span class="s0">new </span><span class="s1">PrintWriter</span><span class="s2">(</span><span class="s1">clientSocket</span><span class="s2">.</span><span class="s1">getOutputStream</span><span class="s2">(), </span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s1">in </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BufferedReader</span><span class="s2">(</span><span class="s0">new </span><span class="s1">InputStreamReader</span><span class="s2">(</span><span class="s1">clientSocket</span><span class="s2">.</span><span class="s1">getInputStream</span><span class="s2">()));</span>
+
+        <span class="s1">String inputLine</span><span class="s2">;</span>
+        <span class="s0">while </span><span class="s2">((</span><span class="s1">inputLine </span><span class="s2">= </span><span class="s1">in</span><span class="s2">.</span><span class="s1">readLine</span><span class="s2">()) != </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">CustomerRequest request </span><span class="s2">= </span><span class="s1">CustomerRequest</span><span class="s2">.</span><span class="s1">fromJSON</span><span class="s2">(</span><span class="s1">inputLine</span><span class="s2">);</span>
+            <span class="s1">CustomerResponse response </span><span class="s2">= </span><span class="s0">new </span><span class="s1">CustomerResponse</span><span class="s2">(</span><span class="s1">request</span><span class="s2">.</span><span class="s1">getId</span><span class="s2">(), </span><span class="s4">&quot;Jane&quot;</span><span class="s2">, </span><span class="s4">&quot;Doe&quot;</span><span class="s2">);</span>
+            <span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">CustomerResponse</span><span class="s2">.</span><span class="s1">toJSON</span><span class="s2">(</span><span class="s1">response</span><span class="s2">));</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">stop</span><span class="s2">() </span><span class="s0">throws </span><span class="s1">IOException </span><span class="s2">{</span>
+        <span class="s1">in</span><span class="s2">.</span><span class="s1">close</span><span class="s2">();</span>
+        <span class="s1">out</span><span class="s2">.</span><span class="s1">close</span><span class="s2">();</span>
+        <span class="s1">clientSocket</span><span class="s2">.</span><span class="s1">close</span><span class="s2">();</span>
+        <span class="s1">serverSocket</span><span class="s2">.</span><span class="s1">close</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s1">Server server </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Server</span><span class="s2">();</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">server</span><span class="s2">.</span><span class="s1">start</span><span class="s2">(</span><span class="s5">4444</span><span class="s2">);</span>
+            <span class="s1">server</span><span class="s2">.</span><span class="s1">stop</span><span class="s2">();</span>
+        <span class="s2">} </span><span class="s0">catch</span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">} </span><span class="s6">//end class Server</span>
+</pre>
+</body>
+</html>

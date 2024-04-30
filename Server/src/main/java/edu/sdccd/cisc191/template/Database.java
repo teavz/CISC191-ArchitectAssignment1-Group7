@@ -40,7 +40,6 @@ public class Database {
         if(rs.next()){
             subject.setId(rs.getInt(1));
         }
-
     }
     public void createSchedule(Schedule schedule) throws SQLException{
         String sql = "INSERT INTO schedule(gpa) VALUES(?)";

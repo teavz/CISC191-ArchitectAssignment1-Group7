@@ -1,0 +1,724 @@
+<html>
+<head>
+<title>ViewStartScreen.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #5f826b; font-style: italic;}
+.s5 { color: #67a37c; font-style: italic;}
+.s6 { color: #2aacb8;}
+.s7 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ViewStartScreen.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">edu</span><span class="s2">.</span><span class="s1">sdccd</span><span class="s2">.</span><span class="s1">cisc191</span><span class="s2">.</span><span class="s1">template</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">application</span><span class="s2">.</span><span class="s1">Application</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">geometry</span><span class="s2">.</span><span class="s1">Pos</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Scene</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">effect</span><span class="s2">.</span><span class="s1">Glow</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">Image</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">ImageView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">input</span><span class="s2">.</span><span class="s1">MouseEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">Border</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">BorderPane</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">HBox</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">VBox</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">paint</span><span class="s2">.</span><span class="s1">Color</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">Font</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">FontWeight</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">FileChooser</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">Stage</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Calendar</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Date</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">SimpleDateFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">File</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">FileNotFoundException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">FileWriter</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">IOException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Files</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Paths</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Scanner</span><span class="s2">;</span>
+<span class="s0">public class </span><span class="s1">ViewStartScreen </span><span class="s0">extends </span><span class="s1">Application </span><span class="s2">{</span>
+    <span class="s0">private int </span><span class="s1">screenWidth</span><span class="s2">, </span><span class="s1">screenHeight</span><span class="s2">; </span><span class="s3">//allows buttons to be scaled accordingly</span>
+    <span class="s0">private int </span><span class="s1">selectedIndex</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">BorderPane layout</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Stage stage</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Date date</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">SimpleDateFormat dateFormat</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Label time</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Scene sceneClassName</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Subject</span><span class="s2">&gt; </span><span class="s1">subjectArrayList </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+    <span class="s0">private boolean </span><span class="s1">done </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Calendar calendar</span><span class="s2">;</span>
+
+    <span class="s0">public void </span><span class="s1">addSubject</span><span class="s2">(</span><span class="s1">Subject temp</span><span class="s2">) {</span>
+        <span class="s1">subjectArrayList</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">temp</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">removeSubject</span><span class="s2">(</span><span class="s0">int </span><span class="s1">index</span><span class="s2">) {</span>
+        <span class="s1">subjectArrayList</span><span class="s2">.</span><span class="s1">remove</span><span class="s2">(</span><span class="s1">index</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">findIndex</span><span class="s2">(</span><span class="s1">Subject find</span><span class="s2">) {</span>
+        <span class="s0">return </span><span class="s1">subjectArrayList</span><span class="s2">.</span><span class="s1">indexOf</span><span class="s2">(</span><span class="s1">find</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setSubject</span><span class="s2">(</span><span class="s0">int </span><span class="s1">i</span><span class="s2">, </span><span class="s1">Subject subject</span><span class="s2">) {</span>
+        <span class="s1">subjectArrayList</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">i</span><span class="s2">, </span><span class="s1">subject</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Subject getAtIndex</span><span class="s2">(</span><span class="s0">int </span><span class="s1">index</span><span class="s2">) {</span>
+        <span class="s0">return </span><span class="s1">subjectArrayList</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">index</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Subject</span><span class="s2">&gt; </span><span class="s1">getSubjectArray</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">subjectArrayList</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">VBox createVBox</span><span class="s2">(</span><span class="s1">Double height</span><span class="s2">, </span><span class="s1">Label label</span><span class="s2">, </span><span class="s1">OptionButton button</span><span class="s2">) {</span>
+        <span class="s1">VBox vBox </span><span class="s2">= </span><span class="s0">new </span><span class="s1">VBox</span><span class="s2">(</span><span class="s1">height</span><span class="s2">, </span><span class="s1">label</span><span class="s2">, </span><span class="s1">button</span><span class="s2">);</span>
+        <span class="s0">return </span><span class="s1">vBox</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">BorderPane createLayout</span><span class="s2">(</span><span class="s1">VBox vBox</span><span class="s2">) {</span>
+        <span class="s0">return </span><span class="s1">layout </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BorderPane</span><span class="s2">(</span><span class="s1">vBox</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Scene getScene</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">sceneClassName</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Stage getStage</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">stage</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setScene</span><span class="s2">(</span><span class="s1">Scene temp</span><span class="s2">) {</span>
+        <span class="s1">sceneClassName </span><span class="s2">= </span><span class="s1">temp</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setStage</span><span class="s2">(</span><span class="s1">Stage stage</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">stage </span><span class="s2">= </span><span class="s1">stage</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private static </span><span class="s1">String savedSchedule</span><span class="s2">;</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* </span><span class="s5">@param </span><span class="s4">stage the primary stage for this application, onto which</span>
+     <span class="s4">*              the application scene can be set. The primary stage will be embedded in</span>
+     <span class="s4">*              the browser if the application was launched as an applet.</span>
+     <span class="s4">*              Applications may create other stages, if needed, but they will not be</span>
+     <span class="s4">*              primary stages and will not be embedded in the browser.</span>
+     <span class="s4">*              Initial screen that the user sees</span>
+     <span class="s4">*              Hooray for javafx</span>
+     <span class="s4">*/</span>
+    <span class="s0">public void </span><span class="s1">start</span><span class="s2">(</span><span class="s1">Stage stage</span><span class="s2">) </span><span class="s0">throws </span><span class="s1">IOException </span><span class="s2">{</span>
+        <span class="s3">//variables???</span>
+        <span class="s1">Glow glow </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Glow</span><span class="s2">();</span>
+        <span class="s1">glow</span><span class="s2">.</span><span class="s1">setLevel</span><span class="s2">(</span><span class="s6">0.2</span><span class="s2">);</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">stage </span><span class="s2">= </span><span class="s1">stage</span><span class="s2">;</span>
+        <span class="s3">// 720x1200 resolution</span>
+        <span class="s1">screenWidth </span><span class="s2">= </span><span class="s6">1000</span><span class="s2">;</span>
+        <span class="s1">screenHeight </span><span class="s2">= </span><span class="s6">1000</span><span class="s2">;</span>
+        <span class="s1">Font font </span><span class="s2">= </span><span class="s1">Font</span><span class="s2">.</span><span class="s1">font</span><span class="s2">(</span><span class="s7">&quot;Montserrat&quot;</span><span class="s2">, </span><span class="s1">FontWeight</span><span class="s2">.</span><span class="s1">EXTRA_BOLD</span><span class="s2">, </span><span class="s6">36</span><span class="s2">);</span>
+        <span class="s1">Font smallFont </span><span class="s2">= </span><span class="s1">Font</span><span class="s2">.</span><span class="s1">font</span><span class="s2">(</span><span class="s7">&quot;Montserrat&quot;</span><span class="s2">, </span><span class="s1">FontWeight</span><span class="s2">.</span><span class="s1">BOLD</span><span class="s2">, </span><span class="s6">18</span><span class="s2">);</span>
+
+        <span class="s3">//button to direct the user to set up</span>
+        <span class="s1">OptionButton setupButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s7">&quot;Make your Schedule&quot;</span><span class="s2">, </span><span class="s6">500</span><span class="s2">, </span><span class="s6">100</span><span class="s2">);</span>
+        <span class="s1">setupButton</span><span class="s2">.</span><span class="s1">changeTextColor</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">web</span><span class="s2">(</span><span class="s7">&quot;#34A3ED&quot;</span><span class="s2">));</span>
+        <span class="s1">setupButton</span><span class="s2">.</span><span class="s1">changeBackGroundColor</span><span class="s2">();</span>
+        <span class="s1">setupButton</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s1">font</span><span class="s2">);</span>
+
+        <span class="s3">//button for import of csv file of saved schedule</span>
+        <span class="s1">OptionButton importCSVButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s7">&quot;Import from File&quot;</span><span class="s2">, </span><span class="s6">500</span><span class="s2">, </span><span class="s6">100</span><span class="s2">);</span>
+        <span class="s1">importCSVButton</span><span class="s2">.</span><span class="s1">changeTextColor</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">web</span><span class="s2">(</span><span class="s7">&quot;#34A3ED&quot;</span><span class="s2">));</span>
+        <span class="s1">importCSVButton</span><span class="s2">.</span><span class="s1">changeBackGroundColor</span><span class="s2">();</span>
+        <span class="s1">importCSVButton</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s1">font</span><span class="s2">);</span>
+        <span class="s1">importCSVButton</span><span class="s2">.</span><span class="s1">setWrapText</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+
+        <span class="s3">//button for import from text field (from website save)</span>
+        <span class="s1">OptionButton importTextButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s7">&quot;Import from Text&quot;</span><span class="s2">, </span><span class="s6">500</span><span class="s2">, </span><span class="s6">100</span><span class="s2">);</span>
+        <span class="s1">importTextButton</span><span class="s2">.</span><span class="s1">changeTextColor</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">web</span><span class="s2">(</span><span class="s7">&quot;#34A3ED&quot;</span><span class="s2">));</span>
+        <span class="s1">importTextButton</span><span class="s2">.</span><span class="s1">changeBackGroundColor</span><span class="s2">();</span>
+        <span class="s1">importTextButton</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s1">font</span><span class="s2">);</span>
+        <span class="s1">importTextButton</span><span class="s2">.</span><span class="s1">setWrapText</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+
+        <span class="s3">//title and credits to the authors</span>
+        <span class="s1">Label title </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Label</span><span class="s2">(</span><span class="s7">&quot;Schedule &amp; Homework Tracker&quot;</span><span class="s2">);</span>
+        <span class="s1">Label credits </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Label</span><span class="s2">(</span><span class="s7">&quot;Credits: Logan, Simon, Theo, Willy&quot;</span><span class="s2">);</span>
+        <span class="s1">date </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Date</span><span class="s2">();</span>
+        <span class="s1">dateFormat </span><span class="s2">= </span><span class="s0">new </span><span class="s1">SimpleDateFormat</span><span class="s2">(</span><span class="s7">&quot;MMMM/dd/y hh:mm:ss a&quot;</span><span class="s2">);</span>
+        <span class="s1">time </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Label</span><span class="s2">(</span><span class="s1">dateFormat</span><span class="s2">.</span><span class="s1">format</span><span class="s2">((</span><span class="s1">date</span><span class="s2">)));</span>
+        <span class="s1">credits</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s1">smallFont</span><span class="s2">);</span>
+        <span class="s1">title</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s1">font</span><span class="s2">);</span>
+        <span class="s3">//organize title and setup button to be spaced accordingly, set it in center</span>
+        <span class="s1">Image image </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Image</span><span class="s2">(</span><span class="s1">Files</span><span class="s2">.</span><span class="s1">newInputStream</span><span class="s2">(</span><span class="s1">Paths</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s7">&quot;Server/src/main/java/edu/sdccd/cisc191/template/Homework-modified.png&quot;</span><span class="s2">)));</span>
+        <span class="s1">Image color </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Image</span><span class="s2">(</span><span class="s1">Files</span><span class="s2">.</span><span class="s1">newInputStream</span><span class="s2">(</span><span class="s1">Paths</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s7">&quot;Server/src/main/java/edu/sdccd/cisc191/template/Homework.png&quot;</span><span class="s2">)));</span>
+        <span class="s1">ImageView imageView </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ImageView</span><span class="s2">(</span><span class="s1">image</span><span class="s2">);</span>
+        <span class="s1">imageView</span><span class="s2">.</span><span class="s1">setFitHeight</span><span class="s2">(</span><span class="s6">150</span><span class="s2">);</span>
+        <span class="s1">imageView</span><span class="s2">.</span><span class="s1">setFitWidth</span><span class="s2">(</span><span class="s6">150</span><span class="s2">);</span>
+        <span class="s1">VBox buttons </span><span class="s2">= </span><span class="s0">new </span><span class="s1">VBox</span><span class="s2">((</span><span class="s0">double</span><span class="s2">) </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">120</span><span class="s2">, </span><span class="s1">title</span><span class="s2">, </span><span class="s1">setupButton</span><span class="s2">, </span><span class="s1">importCSVButton</span><span class="s2">, </span><span class="s1">importTextButton</span><span class="s2">, </span><span class="s1">imageView</span><span class="s2">, </span><span class="s1">credits</span><span class="s2">);</span>
+
+
+        <span class="s1">buttonEffects</span><span class="s2">(</span><span class="s1">glow</span><span class="s2">, </span><span class="s1">setupButton</span><span class="s2">, </span><span class="s1">image</span><span class="s2">, </span><span class="s1">color</span><span class="s2">, </span><span class="s1">imageView</span><span class="s2">);</span>
+
+        <span class="s1">buttonEffects</span><span class="s2">(</span><span class="s1">glow</span><span class="s2">, </span><span class="s1">importCSVButton</span><span class="s2">, </span><span class="s1">image</span><span class="s2">, </span><span class="s1">color</span><span class="s2">, </span><span class="s1">imageView</span><span class="s2">);</span>
+
+        <span class="s1">buttonEffects</span><span class="s2">(</span><span class="s1">glow</span><span class="s2">, </span><span class="s1">importTextButton</span><span class="s2">, </span><span class="s1">image</span><span class="s2">, </span><span class="s1">color</span><span class="s2">, </span><span class="s1">imageView</span><span class="s2">);</span>
+
+        <span class="s1">setupButton</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent e</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">done </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+                <span class="s1">runSetup2</span><span class="s2">();</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">) {</span>
+                <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">importCSVButton</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent e</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s1">subjectArrayList </span><span class="s2">= </span><span class="s1">convertCSVFileToSubject</span><span class="s2">();</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">done </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+                <span class="s1">runMainScreen</span><span class="s2">(</span><span class="s1">subjectArrayList</span><span class="s2">, </span><span class="s1">selectedIndex</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">) {</span>
+                <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">importTextButton</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent e</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">done </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+                <span class="s1">convertPlainTextToSubject</span><span class="s2">();</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">) {</span>
+                <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">buttons</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s7">&quot;-fx-background-color: #FFF1DC&quot;</span><span class="s2">);</span>
+        <span class="s1">buttons</span><span class="s2">.</span><span class="s1">setAlignment</span><span class="s2">(</span><span class="s1">Pos</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+        <span class="s1">layout </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BorderPane</span><span class="s2">(</span><span class="s1">buttons</span><span class="s2">);</span>
+        <span class="s1">buttons </span><span class="s2">= </span><span class="s0">new </span><span class="s1">VBox</span><span class="s2">(</span><span class="s1">credits</span><span class="s2">);</span>
+        <span class="s1">buttons</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s7">&quot;-fx-background-color: #FFF1DC&quot;</span><span class="s2">);</span>
+        <span class="s1">buttons</span><span class="s2">.</span><span class="s1">setAlignment</span><span class="s2">(</span><span class="s1">Pos</span><span class="s2">.</span><span class="s1">BOTTOM_RIGHT</span><span class="s2">);</span>
+        <span class="s1">layout</span><span class="s2">.</span><span class="s1">setBottom</span><span class="s2">(</span><span class="s1">buttons</span><span class="s2">);</span>
+        <span class="s3">//buttons = new VBox(time);</span>
+        <span class="s3">//buttons.setAlignment(Pos.BOTTOM_RIGHT);</span>
+        <span class="s1">layout</span><span class="s2">.</span><span class="s1">setBottom</span><span class="s2">(</span><span class="s1">buttons</span><span class="s2">);</span>
+        <span class="s1">Scene startScene </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">layout</span><span class="s2">, </span><span class="s1">screenWidth</span><span class="s2">, </span><span class="s1">screenHeight</span><span class="s2">);</span>
+        <span class="s1">startScene</span><span class="s2">.</span><span class="s1">setFill</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">web</span><span class="s2">(</span><span class="s7">&quot;#81c483&quot;</span><span class="s2">));</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s7">&quot;Schedule &amp; Homework Tracker&quot;</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s1">startScene</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setTime</span><span class="s2">() {</span>
+        <span class="s0">while </span><span class="s2">(</span><span class="s1">done </span><span class="s2">== </span><span class="s0">false</span><span class="s2">) {</span>
+            <span class="s1">String currentTime </span><span class="s2">= </span><span class="s1">dateFormat</span><span class="s2">.</span><span class="s1">format</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">getTime</span><span class="s2">());</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">currentTime</span><span class="s2">);</span>
+            <span class="s1">time</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">currentTime</span><span class="s2">);</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">Thread</span><span class="s2">.</span><span class="s1">sleep</span><span class="s2">(</span><span class="s6">1000</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">InterruptedException e</span><span class="s2">) {</span>
+                <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* </span><span class="s5">@param </span><span class="s4">glow,        the amount of the glow when hovering/interacting with a button</span>
+     <span class="s4">* </span><span class="s5">@param </span><span class="s4">setupButton, the button which will be imbued with given effects</span>
+     <span class="s4">* </span><span class="s5">@param </span><span class="s4">image,</span>
+     <span class="s4">* </span><span class="s5">@param </span><span class="s4">color</span>
+     <span class="s4">* </span><span class="s5">@param </span><span class="s4">imageView</span>
+     <span class="s4">*/</span>
+    <span class="s0">private void </span><span class="s1">buttonEffects</span><span class="s2">(</span><span class="s1">Glow glow</span><span class="s2">, </span><span class="s1">OptionButton setupButton</span><span class="s2">, </span><span class="s1">Image image</span><span class="s2">, </span><span class="s1">Image color</span><span class="s2">, </span><span class="s1">ImageView imageView</span><span class="s2">) {</span>
+        <span class="s1">setupButton</span><span class="s2">.</span><span class="s1">addEventHandler</span><span class="s2">(</span><span class="s1">MouseEvent</span><span class="s2">.</span><span class="s1">MOUSE_ENTERED</span><span class="s2">, </span><span class="s1">event -&gt; </span><span class="s2">{</span>
+            <span class="s1">setupButton</span><span class="s2">.</span><span class="s1">setEffect</span><span class="s2">(</span><span class="s1">glow</span><span class="s2">);</span>
+            <span class="s1">imageView</span><span class="s2">.</span><span class="s1">setImage</span><span class="s2">(</span><span class="s1">color</span><span class="s2">);</span>
+
+        <span class="s2">});</span>
+        <span class="s1">setupButton</span><span class="s2">.</span><span class="s1">addEventHandler</span><span class="s2">(</span><span class="s1">MouseEvent</span><span class="s2">.</span><span class="s1">MOUSE_EXITED</span><span class="s2">, </span><span class="s1">event -&gt; </span><span class="s2">{</span>
+            <span class="s1">setupButton</span><span class="s2">.</span><span class="s1">setEffect</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+            <span class="s1">imageView</span><span class="s2">.</span><span class="s1">setImage</span><span class="s2">(</span><span class="s1">image</span><span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s1">launch</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+
+    <span class="s4">/**</span>
+     <span class="s4">* First screen the user sees when</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s5">@throws </span><span class="s4">Exception when there's error :)</span>
+     <span class="s4">*/</span>
+    <span class="s0">public void </span><span class="s1">runSetup2</span><span class="s2">() </span><span class="s0">throws </span><span class="s1">Exception </span><span class="s2">{</span>
+        <span class="s1">Font font </span><span class="s2">= </span><span class="s1">Font</span><span class="s2">.</span><span class="s1">font</span><span class="s2">(</span><span class="s7">&quot;Montserrat&quot;</span><span class="s2">, </span><span class="s1">FontWeight</span><span class="s2">.</span><span class="s1">BOLD</span><span class="s2">, </span><span class="s6">18</span><span class="s2">);</span>
+
+        <span class="s1">Label promptName </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Label</span><span class="s2">(</span><span class="s7">&quot;Enter the name of the class you would like to add&quot;</span><span class="s2">);</span>
+        <span class="s1">TextField name </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TextField</span><span class="s2">();</span>
+        <span class="s1">name</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s1">font</span><span class="s2">);</span>
+        <span class="s1">name</span><span class="s2">.</span><span class="s1">setPrefSize</span><span class="s2">(</span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">2.0</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">10.0</span><span class="s2">);</span>
+        <span class="s1">name</span><span class="s2">.</span><span class="s1">setMaxWidth</span><span class="s2">(</span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">2.0</span><span class="s2">);</span>
+        <span class="s1">promptName</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s1">font</span><span class="s2">);</span>
+
+        <span class="s1">CheckBox promptWeighted </span><span class="s2">= </span><span class="s0">new </span><span class="s1">CheckBox</span><span class="s2">(</span><span class="s7">&quot;Is the class weighted?&quot;</span><span class="s2">);</span>
+        <span class="s1">promptWeighted</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s1">font</span><span class="s2">);</span>
+
+        <span class="s1">Label promptGrade </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Label</span><span class="s2">(</span><span class="s7">&quot;What is your current grade in the class?&quot;</span><span class="s2">);</span>
+        <span class="s1">promptGrade</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s1">font</span><span class="s2">);</span>
+
+        <span class="s1">TextField grade </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TextField</span><span class="s2">();</span>
+        <span class="s1">grade</span><span class="s2">.</span><span class="s1">setPrefSize</span><span class="s2">(</span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">2.0</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">8.0</span><span class="s2">);</span>
+        <span class="s1">grade</span><span class="s2">.</span><span class="s1">setMaxWidth</span><span class="s2">(</span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">2.0</span><span class="s2">);</span>
+        <span class="s1">grade</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s1">font</span><span class="s2">);</span>
+        <span class="s3">//prevents any compiler errors when adding to subjectArrayList</span>
+        <span class="s1">OptionButton confirm </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s7">&quot;Confirm&quot;</span><span class="s2">, </span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">6.0</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">24.0</span><span class="s2">);</span>
+        <span class="s1">Label colorChoice </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Label</span><span class="s2">(</span><span class="s7">&quot;What color would you like the subject to be?&quot;</span><span class="s2">);</span>
+        <span class="s1">colorChoice</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s1">font</span><span class="s2">);</span>
+        <span class="s1">ChoiceBox</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">dropDown </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ChoiceBox</span><span class="s2">&lt;&gt;();</span>
+        <span class="s1">dropDown</span><span class="s2">.</span><span class="s1">getItems</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s7">&quot;Red&quot;</span><span class="s2">);</span>
+        <span class="s1">dropDown</span><span class="s2">.</span><span class="s1">getItems</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s7">&quot;Blue&quot;</span><span class="s2">);</span>
+        <span class="s1">dropDown</span><span class="s2">.</span><span class="s1">getItems</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s7">&quot;Yellow&quot;</span><span class="s2">);</span>
+        <span class="s1">dropDown</span><span class="s2">.</span><span class="s1">getItems</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s7">&quot;Green&quot;</span><span class="s2">);</span>
+        <span class="s1">dropDown</span><span class="s2">.</span><span class="s1">getItems</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s7">&quot;Orange&quot;</span><span class="s2">);</span>
+        <span class="s1">dropDown</span><span class="s2">.</span><span class="s1">getItems</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s7">&quot;Purple&quot;</span><span class="s2">);</span>
+        <span class="s1">dropDown</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">event</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s0">int </span><span class="s1">selectedIndex </span><span class="s2">= </span><span class="s1">dropDown</span><span class="s2">.</span><span class="s1">getSelectionModel</span><span class="s2">().</span><span class="s1">getSelectedIndex</span><span class="s2">();</span>
+        <span class="s2">});</span>
+            <span class="s3">/* adds first class to subject array list 
+               directs to main interface 
+             */</span>
+        <span class="s1">confirm</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent yes</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s0">try </span><span class="s2">{</span>
+
+                <span class="s1">selectedIndex </span><span class="s2">= </span><span class="s1">dropDown</span><span class="s2">.</span><span class="s1">getSelectionModel</span><span class="s2">().</span><span class="s1">getSelectedIndex</span><span class="s2">();</span>
+                <span class="s1">Subject tempSubject </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">(</span><span class="s1">name</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">(), </span><span class="s1">Double</span><span class="s2">.</span><span class="s1">parseDouble</span><span class="s2">(</span><span class="s1">grade</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">()));</span>
+                <span class="s1">tempSubject</span><span class="s2">.</span><span class="s1">setColor</span><span class="s2">(</span><span class="s1">selectedIndex</span><span class="s2">);</span>
+                <span class="s0">int </span><span class="s1">tempColor </span><span class="s2">= </span><span class="s1">tempSubject</span><span class="s2">.</span><span class="s1">getColor</span><span class="s2">();</span>
+
+
+                <span class="s1">subjectArrayList</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">tempSubject</span><span class="s2">);</span>
+
+                <span class="s1">runMainScreen</span><span class="s2">(</span><span class="s1">subjectArrayList</span><span class="s2">, </span><span class="s1">tempColor</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+                <span class="s1">Alert alert </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">ERROR</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s7">&quot;ERROR&quot;</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">setHeaderText</span><span class="s2">(</span><span class="s7">&quot;INPUT ERROR&quot;</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">setContentText</span><span class="s2">(</span><span class="s7">&quot;YOUR GRADE, &quot; </span><span class="s2">+ </span><span class="s7">&quot;'&quot; </span><span class="s2">+ ((</span><span class="s1">grade</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">())) + </span><span class="s7">&quot;'&quot; </span><span class="s2">+ </span><span class="s7">&quot; IS NOT A NUMBER&quot; </span><span class="s2">+</span>
+                        <span class="s7">&quot;</span><span class="s0">\n</span><span class="s7">TRY AGAIN&quot;</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">VBox buttons </span><span class="s2">= </span><span class="s0">new </span><span class="s1">VBox</span><span class="s2">(</span><span class="s6">50</span><span class="s2">);</span>
+        <span class="s3">//TODO Add something to get the information of the color</span>
+
+
+        <span class="s1">buttons</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s7">&quot;-fx-background-color: #FFF1DC;&quot;</span><span class="s2">);</span>
+        <span class="s1">buttons</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">addAll</span><span class="s2">(</span><span class="s1">promptName</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">promptGrade</span><span class="s2">, </span><span class="s1">grade</span><span class="s2">, </span><span class="s1">promptWeighted</span><span class="s2">, </span><span class="s1">colorChoice</span><span class="s2">, </span><span class="s1">dropDown</span><span class="s2">, </span><span class="s1">confirm</span><span class="s2">);</span>
+        <span class="s1">buttons</span><span class="s2">.</span><span class="s1">setAlignment</span><span class="s2">(</span><span class="s1">Pos</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+        <span class="s1">layout </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BorderPane</span><span class="s2">(</span><span class="s1">buttons</span><span class="s2">);</span>
+
+        <span class="s1">name</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">();</span>
+        <span class="s1">grade</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">();</span>
+        <span class="s1">sceneClassName </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">layout</span><span class="s2">, </span><span class="s1">screenWidth</span><span class="s2">, </span><span class="s1">screenHeight</span><span class="s2">);</span>
+        <span class="s1">switchScene</span><span class="s2">(</span><span class="s1">sceneClassName</span><span class="s2">, </span><span class="s7">&quot;Set your classes&quot;</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* switchScene to handle repetitive action</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s5">@param </span><span class="s4">scene scene to switch to</span>
+     <span class="s4">* </span><span class="s5">@param </span><span class="s4">title title of new scene</span>
+     <span class="s4">*/</span>
+    <span class="s0">public void </span><span class="s1">switchScene</span><span class="s2">(</span><span class="s1">Scene scene</span><span class="s2">, </span><span class="s1">String title</span><span class="s2">) {</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s1">scene</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s1">title</span><span class="s2">);</span>
+        <span class="s1">sceneClassName </span><span class="s2">= </span><span class="s1">scene</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* </span><span class="s5">@param </span><span class="s4">a subjectArrayList, used to have the proper amount of buttons</span>
+     <span class="s4">* </span><span class="s5">@throws </span><span class="s4">Exception prevents anything from not compiling</span>
+     <span class="s4">*/</span>
+    <span class="s0">public void </span><span class="s1">runMainScreen</span><span class="s2">(</span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Subject</span><span class="s2">&gt; </span><span class="s1">a</span><span class="s2">, </span><span class="s0">int </span><span class="s1">colorNumber</span><span class="s2">) </span><span class="s0">throws </span><span class="s1">Exception </span><span class="s2">{</span>
+        <span class="s1">Label classList </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Label</span><span class="s2">(</span><span class="s7">&quot;Your Classes&quot;</span><span class="s2">);</span>
+        <span class="s1">classList</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s7">&quot;-fx-font-size: 20; -fx-underline: true; -fx-font-weight: bold;&quot;</span><span class="s2">);</span>
+        <span class="s1">VBox classes </span><span class="s2">= </span><span class="s0">new </span><span class="s1">VBox</span><span class="s2">(</span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">240.0</span><span class="s2">, </span><span class="s1">classList</span><span class="s2">);</span>
+        <span class="s1">classes</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s7">&quot;-fx-background-color: #FFF1DC;&quot;</span><span class="s2">);</span>
+        <span class="s1">classes</span><span class="s2">.</span><span class="s1">setAlignment</span><span class="s2">(</span><span class="s1">Pos</span><span class="s2">.</span><span class="s1">TOP_LEFT</span><span class="s2">);</span>
+
+        <span class="s3">// set individual color for each subject</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Subject subject </span><span class="s2">: </span><span class="s1">a</span><span class="s2">) {</span>
+            <span class="s1">OptionButton button </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s1">subject</span><span class="s2">.</span><span class="s1">getNameOfSubject</span><span class="s2">(), </span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">3</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">10</span><span class="s2">);</span>
+
+            <span class="s1">button</span><span class="s2">.</span><span class="s1">buttonGlow</span><span class="s2">();</span>
+            <span class="s1">button</span><span class="s2">.</span><span class="s1">changeTextColor</span><span class="s2">(</span><span class="s1">subject</span><span class="s2">.</span><span class="s1">getColor</span><span class="s2">()); </span><span class="s3">// Set color based on subject</span>
+            <span class="s1">button</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent e</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+                <span class="s0">try </span><span class="s2">{</span>
+                    <span class="s0">int </span><span class="s1">subjectIndex </span><span class="s2">= </span><span class="s1">a</span><span class="s2">.</span><span class="s1">indexOf</span><span class="s2">(</span><span class="s1">subject</span><span class="s2">);</span>
+                    <span class="s1">viewAssignmentList</span><span class="s2">(</span><span class="s1">subjectIndex</span><span class="s2">);</span>
+                <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">) {</span>
+                    <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+            <span class="s1">classes</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">button</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s3">//allows user to add another class to the list</span>
+        <span class="s1">OptionButton addClass </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s7">&quot;Add Class&quot;</span><span class="s2">, </span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">3</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">17.5</span><span class="s2">);</span>
+        <span class="s1">addClass</span><span class="s2">.</span><span class="s1">changeBackGroundColor</span><span class="s2">();</span>
+        <span class="s1">addClass</span><span class="s2">.</span><span class="s1">buttonGlow</span><span class="s2">();</span>
+        <span class="s1">addClass</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent e</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">runSetup2</span><span class="s2">();</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">) {</span>
+                <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s1">OptionButton saveSchedule </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s7">&quot;Save Schedule&quot;</span><span class="s2">, </span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">3</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">17.5</span><span class="s2">);</span>
+        <span class="s1">saveSchedule</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent e</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s1">chooseSchedule</span><span class="s2">(</span><span class="s1">a</span><span class="s2">);</span>
+        <span class="s2">});</span>
+        <span class="s1">saveSchedule</span><span class="s2">.</span><span class="s1">buttonGlow</span><span class="s2">();</span>
+        <span class="s1">saveSchedule</span><span class="s2">.</span><span class="s1">changeBackGroundColor</span><span class="s2">();</span>
+        <span class="s1">HBox bottomButtons </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HBox</span><span class="s2">(</span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">1.5</span><span class="s2">, </span><span class="s1">addClass</span><span class="s2">, </span><span class="s1">saveSchedule</span><span class="s2">);</span>
+        <span class="s1">bottomButtons</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s7">&quot;-fx-background-color: #FFF1DC&quot;</span><span class="s2">);</span>
+        <span class="s1">bottomButtons</span><span class="s2">.</span><span class="s1">setAlignment</span><span class="s2">(</span><span class="s1">Pos</span><span class="s2">.</span><span class="s1">BOTTOM_LEFT</span><span class="s2">);</span>
+        <span class="s1">layout </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BorderPane</span><span class="s2">(</span><span class="s1">classes</span><span class="s2">);</span>
+        <span class="s1">layout</span><span class="s2">.</span><span class="s1">setBottom</span><span class="s2">(</span><span class="s1">bottomButtons</span><span class="s2">);</span>
+        <span class="s1">sceneClassName </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">layout</span><span class="s2">, </span><span class="s1">screenWidth</span><span class="s2">, </span><span class="s1">screenHeight</span><span class="s2">);</span>
+        <span class="s1">switchScene</span><span class="s2">(</span><span class="s1">sceneClassName</span><span class="s2">, </span><span class="s7">&quot;View Information&quot;</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* </span><span class="s5">@param </span><span class="s4">subjectArrayIndex index of subjectArray i.e which subject does the user want to access</span>
+     <span class="s4">*                          dear God did I do anything correctly</span>
+     <span class="s4">*                                                                            TODO deal with weird user inputs</span>
+     <span class="s4">*/</span>
+    <span class="s0">public void </span><span class="s1">viewAssignmentList</span><span class="s2">(</span><span class="s0">int </span><span class="s1">subjectArrayIndex</span><span class="s2">) {</span>
+        <span class="s1">Subject subject </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">(</span><span class="s1">subjectArrayList</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">subjectArrayIndex</span><span class="s2">));</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Assignment</span><span class="s2">&gt; </span><span class="s1">tempArray </span><span class="s2">= </span><span class="s1">subject</span><span class="s2">.</span><span class="s1">getAssignmentList</span><span class="s2">();</span>
+        <span class="s1">Label nameOfSubject </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Label</span><span class="s2">(</span><span class="s1">subjectArrayList</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">subjectArrayIndex</span><span class="s2">).</span><span class="s1">getNameOfSubject</span><span class="s2">());</span>
+        <span class="s1">nameOfSubject</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s7">&quot;-fx-font-size: 20; -fx-underline: true; -fx-font-weight: bold;&quot;</span><span class="s2">);</span>
+
+        <span class="s1">VBox assignments </span><span class="s2">= </span><span class="s0">new </span><span class="s1">VBox</span><span class="s2">(</span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">240.0</span><span class="s2">, </span><span class="s1">nameOfSubject</span><span class="s2">);</span>
+        <span class="s1">assignments</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s7">&quot;-fx-background-color: #FFF1DC;&quot;</span><span class="s2">);</span>
+        <span class="s1">assignments</span><span class="s2">.</span><span class="s1">setAlignment</span><span class="s2">(</span><span class="s1">Pos</span><span class="s2">.</span><span class="s1">TOP_LEFT</span><span class="s2">);</span>
+        <span class="s1">OptionButton addAssignment </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s7">&quot;Add Assignment&quot;</span><span class="s2">, </span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">3.0</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">17.5</span><span class="s2">);</span>
+        <span class="s1">addAssignment</span><span class="s2">.</span><span class="s1">changeBackGroundColor</span><span class="s2">();</span>
+        <span class="s1">addAssignment</span><span class="s2">.</span><span class="s1">buttonGlow</span><span class="s2">();</span>
+        <span class="s1">addAssignment</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent e</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">addAssignment</span><span class="s2">(</span><span class="s1">subjectArrayIndex</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">) {</span>
+                <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s1">OptionButton backButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s7">&quot;Back&quot;</span><span class="s2">, </span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">3.0</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">17.5</span><span class="s2">);</span>
+        <span class="s1">backButton</span><span class="s2">.</span><span class="s1">changeBackGroundColor</span><span class="s2">();</span>
+        <span class="s1">backButton</span><span class="s2">.</span><span class="s1">buttonGlow</span><span class="s2">();</span>
+        <span class="s1">backButton</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent e</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">runMainScreen</span><span class="s2">(</span><span class="s1">subjectArrayList</span><span class="s2">, </span><span class="s1">selectedIndex</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">) {</span>
+                <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s6">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">tempArray</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s1">Assignment assignment </span><span class="s2">= </span><span class="s1">tempArray</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+            <span class="s1">OptionButton button </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s1">assignment</span><span class="s2">.</span><span class="s1">getNameOfAssignment</span><span class="s2">(), </span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">3.0</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">10.0</span><span class="s2">);</span>
+            <span class="s0">int </span><span class="s1">finalI </span><span class="s2">= </span><span class="s1">i</span><span class="s2">;</span>
+            <span class="s1">button</span><span class="s2">.</span><span class="s1">changeBackGroundColor</span><span class="s2">();</span>
+            <span class="s1">button</span><span class="s2">.</span><span class="s1">buttonGlow</span><span class="s2">();</span>
+            <span class="s1">button</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent e</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+                <span class="s0">try </span><span class="s2">{</span>
+                    <span class="s1">viewAssignmentInfo</span><span class="s2">(</span><span class="s1">subjectArrayIndex</span><span class="s2">, </span><span class="s1">finalI</span><span class="s2">);</span>
+                <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">) {</span>
+                    <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+            <span class="s1">assignments</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">button</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s1">HBox bottomButtons </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HBox</span><span class="s2">(</span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">1.5</span><span class="s2">, </span><span class="s1">addAssignment</span><span class="s2">, </span><span class="s1">backButton</span><span class="s2">);</span>
+        <span class="s1">bottomButtons</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s7">&quot;-fx-background-color: #FFF1DC&quot;</span><span class="s2">);</span>
+        <span class="s1">layout </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BorderPane</span><span class="s2">(</span><span class="s1">assignments</span><span class="s2">);</span>
+        <span class="s1">layout</span><span class="s2">.</span><span class="s1">setBottom</span><span class="s2">(</span><span class="s1">bottomButtons</span><span class="s2">);</span>
+        <span class="s1">sceneClassName </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">layout</span><span class="s2">, </span><span class="s1">screenWidth</span><span class="s2">, </span><span class="s1">screenHeight</span><span class="s2">);</span>
+        <span class="s1">switchScene</span><span class="s2">(</span><span class="s1">sceneClassName</span><span class="s2">, </span><span class="s7">&quot;Assignments&quot;</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">viewAssignmentInfo</span><span class="s2">(</span><span class="s0">int </span><span class="s1">subjectIndex</span><span class="s2">, </span><span class="s0">int </span><span class="s1">assignmentIndex</span><span class="s2">) {</span>
+        <span class="s1">Subject subject </span><span class="s2">= </span><span class="s1">subjectArrayList</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">subjectIndex</span><span class="s2">);</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Assignment</span><span class="s2">&gt; </span><span class="s1">assignments </span><span class="s2">= </span><span class="s1">subject</span><span class="s2">.</span><span class="s1">getAssignmentList</span><span class="s2">();</span>
+        <span class="s1">Assignment selectedAssignment </span><span class="s2">= </span><span class="s1">assignments</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">assignmentIndex</span><span class="s2">);</span>
+
+        <span class="s3">// Create labels to display assignment details</span>
+        <span class="s1">Label assignmentLabel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Label</span><span class="s2">(</span><span class="s7">&quot;Assignment Name: &quot; </span><span class="s2">+ </span><span class="s1">selectedAssignment</span><span class="s2">.</span><span class="s1">getNameOfAssignment</span><span class="s2">() + </span><span class="s7">&quot;</span><span class="s0">\n</span><span class="s7">&quot; </span><span class="s2">+</span>
+                <span class="s7">&quot;Total Points Possible: &quot; </span><span class="s2">+ </span><span class="s1">Double</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">(</span><span class="s1">selectedAssignment</span><span class="s2">.</span><span class="s1">getTotalPoints</span><span class="s2">()));</span>
+
+
+        <span class="s3">// Create a button to go back to the assignment list</span>
+        <span class="s1">OptionButton backButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s7">&quot;Back to Assignment List&quot;</span><span class="s2">, </span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">5.0</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">17.5</span><span class="s2">);</span>
+        <span class="s1">backButton</span><span class="s2">.</span><span class="s1">buttonGlow</span><span class="s2">();</span>
+        <span class="s1">backButton</span><span class="s2">.</span><span class="s1">changeBackGroundColor</span><span class="s2">();</span>
+        <span class="s1">backButton</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent e</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">viewAssignmentList</span><span class="s2">(</span><span class="s1">subjectIndex</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">) {</span>
+                <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s3">// Create a VBox to hold the labels and button</span>
+        <span class="s1">VBox assignmentInfoLayout </span><span class="s2">= </span><span class="s0">new </span><span class="s1">VBox</span><span class="s2">(</span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">60.0</span><span class="s2">, </span><span class="s1">assignmentLabel</span><span class="s2">, </span><span class="s1">backButton</span><span class="s2">);</span>
+        <span class="s1">assignmentInfoLayout</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s7">&quot;-fx-background-color: #FFF1DC&quot;</span><span class="s2">);</span>
+        <span class="s1">assignmentInfoLayout</span><span class="s2">.</span><span class="s1">setAlignment</span><span class="s2">(</span><span class="s1">Pos</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+
+        <span class="s3">// Set the layout for the scene</span>
+        <span class="s1">layout </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BorderPane</span><span class="s2">(</span><span class="s1">assignmentInfoLayout</span><span class="s2">);</span>
+        <span class="s1">sceneClassName </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">layout</span><span class="s2">, </span><span class="s1">screenWidth</span><span class="s2">, </span><span class="s1">screenHeight</span><span class="s2">);</span>
+        <span class="s1">switchScene</span><span class="s2">(</span><span class="s1">sceneClassName</span><span class="s2">, </span><span class="s7">&quot;Assignment Details&quot;</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// points earned is killed bc homework planner assumes assignments have not been done yet</span>
+    <span class="s0">public void </span><span class="s1">addAssignment</span><span class="s2">(</span><span class="s0">int </span><span class="s1">subjectIndex</span><span class="s2">) {</span>
+        <span class="s1">Subject subject </span><span class="s2">= </span><span class="s1">subjectArrayList</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">subjectIndex</span><span class="s2">); </span><span class="s3">// Get the subject from the ArrayList</span>
+        <span class="s1">Label assignmentNameLabel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Label</span><span class="s2">(</span><span class="s7">&quot;Enter name of Assignment:&quot;</span><span class="s2">);</span>
+        <span class="s1">TextField assignmentNameField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TextField</span><span class="s2">();</span>
+
+        <span class="s3">//Label assignmentPointsLabel = new Label(&quot;Enter amount of points earned on Assignment:&quot;);</span>
+        <span class="s3">// TextField assignmentPointsField = new TextField();</span>
+
+        <span class="s1">Label assignmentTotalPointsLabel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Label</span><span class="s2">(</span><span class="s7">&quot;Enter number of points for Assignment:&quot;</span><span class="s2">);</span>
+        <span class="s1">TextField assignmentTotalPointsField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TextField</span><span class="s2">();</span>
+
+        <span class="s1">assignmentNameField</span><span class="s2">.</span><span class="s1">setPrefSize</span><span class="s2">(</span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">2.0</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">8.0</span><span class="s2">);</span>
+        <span class="s3">// assignmentPointsField.setPrefSize(screenWidth / 2.0, screenHeight / 20.0);</span>
+        <span class="s1">assignmentTotalPointsField</span><span class="s2">.</span><span class="s1">setPrefSize</span><span class="s2">(</span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">2.0</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">20.0</span><span class="s2">);</span>
+
+        <span class="s1">OptionButton confirmButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s7">&quot;Confirm&quot;</span><span class="s2">, </span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">6.0</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">24.0</span><span class="s2">);</span>
+        <span class="s1">confirmButton</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent e</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">String assignmentName </span><span class="s2">= </span><span class="s1">assignmentNameField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">();</span>
+                <span class="s3">// int assignmentPoints = Integer.parseInt(assignmentPointsField.getText());</span>
+                <span class="s0">int </span><span class="s1">totalAssignmentPoints </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">assignmentTotalPointsField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">());</span>
+                <span class="s3">// Create a new Assignment object with the entered name</span>
+                <span class="s1">Assignment assignment </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s1">assignmentName</span><span class="s2">);</span>
+                <span class="s3">// assignment.setPointsOfAssignment(assignmentPoints);</span>
+                <span class="s1">assignment</span><span class="s2">.</span><span class="s1">setTotalPoints</span><span class="s2">(</span><span class="s1">totalAssignmentPoints</span><span class="s2">);</span>
+                <span class="s3">// Add the assignment to the subject's ArrayList</span>
+                <span class="s1">subject</span><span class="s2">.</span><span class="s1">addAssignment</span><span class="s2">(</span><span class="s1">assignment</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception error</span><span class="s2">) {</span>
+                <span class="s1">Alert alert </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">ERROR</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s7">&quot;ERROR&quot;</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">setHeaderText</span><span class="s2">(</span><span class="s7">&quot;INPUT ERROR&quot;</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">setContentText</span><span class="s2">(</span><span class="s7">&quot;YOUR GRADE, &quot; </span><span class="s2">+ </span><span class="s7">&quot;'&quot; </span><span class="s2">+ ((</span><span class="s1">assignmentTotalPointsField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">())) + </span><span class="s7">&quot;'&quot; </span><span class="s2">+ </span><span class="s7">&quot; IS NOT A NUMBER&quot; </span><span class="s2">+</span>
+                        <span class="s7">&quot;</span><span class="s0">\n</span><span class="s7">TRY AGAIN&quot;</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+            <span class="s2">}</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">runMainScreen</span><span class="s2">(</span><span class="s1">subjectArrayList</span><span class="s2">, </span><span class="s1">selectedIndex</span><span class="s2">); </span><span class="s3">// Refresh the main screen with the updated assignment list</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">) {</span>
+                <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">VBox buttons </span><span class="s2">= </span><span class="s0">new </span><span class="s1">VBox</span><span class="s2">(</span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">60.0</span><span class="s2">, </span><span class="s1">assignmentNameLabel</span><span class="s2">, </span><span class="s1">assignmentNameField</span><span class="s2">, </span><span class="s1">assignmentTotalPointsLabel</span><span class="s2">, </span><span class="s1">assignmentTotalPointsField</span><span class="s2">, </span><span class="s1">confirmButton</span><span class="s2">);</span>
+        <span class="s1">layout </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BorderPane</span><span class="s2">(</span><span class="s1">buttons</span><span class="s2">);</span>
+        <span class="s1">sceneClassName </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">layout</span><span class="s2">, </span><span class="s1">screenWidth</span><span class="s2">, </span><span class="s1">screenHeight</span><span class="s2">);</span>
+        <span class="s1">switchScene</span><span class="s2">(</span><span class="s1">sceneClassName</span><span class="s2">, </span><span class="s7">&quot;Add Assignment&quot;</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* Convert the list of subjects to a CSV file</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s5">@param </span><span class="s4">a The list of subjects to be converted.</span>
+     <span class="s4">*/</span>
+    <span class="s0">public void </span><span class="s1">convertSubjectToCSV</span><span class="s2">(</span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Subject</span><span class="s2">&gt; </span><span class="s1">a</span><span class="s2">) {</span>
+        <span class="s1">FileChooser</span><span class="s2">.</span><span class="s1">ExtensionFilter availableFiles </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FileChooser</span><span class="s2">.</span><span class="s1">ExtensionFilter</span><span class="s2">(</span><span class="s7">&quot;txt files&quot;</span><span class="s2">, </span><span class="s7">&quot;*.txt&quot;</span><span class="s2">);</span>
+        <span class="s1">FileChooser fc </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FileChooser</span><span class="s2">();</span>
+        <span class="s1">fc</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s7">&quot;Save Schedule&quot;</span><span class="s2">);</span>
+        <span class="s1">fc</span><span class="s2">.</span><span class="s1">setInitialFileName</span><span class="s2">(</span><span class="s7">&quot;My_Schedule.txt&quot;</span><span class="s2">);</span>
+        <span class="s1">fc</span><span class="s2">.</span><span class="s1">getExtensionFilters</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">availableFiles</span><span class="s2">);</span>
+        <span class="s1">File saveLocation </span><span class="s2">= </span><span class="s1">fc</span><span class="s2">.</span><span class="s1">showSaveDialog</span><span class="s2">(</span><span class="s1">stage</span><span class="s2">);</span>
+        <span class="s0">try </span><span class="s2">(</span><span class="s1">FileWriter writer </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FileWriter</span><span class="s2">(</span><span class="s1">saveLocation</span><span class="s2">)) {</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">Subject subject </span><span class="s2">: </span><span class="s1">a</span><span class="s2">) {</span>
+                <span class="s1">writer</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">subject</span><span class="s2">.</span><span class="s1">getNameOfSubject</span><span class="s2">())</span>
+                        <span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s7">','</span><span class="s2">)</span>
+                        <span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">String</span><span class="s2">.</span><span class="s1">valueOf</span><span class="s2">(</span><span class="s1">subject</span><span class="s2">.</span><span class="s1">getGradeInClass</span><span class="s2">()))</span>
+                        <span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s7">','</span><span class="s2">)</span>
+                        <span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">String</span><span class="s2">.</span><span class="s1">valueOf</span><span class="s2">(</span><span class="s1">subject</span><span class="s2">.</span><span class="s1">isWeighted</span><span class="s2">()))</span>
+                        <span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s7">','</span><span class="s2">)</span>
+                        <span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">String</span><span class="s2">.</span><span class="s1">valueOf</span><span class="s2">(</span><span class="s1">subject</span><span class="s2">.</span><span class="s1">getColor</span><span class="s2">()))</span>
+                        <span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s7">','</span><span class="s2">);</span>
+                <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Assignment</span><span class="s2">&gt; </span><span class="s1">temp </span><span class="s2">= </span><span class="s1">subject</span><span class="s2">.</span><span class="s1">getAssignmentList</span><span class="s2">();</span>
+                <span class="s0">for </span><span class="s2">(</span><span class="s1">Assignment assignment </span><span class="s2">: </span><span class="s1">temp</span><span class="s2">) {</span>
+                    <span class="s1">writer</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">assignment</span><span class="s2">.</span><span class="s1">getNameOfAssignment</span><span class="s2">()).</span><span class="s1">append</span><span class="s2">(</span><span class="s7">','</span><span class="s2">);</span>
+                <span class="s2">}</span>
+                <span class="s1">writer</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s7">&quot;</span><span class="s0">\n</span><span class="s7">&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+            <span class="s1">writer</span><span class="s2">.</span><span class="s1">close</span><span class="s2">();</span>
+
+            <span class="s3">//msg to javafx success</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException e</span><span class="s2">) {</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* allows the user to import a previously saved schedule in the form of a csv file</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s5">@return </span><span class="s4">subject array to be imported</span>
+     <span class="s4">*/</span>
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Subject</span><span class="s2">&gt; </span><span class="s1">convertCSVFileToSubject</span><span class="s2">() {</span>
+        <span class="s1">FileChooser fc </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FileChooser</span><span class="s2">();</span>
+        <span class="s1">fc</span><span class="s2">.</span><span class="s1">getExtensionFilters</span><span class="s2">().</span><span class="s1">addAll</span><span class="s2">(</span><span class="s0">new </span><span class="s1">FileChooser</span><span class="s2">.</span><span class="s1">ExtensionFilter</span><span class="s2">(</span><span class="s7">&quot;TXT Files&quot;</span><span class="s2">, </span><span class="s7">&quot;*.TXT&quot;</span><span class="s2">),</span>
+                <span class="s0">new </span><span class="s1">FileChooser</span><span class="s2">.</span><span class="s1">ExtensionFilter</span><span class="s2">(</span><span class="s7">&quot;txt files&quot;</span><span class="s2">, </span><span class="s7">&quot;*.txt&quot;</span><span class="s2">));</span>
+        <span class="s1">File inFile </span><span class="s2">= </span><span class="s1">fc</span><span class="s2">.</span><span class="s1">showOpenDialog</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Subject</span><span class="s2">&gt; </span><span class="s1">subjectSave </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">inFile </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">Scanner inputStream </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scanner</span><span class="s2">(</span><span class="s1">inFile</span><span class="s2">);</span>
+                <span class="s0">while </span><span class="s2">(</span><span class="s1">inputStream</span><span class="s2">.</span><span class="s1">hasNextLine</span><span class="s2">()) {</span>
+                    <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Assignment</span><span class="s2">&gt; </span><span class="s1">assignments </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+                    <span class="s1">String temp </span><span class="s2">= </span><span class="s1">inputStream</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+                    <span class="s1">String</span><span class="s2">[] </span><span class="s1">tokens </span><span class="s2">= </span><span class="s1">temp</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s7">&quot;,&quot;</span><span class="s2">);</span>
+                    <span class="s1">Subject tempSubject </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">(</span><span class="s1">tokens</span><span class="s2">[</span><span class="s6">0</span><span class="s2">], </span><span class="s1">Boolean</span><span class="s2">.</span><span class="s1">parseBoolean</span><span class="s2">(</span><span class="s1">tokens</span><span class="s2">[</span><span class="s6">2</span><span class="s2">]), </span><span class="s1">Double</span><span class="s2">.</span><span class="s1">parseDouble</span><span class="s2">(</span><span class="s1">tokens</span><span class="s2">[</span><span class="s6">1</span><span class="s2">]));</span>
+                    <span class="s1">tempSubject</span><span class="s2">.</span><span class="s1">setColor</span><span class="s2">(</span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">tokens</span><span class="s2">[</span><span class="s6">3</span><span class="s2">]));</span>
+                    <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s6">4</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">tokens</span><span class="s2">.</span><span class="s1">length</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+                        <span class="s1">assignments</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s1">tokens</span><span class="s2">[</span><span class="s1">i</span><span class="s2">]));</span>
+                    <span class="s2">}</span>
+                    <span class="s1">tempSubject</span><span class="s2">.</span><span class="s1">setAssignmentList</span><span class="s2">(</span><span class="s1">assignments</span><span class="s2">);</span>
+                    <span class="s1">subjectSave</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">tempSubject</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">FileNotFoundException e</span><span class="s2">) {</span>
+                <span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s7">&quot;Invalid file&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">subjectSave</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">convertPlainTextToSubject</span><span class="s2">() {</span>
+        <span class="s3">// Create a TextArea on new page for the user to input the schedule text</span>
+        <span class="s1">TextArea scheduleText </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TextArea</span><span class="s2">();</span>
+        <span class="s1">scheduleText</span><span class="s2">.</span><span class="s1">setPrefSize</span><span class="s2">(</span><span class="s1">screenWidth</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">3.0</span><span class="s2">);</span>
+
+        <span class="s3">// Creates a confirm button to process the entered text when done</span>
+        <span class="s1">OptionButton confirmButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s7">&quot;Confirm&quot;</span><span class="s2">, </span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">6.0</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">10</span><span class="s2">);</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Subject</span><span class="s2">&gt; </span><span class="s1">subjectSave </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+        <span class="s1">confirmButton</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent e</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s1">String</span><span class="s2">[] </span><span class="s1">tokens </span><span class="s2">= </span><span class="s1">scheduleText</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">split</span><span class="s2">(</span><span class="s7">&quot;</span><span class="s0">\n</span><span class="s7">&quot;</span><span class="s2">);</span>
+            <span class="s1">String</span><span class="s2">[] </span><span class="s1">tokens1</span><span class="s2">;</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s6">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">tokens</span><span class="s2">.</span><span class="s1">length</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+                <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Assignment</span><span class="s2">&gt; </span><span class="s1">assignments </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+                <span class="s1">tokens1 </span><span class="s2">= </span><span class="s1">tokens</span><span class="s2">[</span><span class="s1">i</span><span class="s2">].</span><span class="s1">split</span><span class="s2">(</span><span class="s7">&quot;,&quot;</span><span class="s2">);</span>
+                <span class="s1">Subject tempSubject </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">(</span><span class="s1">tokens1</span><span class="s2">[</span><span class="s6">0</span><span class="s2">], </span><span class="s1">Boolean</span><span class="s2">.</span><span class="s1">parseBoolean</span><span class="s2">(</span><span class="s1">tokens1</span><span class="s2">[</span><span class="s6">2</span><span class="s2">]), </span><span class="s1">Double</span><span class="s2">.</span><span class="s1">parseDouble</span><span class="s2">(</span><span class="s1">tokens1</span><span class="s2">[</span><span class="s6">1</span><span class="s2">]));</span>
+                <span class="s1">tempSubject</span><span class="s2">.</span><span class="s1">setColor</span><span class="s2">(</span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">tokens1</span><span class="s2">[</span><span class="s6">3</span><span class="s2">]));</span>
+                <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">j </span><span class="s2">= </span><span class="s6">4</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s1">tokens1</span><span class="s2">.</span><span class="s1">length</span><span class="s2">; </span><span class="s1">j</span><span class="s2">++) {</span>
+                    <span class="s1">assignments</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s1">tokens1</span><span class="s2">[</span><span class="s1">j</span><span class="s2">]));</span>
+                <span class="s2">}</span>
+                <span class="s1">tempSubject</span><span class="s2">.</span><span class="s1">setAssignmentList</span><span class="s2">(</span><span class="s1">assignments</span><span class="s2">);</span>
+                <span class="s1">subjectSave</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">tempSubject</span><span class="s2">);</span>
+                <span class="s1">subjectArrayList </span><span class="s2">= </span><span class="s1">subjectSave</span><span class="s2">;</span>
+            <span class="s2">}</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s3">// After processing the text, switch to the main screen</span>
+                <span class="s1">runMainScreen</span><span class="s2">(</span><span class="s1">subjectArrayList</span><span class="s2">, </span><span class="s1">selectedIndex</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">) {</span>
+                <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s3">// Create a VBox to hold the text input field and the confirm button</span>
+        <span class="s1">VBox buttons </span><span class="s2">= </span><span class="s0">new </span><span class="s1">VBox</span><span class="s2">(</span><span class="s6">20</span><span class="s2">, </span><span class="s1">scheduleText</span><span class="s2">, </span><span class="s1">confirmButton</span><span class="s2">);</span>
+        <span class="s1">buttons</span><span class="s2">.</span><span class="s1">setAlignment</span><span class="s2">(</span><span class="s1">Pos</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+
+        <span class="s3">// Set up the layout</span>
+        <span class="s1">layout </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BorderPane</span><span class="s2">(</span><span class="s1">buttons</span><span class="s2">);</span>
+        <span class="s1">sceneClassName </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">layout</span><span class="s2">, </span><span class="s1">screenWidth</span><span class="s2">, </span><span class="s1">screenHeight</span><span class="s2">); </span><span class="s3">// Set scene dimensions</span>
+        <span class="s1">switchScene</span><span class="s2">(</span><span class="s1">sceneClassName</span><span class="s2">, </span><span class="s7">&quot;Import Schedule From Text&quot;</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* used for tomcat activities</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s5">@param </span><span class="s4">a subject array to convert</span>
+     <span class="s4">* </span><span class="s5">@return </span><span class="s4">string consisting of all schedule info</span>
+     <span class="s4">*/</span>
+    <span class="s0">public </span><span class="s1">String convertEverythingToString</span><span class="s2">(</span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Subject</span><span class="s2">&gt; </span><span class="s1">a</span><span class="s2">) {</span>
+        <span class="s3">//IGNORE METHOD. New implementation of networking on web server itself.</span>
+        <span class="s1">String finalString </span><span class="s2">= </span><span class="s7">&quot;&quot;</span><span class="s2">;</span>
+        <span class="s1">String temp </span><span class="s2">= </span><span class="s7">&quot;&quot;</span><span class="s2">;</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Subject subject </span><span class="s2">: </span><span class="s1">a</span><span class="s2">) {</span>
+            <span class="s1">temp </span><span class="s2">= </span><span class="s1">subject</span><span class="s2">.</span><span class="s1">getNameOfSubject</span><span class="s2">() + </span><span class="s7">',' </span><span class="s2">+ </span><span class="s1">String</span><span class="s2">.</span><span class="s1">valueOf</span><span class="s2">(</span><span class="s1">subject</span><span class="s2">.</span><span class="s1">getGradeInClass</span><span class="s2">()) + </span><span class="s7">',' </span><span class="s2">+</span>
+                    <span class="s1">String</span><span class="s2">.</span><span class="s1">valueOf</span><span class="s2">(</span><span class="s1">subject</span><span class="s2">.</span><span class="s1">isWeighted</span><span class="s2">()) + </span><span class="s7">',' </span><span class="s2">+ </span><span class="s1">String</span><span class="s2">.</span><span class="s1">valueOf</span><span class="s2">(</span><span class="s1">subject</span><span class="s2">.</span><span class="s1">getColor</span><span class="s2">()) + </span><span class="s7">','</span><span class="s2">;</span>
+            <span class="s1">finalString </span><span class="s2">+= </span><span class="s1">temp</span><span class="s2">;</span>
+            <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Assignment</span><span class="s2">&gt; </span><span class="s1">assignments </span><span class="s2">= </span><span class="s1">subject</span><span class="s2">.</span><span class="s1">getAssignmentList</span><span class="s2">();</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">j </span><span class="s2">= </span><span class="s6">0</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s1">assignments</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">j</span><span class="s2">++) {</span>
+                <span class="s1">finalString </span><span class="s2">+= </span><span class="s1">assignments</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">j</span><span class="s2">).</span><span class="s1">getNameOfAssignment</span><span class="s2">() + (</span><span class="s7">','</span><span class="s2">);</span>
+            <span class="s2">}</span>
+            <span class="s1">finalString </span><span class="s2">+= </span><span class="s7">&quot;</span><span class="s0">\n</span><span class="s7">&quot;</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">finalString</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">chooseSchedule</span><span class="s2">(</span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Subject</span><span class="s2">&gt; </span><span class="s1">a</span><span class="s2">) {</span>
+        <span class="s1">OptionButton saveFile </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s7">&quot;Save as File&quot;</span><span class="s2">, </span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">3.0</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">2.0</span><span class="s2">);</span>
+        <span class="s1">OptionButton saveRemote </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s7">&quot;Save Remotely&quot;</span><span class="s2">, </span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s6">3.0</span><span class="s2">, </span><span class="s1">screenHeight </span><span class="s2">/ </span><span class="s6">2.0</span><span class="s2">);</span>
+        <span class="s1">HBox buttons </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HBox</span><span class="s2">(</span><span class="s6">50</span><span class="s2">, </span><span class="s1">saveFile</span><span class="s2">, </span><span class="s1">saveRemote</span><span class="s2">);</span>
+        <span class="s1">buttons</span><span class="s2">.</span><span class="s1">setAlignment</span><span class="s2">(</span><span class="s1">Pos</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+        <span class="s1">buttons</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s7">&quot;-fx-background-color: #FFF1DC;&quot;</span><span class="s2">);</span>
+
+        <span class="s1">saveFile</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent e</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s1">convertSubjectToCSV</span><span class="s2">(</span><span class="s1">a</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s1">saveRemote</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">((</span><span class="s1">ActionEvent e</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s3">//DOES NOT WORK. Alternate networking implementation:</span>
+            <span class="s3">// File Upload/Download on web server</span>
+            <span class="s1">savedSchedule </span><span class="s2">= </span><span class="s1">convertEverythingToString</span><span class="s2">(</span><span class="s1">a</span><span class="s2">);</span>
+        <span class="s2">});</span>
+        <span class="s3">//set layout</span>
+        <span class="s1">layout </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BorderPane</span><span class="s2">(</span><span class="s1">buttons</span><span class="s2">);</span>
+        <span class="s1">sceneClassName </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">layout</span><span class="s2">, </span><span class="s1">screenWidth</span><span class="s2">, </span><span class="s1">screenHeight</span><span class="s2">);</span>
+        <span class="s1">switchScene</span><span class="s2">(</span><span class="s1">sceneClassName</span><span class="s2">, </span><span class="s7">&quot;Choose Save Option&quot;</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+
+    <span class="s0">public boolean </span><span class="s1">checkSceneEquals</span><span class="s2">(</span><span class="s1">Scene scene1</span><span class="s2">, </span><span class="s1">Scene scene2</span><span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">scene1</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">() == </span><span class="s1">scene2</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">() &amp;&amp; </span><span class="s1">scene1</span><span class="s2">.</span><span class="s1">getHeight</span><span class="s2">() == </span><span class="s1">scene2</span><span class="s2">.</span><span class="s1">getHeight</span><span class="s2">()) {</span>
+            <span class="s0">return true</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

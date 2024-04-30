@@ -1,0 +1,293 @@
+<html>
+<head>
+<title>TestClass.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #5f826b; font-style: italic;}
+.s4 { color: #7a7e85;}
+.s5 { color: #67a37c; font-style: italic;}
+.s6 { color: #6aab73;}
+.s7 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+TestClass.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">edu</span><span class="s2">.</span><span class="s1">sdccd</span><span class="s2">.</span><span class="s1">cisc191</span><span class="s2">.</span><span class="s1">template</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">application</span><span class="s2">.</span><span class="s1">Platform</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">embed</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.</span><span class="s1">JFXPanel</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Parent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Scene</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">Label</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">BorderPane</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">StackPane</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">VBox</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">paint</span><span class="s2">.</span><span class="s1">Color</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">Font</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">FontWeight</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">Stage</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">junit</span><span class="s2">.</span><span class="s1">jupiter</span><span class="s2">.</span><span class="s1">api</span><span class="s2">.</span><span class="s1">Assertions</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">junit</span><span class="s2">.</span><span class="s1">jupiter</span><span class="s2">.</span><span class="s1">api</span><span class="s2">.</span><span class="s1">BeforeAll</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">junit</span><span class="s2">.</span><span class="s1">jupiter</span><span class="s2">.</span><span class="s1">api</span><span class="s2">.</span><span class="s1">Test</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">paint</span><span class="s2">.</span><span class="s1">Paint</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">File</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">FileNotFoundException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">reflect</span><span class="s2">.</span><span class="s1">Array</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Scanner</span><span class="s2">;</span>
+
+<span class="s0">import static </span><span class="s1">org</span><span class="s2">.</span><span class="s1">junit</span><span class="s2">.</span><span class="s1">jupiter</span><span class="s2">.</span><span class="s1">api</span><span class="s2">.</span><span class="s1">Assertions</span><span class="s2">.</span><span class="s1">assertEquals</span><span class="s2">;</span>
+<span class="s0">import static </span><span class="s1">org</span><span class="s2">.</span><span class="s1">junit</span><span class="s2">.</span><span class="s1">jupiter</span><span class="s2">.</span><span class="s1">api</span><span class="s2">.</span><span class="s1">Assertions</span><span class="s2">.</span><span class="s1">assertTrue</span><span class="s2">;</span>
+
+
+<span class="s3">/**</span>
+ <span class="s3">* Unit tests for homework planner</span>
+ <span class="s3">*/</span>
+<span class="s0">public class </span><span class="s1">TestClass </span><span class="s2">{</span>
+
+    <span class="s4">//fixes the illegalstateexception toolkit error.</span>
+    <span class="s1">@BeforeAll</span>
+    <span class="s0">public static void </span><span class="s1">setUp</span><span class="s2">() {</span>
+        <span class="s0">new </span><span class="s1">JFXPanel</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+
+    <span class="s3">/** Unit Test 1</span>
+     <span class="s3">* 1. creates a new ViewStartScreen class for test screen</span>
+     <span class="s3">* 2. Create subjects to be put into an ArrayList</span>
+     <span class="s3">* 3. Adds subjects into ArrayLists</span>
+     <span class="s3">* 4. Methods involving ArrayList</span>
+     <span class="s3">* 5. assert that the items within the ArrayList are consistent with the methods that modified it</span>
+     <span class="s3">*</span>
+     <span class="s3">* </span><span class="s5">@author </span><span class="s3">Simon Nguyen &amp; Willy Do</span>
+     <span class="s3">*/</span>
+    <span class="s1">@Test</span>
+    <span class="s0">void </span><span class="s1">module1</span><span class="s2">() {</span>
+
+        <span class="s1">ViewStartScreen testClass </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ViewStartScreen</span><span class="s2">();</span>
+
+        <span class="s1">Subject testSubject </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">(</span><span class="s6">&quot;AP Physics&quot;</span><span class="s2">, </span><span class="s0">true</span><span class="s2">, </span><span class="s7">76</span><span class="s2">);</span>
+        <span class="s1">Subject testSubject2 </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">(</span><span class="s6">&quot;AP Calculus BC&quot;</span><span class="s2">, </span><span class="s0">true</span><span class="s2">, </span><span class="s7">91</span><span class="s2">);</span>
+        <span class="s1">Subject testSubject3 </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">(</span><span class="s6">&quot;Culinary 1-2&quot;</span><span class="s2">, </span><span class="s0">false</span><span class="s2">, </span><span class="s7">95</span><span class="s2">);</span>
+        <span class="s1">Subject testSubject4 </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">(</span><span class="s6">&quot;Honors Biotechnology 1-2&quot;</span><span class="s2">, </span><span class="s0">true</span><span class="s2">, </span><span class="s7">93</span><span class="s2">);</span>
+        <span class="s1">Subject testSubject5 </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">(</span><span class="s6">&quot;AP US History&quot;</span><span class="s2">, </span><span class="s0">true</span><span class="s2">, </span><span class="s7">45</span><span class="s2">);</span>
+        <span class="s1">Subject testSubject6 </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">(</span><span class="s6">&quot;CISC191&quot;</span><span class="s2">, </span><span class="s0">true</span><span class="s2">, </span><span class="s7">22</span><span class="s2">);</span>
+
+
+
+        <span class="s1">testClass</span><span class="s2">.</span><span class="s1">addSubject</span><span class="s2">(</span><span class="s1">testSubject</span><span class="s2">);</span>
+        <span class="s1">testClass</span><span class="s2">.</span><span class="s1">addSubject</span><span class="s2">(</span><span class="s1">testSubject2</span><span class="s2">);</span>
+        <span class="s1">testClass</span><span class="s2">.</span><span class="s1">addSubject</span><span class="s2">(</span><span class="s1">testSubject3</span><span class="s2">);</span>
+        <span class="s1">testClass</span><span class="s2">.</span><span class="s1">addSubject</span><span class="s2">(</span><span class="s1">testSubject4</span><span class="s2">);</span>
+        <span class="s1">testClass</span><span class="s2">.</span><span class="s1">addSubject</span><span class="s2">(</span><span class="s1">testSubject5</span><span class="s2">);</span>
+        <span class="s1">testClass</span><span class="s2">.</span><span class="s1">addSubject</span><span class="s2">(</span><span class="s1">testSubject6</span><span class="s2">);</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">testClass</span><span class="s2">.</span><span class="s1">getAtIndex</span><span class="s2">(</span><span class="s7">3</span><span class="s2">), </span><span class="s1">testSubject4</span><span class="s2">);</span>
+        <span class="s1">testClass</span><span class="s2">.</span><span class="s1">removeSubject</span><span class="s2">(</span><span class="s7">2</span><span class="s2">);</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">testClass</span><span class="s2">.</span><span class="s1">getAtIndex</span><span class="s2">(</span><span class="s7">3</span><span class="s2">), </span><span class="s1">testSubject5</span><span class="s2">);</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">testClass</span><span class="s2">.</span><span class="s1">findIndex</span><span class="s2">(</span><span class="s1">testSubject2</span><span class="s2">), </span><span class="s7">1</span><span class="s2">);</span>
+        <span class="s1">testClass</span><span class="s2">.</span><span class="s1">setSubject</span><span class="s2">(</span><span class="s7">4</span><span class="s2">, </span><span class="s1">testSubject3</span><span class="s2">);</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">testClass</span><span class="s2">.</span><span class="s1">getAtIndex</span><span class="s2">(</span><span class="s7">4</span><span class="s2">), </span><span class="s1">testSubject3</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+
+
+
+    <span class="s3">/** Unit Test 2</span>
+     <span class="s3">*  1. Create new test ViewStartScreen, subject for unit test</span>
+     <span class="s3">*  2. Create a Calendar object which contains a 2D Array of Arraylists of Assignments</span>
+     <span class="s3">*  3. This means an infinite amount of assignments can be added to a day with no bounds</span>
+     <span class="s3">*  4. Add multiple assignments to one day and confirm a variety of 2D Array methods</span>
+     <span class="s3">*  5. Do the same for another day to confirm that the 2D Array works</span>
+     <span class="s3">* </span><span class="s5">@author </span><span class="s3">Willy Do</span>
+     <span class="s3">*/</span>
+    <span class="s1">@Test</span>
+    <span class="s0">void </span><span class="s1">module2</span><span class="s2">() {</span>
+        <span class="s4">//Example date number 1 (The 24th)</span>
+        <span class="s1">ViewStartScreen testClass </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ViewStartScreen</span><span class="s2">();</span>
+        <span class="s1">Calendar calendar </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Calendar</span><span class="s2">();</span>
+        <span class="s1">calendar</span><span class="s2">.</span><span class="s1">createArrayList</span><span class="s2">();</span>
+        <span class="s1">Subject testSubject </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">(</span><span class="s6">&quot;AP Physics&quot;</span><span class="s2">, </span><span class="s0">false</span><span class="s2">, </span><span class="s7">76</span><span class="s2">);</span>
+        <span class="s1">Assignment testAssignment </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s6">&quot;Test 1&quot;</span><span class="s2">, </span><span class="s7">9</span><span class="s2">, </span><span class="s7">70</span><span class="s2">, </span><span class="s0">true</span><span class="s2">, </span><span class="s7">80</span><span class="s2">);</span>
+        <span class="s1">calendar</span><span class="s2">.</span><span class="s1">addAssignment</span><span class="s2">(</span><span class="s7">24</span><span class="s2">, </span><span class="s1">testAssignment</span><span class="s2">);</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">calendar</span><span class="s2">.</span><span class="s1">getAssignment</span><span class="s2">(</span><span class="s7">24</span><span class="s2">, </span><span class="s7">0</span><span class="s2">), </span><span class="s1">testAssignment</span><span class="s2">);</span>
+        <span class="s1">Assignment testAssignment2 </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s6">&quot;Test 2&quot;</span><span class="s2">, </span><span class="s7">5</span><span class="s2">, </span><span class="s7">50</span><span class="s2">, </span><span class="s0">false</span><span class="s2">, </span><span class="s7">70</span><span class="s2">);</span>
+        <span class="s1">calendar</span><span class="s2">.</span><span class="s1">addAssignment</span><span class="s2">(</span><span class="s7">24</span><span class="s2">, </span><span class="s1">testAssignment2</span><span class="s2">);</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">calendar</span><span class="s2">.</span><span class="s1">getAssignment</span><span class="s2">(</span><span class="s7">24</span><span class="s2">,</span><span class="s7">1</span><span class="s2">), </span><span class="s1">testAssignment2</span><span class="s2">);</span>
+        <span class="s1">Assignment testAssignment3 </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s6">&quot;Test 3&quot;</span><span class="s2">, </span><span class="s7">6</span><span class="s2">, </span><span class="s7">50</span><span class="s2">, </span><span class="s0">false</span><span class="s2">, </span><span class="s7">100</span><span class="s2">);</span>
+        <span class="s1">calendar</span><span class="s2">.</span><span class="s1">addAssignment</span><span class="s2">(</span><span class="s7">24</span><span class="s2">, </span><span class="s1">testAssignment3</span><span class="s2">);</span>
+        <span class="s1">Assignment testAssignment4 </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s6">&quot;Test 4&quot;</span><span class="s2">, </span><span class="s7">1</span><span class="s2">, </span><span class="s7">30</span><span class="s2">, </span><span class="s0">false</span><span class="s2">, </span><span class="s7">100</span><span class="s2">);</span>
+        <span class="s1">Assignment testAssignment5 </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s6">&quot;Test 5&quot;</span><span class="s2">, </span><span class="s7">2</span><span class="s2">, </span><span class="s7">90</span><span class="s2">, </span><span class="s0">false</span><span class="s2">, </span><span class="s7">100</span><span class="s2">);</span>
+        <span class="s1">Assignment testAssignment6 </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s6">&quot;Test 6&quot;</span><span class="s2">, </span><span class="s7">3</span><span class="s2">, </span><span class="s7">50</span><span class="s2">, </span><span class="s0">true</span><span class="s2">, </span><span class="s7">100</span><span class="s2">);</span>
+        <span class="s1">calendar</span><span class="s2">.</span><span class="s1">addAssignment</span><span class="s2">(</span><span class="s7">24</span><span class="s2">, </span><span class="s1">testAssignment4</span><span class="s2">);</span>
+        <span class="s1">calendar</span><span class="s2">.</span><span class="s1">setAssignment</span><span class="s2">(</span><span class="s7">24</span><span class="s2">, </span><span class="s7">2</span><span class="s2">, </span><span class="s1">testAssignment5</span><span class="s2">);</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">calendar</span><span class="s2">.</span><span class="s1">getAssignment</span><span class="s2">(</span><span class="s7">24</span><span class="s2">, </span><span class="s7">2</span><span class="s2">), </span><span class="s1">testAssignment5</span><span class="s2">);</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">calendar</span><span class="s2">.</span><span class="s1">getAssignment</span><span class="s2">(</span><span class="s7">24</span><span class="s2">, </span><span class="s7">3</span><span class="s2">), </span><span class="s1">testAssignment4</span><span class="s2">);</span>
+        <span class="s1">calendar</span><span class="s2">.</span><span class="s1">removeAssignment</span><span class="s2">(</span><span class="s7">24</span><span class="s2">, </span><span class="s7">3</span><span class="s2">);</span>
+        <span class="s1">calendar</span><span class="s2">.</span><span class="s1">addAssignment</span><span class="s2">(</span><span class="s7">24</span><span class="s2">, </span><span class="s1">testAssignment6</span><span class="s2">);</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">calendar</span><span class="s2">.</span><span class="s1">getAssignment</span><span class="s2">(</span><span class="s7">24</span><span class="s2">, </span><span class="s7">3</span><span class="s2">), </span><span class="s1">testAssignment6</span><span class="s2">);</span>
+        <span class="s4">//Example date number 2 (The 13th)</span>
+        <span class="s1">Assignment testAssignment7 </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s6">&quot;Test 7&quot;</span><span class="s2">, </span><span class="s7">4</span><span class="s2">, </span><span class="s7">50</span><span class="s2">, </span><span class="s0">false</span><span class="s2">, </span><span class="s7">100</span><span class="s2">);</span>
+        <span class="s1">calendar</span><span class="s2">.</span><span class="s1">addAssignment</span><span class="s2">(</span><span class="s7">13</span><span class="s2">, </span><span class="s1">testAssignment7</span><span class="s2">);</span>
+        <span class="s1">Assignment testAssignment8 </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s6">&quot;Test 8&quot;</span><span class="s2">, </span><span class="s7">7</span><span class="s2">, </span><span class="s7">10</span><span class="s2">, </span><span class="s0">false</span><span class="s2">, </span><span class="s7">100</span><span class="s2">);</span>
+        <span class="s1">calendar</span><span class="s2">.</span><span class="s1">addAssignment</span><span class="s2">(</span><span class="s7">13</span><span class="s2">, </span><span class="s1">testAssignment8</span><span class="s2">);</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">calendar</span><span class="s2">.</span><span class="s1">findIndex</span><span class="s2">(</span><span class="s7">13</span><span class="s2">, </span><span class="s1">testAssignment8</span><span class="s2">), </span><span class="s7">1</span><span class="s2">);</span>
+
+
+    <span class="s2">}</span>
+
+
+
+
+    <span class="s3">/** Unit 3 Test</span>
+     <span class="s3">* -  like test 5, Platform.runLater makes sure the UI stuff runs on JavaFX thread.  This</span>
+     <span class="s3">*  fixed the annoying IllegalStateException error</span>
+     <span class="s3">* 1. create a sample test class, and make some sample subjects and assignments.</span>
+     <span class="s3">* 2.  Create a new stage and new scene and button for our class</span>
+     <span class="s3">* 3. Replicates the same stage</span>
+     <span class="s3">* 4. Confirms that the two stages are the same.</span>
+     <span class="s3">*</span>
+     <span class="s3">* </span><span class="s5">@author </span><span class="s3">Simon Nguyen &amp; Willy Do</span>
+     <span class="s3">*/</span>
+    <span class="s1">@Test</span>
+    <span class="s0">void </span><span class="s1">module3</span><span class="s2">() {</span>
+
+        <span class="s1">Platform</span><span class="s2">.</span><span class="s1">runLater</span><span class="s2">(() </span><span class="s1">-&gt; </span><span class="s2">{</span>
+
+
+            <span class="s1">ViewStartScreen testClass </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ViewStartScreen</span><span class="s2">();</span>
+
+            <span class="s1">Subject testSubject </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">(</span><span class="s6">&quot;AP Physics&quot;</span><span class="s2">, </span><span class="s0">false</span><span class="s2">, </span><span class="s7">76</span><span class="s2">);</span>
+            <span class="s1">Assignment testAssignment </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Assignment</span><span class="s2">();</span>
+            <span class="s1">testSubject</span><span class="s2">.</span><span class="s1">addAssignment</span><span class="s2">(</span><span class="s1">testAssignment</span><span class="s2">);</span>
+            <span class="s1">testClass</span><span class="s2">.</span><span class="s1">addSubject</span><span class="s2">(</span><span class="s1">testSubject</span><span class="s2">);</span>
+            <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Subject</span><span class="s2">&gt; </span><span class="s1">testSubjectArray </span><span class="s2">= </span><span class="s1">testClass</span><span class="s2">.</span><span class="s1">getSubjectArray</span><span class="s2">();</span>
+
+
+            <span class="s1">Stage testStage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Stage</span><span class="s2">();</span>
+            <span class="s1">testClass</span><span class="s2">.</span><span class="s1">setStage</span><span class="s2">(</span><span class="s1">testStage</span><span class="s2">);</span>
+            <span class="s1">Font font </span><span class="s2">= </span><span class="s1">Font</span><span class="s2">.</span><span class="s1">font</span><span class="s2">(</span><span class="s6">&quot;Montserrat&quot;</span><span class="s2">, </span><span class="s1">FontWeight</span><span class="s2">.</span><span class="s1">BOLD</span><span class="s2">, </span><span class="s7">36</span><span class="s2">);</span>
+            <span class="s1">OptionButton testButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OptionButton</span><span class="s2">(</span><span class="s6">&quot;Start Making Schedule&quot;</span><span class="s2">, </span><span class="s7">100</span><span class="s2">, </span><span class="s7">100</span><span class="s2">);</span>
+            <span class="s1">testButton</span><span class="s2">.</span><span class="s1">changeBackGroundColor</span><span class="s2">();</span>
+            <span class="s1">testButton</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s1">font</span><span class="s2">);</span>
+            <span class="s1">Label testLabel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Label</span><span class="s2">(</span><span class="s6">&quot;Welcome!&quot;</span><span class="s2">);</span>
+            <span class="s1">testLabel</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s1">font</span><span class="s2">);</span>
+
+            <span class="s1">testClass</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">testClass</span><span class="s2">.</span><span class="s1">createLayout</span><span class="s2">(</span><span class="s1">testClass</span><span class="s2">.</span><span class="s1">createVBox</span><span class="s2">(</span><span class="s7">50.0</span><span class="s2">, </span><span class="s1">testLabel</span><span class="s2">, </span><span class="s1">testButton</span><span class="s2">))));</span>
+            <span class="s1">VBox vBox </span><span class="s2">= </span><span class="s0">new </span><span class="s1">VBox</span><span class="s2">(</span><span class="s7">50.0</span><span class="s2">, </span><span class="s1">testLabel</span><span class="s2">, </span><span class="s1">testButton</span><span class="s2">);</span>
+            <span class="s1">BorderPane layout </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BorderPane</span><span class="s2">(</span><span class="s1">vBox</span><span class="s2">);</span>
+            <span class="s1">Scene scene2 </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">layout</span><span class="s2">, </span><span class="s7">400</span><span class="s2">, </span><span class="s7">300</span><span class="s2">);</span>
+
+
+            <span class="s1">Assertions</span><span class="s2">.</span><span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">scene2</span><span class="s2">, </span><span class="s1">testClass</span><span class="s2">.</span><span class="s1">getScene</span><span class="s2">());</span>
+
+
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+
+
+
+
+    <span class="s3">/** Unit Test 4</span>
+     <span class="s3">* - goal is to verify that moving between different classes work, thus</span>
+     <span class="s3">* proving Object-Oriented Programming.  Or so I think.</span>
+     <span class="s3">* 1. Create a new subject and a sample assignment, which will be added to the</span>
+     <span class="s3">* subject's array list.</span>
+     <span class="s3">* 2.  Using getters, assert that all content of the assignment taken from</span>
+     <span class="s3">* our subject's assignment list is the same as our original assignment's</span>
+     <span class="s3">* attributes</span>
+     <span class="s3">*</span>
+     <span class="s3">* </span><span class="s5">@author </span><span class="s3">Simon Nguyen</span>
+     <span class="s3">*/</span>
+    <span class="s1">@Test</span>
+    <span class="s0">void </span><span class="s1">module4</span><span class="s2">() {</span>
+
+        <span class="s1">ViewStartScreen testClass </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ViewStartScreen</span><span class="s2">();</span>
+
+        <span class="s1">Subject testSubject </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">();</span>
+        <span class="s1">Assignment testAssignment </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Assignment</span><span class="s2">(</span><span class="s6">&quot;Test 1&quot;</span><span class="s2">);</span>
+        <span class="s1">testAssignment</span><span class="s2">.</span><span class="s1">setBusyWork</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s1">testAssignment</span><span class="s2">.</span><span class="s1">setTotalPoints</span><span class="s2">(</span><span class="s7">80</span><span class="s2">);</span>
+        <span class="s1">testAssignment</span><span class="s2">.</span><span class="s1">setPointsOfAssignment</span><span class="s2">(</span><span class="s7">70</span><span class="s2">);</span>
+        <span class="s1">testAssignment</span><span class="s2">.</span><span class="s1">setDaysUntilDueDate</span><span class="s2">(</span><span class="s7">9</span><span class="s2">);</span>
+
+        <span class="s1">testSubject</span><span class="s2">.</span><span class="s1">addAssignment</span><span class="s2">(</span><span class="s1">testAssignment</span><span class="s2">);</span>
+
+        <span class="s4">// purposely left it at testSubject.get(0) to test all the getters and setters</span>
+
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">testAssignment</span><span class="s2">, </span><span class="s1">testSubject</span><span class="s2">.</span><span class="s1">getAssignmentList</span><span class="s2">().</span><span class="s1">get</span><span class="s2">(</span><span class="s7">0</span><span class="s2">));</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">testAssignment</span><span class="s2">.</span><span class="s1">getTotalPoints</span><span class="s2">(), </span><span class="s1">testSubject</span><span class="s2">.</span><span class="s1">getAssignmentList</span><span class="s2">().</span><span class="s1">get</span><span class="s2">(</span><span class="s7">0</span><span class="s2">).</span><span class="s1">getTotalPoints</span><span class="s2">());</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">testAssignment</span><span class="s2">.</span><span class="s1">getPointsOfAssignment</span><span class="s2">(), </span><span class="s1">testSubject</span><span class="s2">.</span><span class="s1">getAssignmentList</span><span class="s2">().</span><span class="s1">get</span><span class="s2">(</span><span class="s7">0</span><span class="s2">).</span><span class="s1">getPointsOfAssignment</span><span class="s2">());</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">testAssignment</span><span class="s2">.</span><span class="s1">getDaysUntilDueDate</span><span class="s2">(), </span><span class="s1">testSubject</span><span class="s2">.</span><span class="s1">getAssignmentList</span><span class="s2">().</span><span class="s1">get</span><span class="s2">(</span><span class="s7">0</span><span class="s2">).</span><span class="s1">getDaysUntilDueDate</span><span class="s2">());</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">testAssignment</span><span class="s2">.</span><span class="s1">isBusyWork</span><span class="s2">(), </span><span class="s1">testSubject</span><span class="s2">.</span><span class="s1">getAssignmentList</span><span class="s2">().</span><span class="s1">get</span><span class="s2">(</span><span class="s7">0</span><span class="s2">).</span><span class="s1">isBusyWork</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+
+    <span class="s3">/** Unit Test 5</span>
+     <span class="s3">* - Platform.runLater makes sure the UI stuff runs on JavaFX thread.  This</span>
+     <span class="s3">* fixed the annoying IllegalStateException error</span>
+     <span class="s3">*</span>
+     <span class="s3">* 1. create new testClass and two sample test subjects with different attributes</span>
+     <span class="s3">* for testing.  Put these subjects in an arraylist.</span>
+     <span class="s3">* 2.  Create a sample string of what the CSV file is supposed to look like.</span>
+     <span class="s3">* 3. Test our arraylist to CSV method by plugging in the sample arraylist.</span>
+     <span class="s3">* 4. using a Scanner, the unit test will read the file.</span>
+     <span class="s3">* 5. With iteration, read each line of file and build the string.</span>
+     <span class="s3">* 6. Assert that the sample created from reading the CSV file is identical to the</span>
+     <span class="s3">* sample string we created earlier.</span>
+     <span class="s3">*</span>
+     <span class="s3">* </span><span class="s5">@author </span><span class="s3">Simon Nguyen</span>
+     <span class="s3">*/</span>
+    <span class="s1">@Test</span>
+    <span class="s0">void </span><span class="s1">module5</span><span class="s2">() {</span>
+
+        <span class="s1">Platform</span><span class="s2">.</span><span class="s1">runLater</span><span class="s2">(() </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s1">ViewStartScreen testClass </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ViewStartScreen</span><span class="s2">();</span>
+
+        <span class="s1">Subject testSubject </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">(</span><span class="s6">&quot;Subject&quot;</span><span class="s2">, </span><span class="s0">true</span><span class="s2">, </span><span class="s7">94.0</span><span class="s2">);</span>
+        <span class="s1">testSubject</span><span class="s2">.</span><span class="s1">setColor</span><span class="s2">(</span><span class="s7">0</span><span class="s2">);</span>
+        <span class="s1">Subject testSubject2 </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Subject</span><span class="s2">(</span><span class="s6">&quot;Subject2&quot;</span><span class="s2">, </span><span class="s0">false</span><span class="s2">, </span><span class="s7">89.0</span><span class="s2">);</span>
+        <span class="s1">testSubject2</span><span class="s2">.</span><span class="s1">setColor</span><span class="s2">(</span><span class="s7">1</span><span class="s2">);</span>
+
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Subject</span><span class="s2">&gt; </span><span class="s1">testArray </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Subject</span><span class="s2">&gt;();</span>
+        <span class="s1">testArray</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">testSubject</span><span class="s2">);</span>
+        <span class="s1">testArray</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">testSubject2</span><span class="s2">);</span>
+
+
+        <span class="s1">File testFile </span><span class="s2">= </span><span class="s0">new </span><span class="s1">File</span><span class="s2">(</span><span class="s6">&quot;My_Schedule.txt&quot;</span><span class="s2">);</span>
+        <span class="s1">String actual </span><span class="s2">= </span><span class="s6">&quot;Subject,94.0,false,0,</span><span class="s0">\n</span><span class="s6">Subject2,89.0,false,1,&quot;</span><span class="s2">;</span>
+
+        <span class="s1">testClass</span><span class="s2">.</span><span class="s1">convertSubjectToCSV</span><span class="s2">(</span><span class="s1">testArray</span><span class="s2">);</span>
+        <span class="s4">//file created is My_Schedule.txt right</span>
+
+        <span class="s1">String test </span><span class="s2">= </span><span class="s6">&quot;&quot;</span><span class="s2">;</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">Scanner readFile </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scanner</span><span class="s2">(</span><span class="s1">testFile</span><span class="s2">);</span>
+            <span class="s1">readFile</span><span class="s2">.</span><span class="s1">useDelimiter</span><span class="s2">(</span><span class="s6">&quot;,&quot;</span><span class="s2">);</span>
+
+            <span class="s0">while </span><span class="s2">(</span><span class="s1">readFile</span><span class="s2">.</span><span class="s1">hasNextLine</span><span class="s2">()) {</span>
+                <span class="s1">String temp </span><span class="s2">= </span><span class="s1">readFile</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+                <span class="s1">test </span><span class="s2">+= </span><span class="s1">temp</span><span class="s2">;</span>
+            <span class="s2">}</span>
+                <span class="s1">assertEquals</span><span class="s2">(</span><span class="s1">actual</span><span class="s2">, </span><span class="s1">test</span><span class="s2">);</span>
+
+        <span class="s2">}</span>
+        <span class="s0">catch </span><span class="s2">(</span><span class="s1">FileNotFoundException ex</span><span class="s2">) {</span>
+            <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
