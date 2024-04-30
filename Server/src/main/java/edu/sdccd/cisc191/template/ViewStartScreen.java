@@ -238,23 +238,6 @@ public class ViewStartScreen extends Application {
     }
 
     public static void main(String[] args) {
-        try{
-            Database database = new Database();
-            database.createTables();
-            Subject subject = new Subject("Math");
-            database.create(subject);
-
-            while(true) {
-                try {
-                    Thread.sleep(5000);
-                    System.out.println("hello");
-                }catch (InterruptedException e){
-                    throw new RuntimeException(e);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         launch();
     }
 
@@ -308,6 +291,7 @@ public class ViewStartScreen extends Application {
                 Subject tempSubject = new Subject(name.getText(), Double.parseDouble(grade.getText()));
                 tempSubject.setColor(selectedIndex);
                 int tempColor = tempSubject.getColor();
+
 
 
                 subjectArrayList.add(tempSubject);
@@ -556,6 +540,25 @@ public class ViewStartScreen extends Application {
     public void convertSubjectToCSV(ArrayList<Subject> a) {
         FileChooser.ExtensionFilter availableFiles = new FileChooser.ExtensionFilter("txt files", "*.txt");
         FileChooser fc = new FileChooser();
+        try {
+            Database database = new Database();
+            database.createScheduleTables();
+            Schedule schedule = new Schedule(subjectArrayList);
+            database.createSchedule(schedule);
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        for(int i = 0; i < subjectArrayList.size(); i++){
+            try{
+                Database database = new Database();
+                database.createTables();
+                Subject subject = new Subject(subjectArrayList.get(i).getNameOfSubject());
+                database.create(subject);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
         fc.setTitle("Save Schedule");
         fc.setInitialFileName("My_Schedule.txt");
         fc.getExtensionFilters().add(availableFiles);

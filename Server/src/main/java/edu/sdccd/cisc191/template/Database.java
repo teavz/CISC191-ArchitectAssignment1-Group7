@@ -22,7 +22,10 @@ public class Database {
     }
 
     public void createTables() throws SQLException{
-        statement.execute("CREATE TABLE IF NOT EXISTS subject(id INT PRIMARY KEY AUTO_INCREMENT, nameOfSubject VARCHAR(64))");
+        statement.execute("CREATE TABLE IF NOT EXISTS subject(class INT PRIMARY KEY AUTO_INCREMENT, nameOfSubject VARCHAR(64), FOREIGN KEY (ScheduleID) REFERENCES schedule(ScheduleID))");
+    }
+    public void createScheduleTables() throws SQLException{
+        statement.execute("CREATE TABLE IF NOT EXISTS schedule(ScheduleID INT PRIMARY KEY AUTO_INCREMENT, gpa DOUBLE(3))");
     }
 
     public void create(Subject subject) throws SQLException {
@@ -38,5 +41,18 @@ public class Database {
             subject.setId(rs.getInt(1));
         }
 
+    }
+    public void createSchedule(Schedule schedule) throws SQLException{
+        String sql = "INSERT INTO schedule(gpa) VALUES(?)";
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.setDouble(1, schedule.getGpa());
+        int numRows = ps.executeUpdate();
+        if (numRows == 0) {
+            throw new SQLException("No rows affected");
+        }
+        ResultSet rs = ps.getGeneratedKeys();
+        if(rs.next()){
+            schedule.setId(rs.getInt(1));
+        }
     }
 }
