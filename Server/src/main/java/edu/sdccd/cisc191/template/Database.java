@@ -7,7 +7,7 @@ import java.sql.*;
 import org.h2.tools.Server;
 
 public class Database {
-    static final String DB_URL = "jdbc:h2:tcp://localhost:9092/./Server;DB_CLOSE_ON_EXIT=FALSE;";
+    static final String DB_URL = "jdbc:postgresql://localhost:5432/./Server;DB_CLOSE_ON_EXIT=FALSE;";
     static final String USER = "Guest";
     static final String PASS = "AppleBanana123";
 
@@ -16,16 +16,19 @@ public class Database {
     private Statement statement;
 
     public Database() throws SQLException {
-        server = Server.createTcpServer("-tcpPort", "9092", "-tcpAllowOthers", "-ifNotExists").start();
-        connection = DriverManager.getConnection(DB_URL, USER, PASS);
-        statement = connection.createStatement();
+
+
+            server = Server.createTcpServer("-tcpPort", "5432", "-tcpAllowOthers", "-ifNotExists").start();
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            statement = connection.createStatement();
+
     }
 
     public void createTables() throws SQLException{
         statement.execute("CREATE TABLE IF NOT EXISTS subject(class INT PRIMARY KEY AUTO_INCREMENT, nameOfSubject VARCHAR(64), FOREIGN KEY (ScheduleID) REFERENCES schedule(ScheduleID))");
     }
     public void createScheduleTables() throws SQLException{
-        statement.execute("CREATE TABLE IF NOT EXISTS schedule(ScheduleID INT PRIMARY KEY AUTO_INCREMENT, gpa DOUBLE(3))");
+        statement.execute("CREATE TABLE IF NOT EXISTS schedule(ScheduleID INT PRIMARY KEY AUTO_INCREMENT, gpa DOUBLE)");
     }
 
     public void create(Subject subject) throws SQLException {
@@ -53,5 +56,9 @@ public class Database {
         if(rs.next()){
             schedule.setId(rs.getInt(1));
         }
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 }

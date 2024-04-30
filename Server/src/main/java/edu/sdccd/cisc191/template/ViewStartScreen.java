@@ -453,7 +453,7 @@ public class ViewStartScreen extends Application {
         ArrayList<Assignment> assignments = subject.getAssignmentList();
         Assignment selectedAssignment = assignments.get(assignmentIndex);
 
-        // Create labels to display assignment details
+
         Label assignmentLabel = new Label("Assignment Name: " + selectedAssignment.getNameOfAssignment() + "\n" +
                 "Total Points Possible: " + Double.toString(selectedAssignment.getTotalPoints()));
 
@@ -535,12 +535,88 @@ public class ViewStartScreen extends Application {
     /**
      * Convert the list of subjects to a CSV file
      *
-     * @param a The list of subjects to be converted.
+     * @param  The list of subjects to be converted.
      */
-    public void convertSubjectToCSV(ArrayList<Subject> a) {
+
+    public void convertSubjectToCSV(ArrayList<Subject> subjectArrayList) {
         FileChooser.ExtensionFilter availableFiles = new FileChooser.ExtensionFilter("txt files", "*.txt");
         FileChooser fc = new FileChooser();
+
         try {
+            // Create a single Database instance
+            Database database = new Database();
+            database.createScheduleTables();
+            database.createTables();
+
+            // Start a transaction
+            database.getConnection().setAutoCommit(false);
+
+            // Insert schedule
+            Schedule schedule = new Schedule(subjectArrayList);
+            database.createSchedule(schedule);
+
+            // Insert subjects
+            for(Subject subject : subjectArrayList) {
+                database.create(subject);
+            }
+
+            // Commit the transaction
+            database.getConnection().commit();
+            database.getConnection().setAutoCommit(true);
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        fc.setTitle("Save Schedule");
+        fc.setInitialFileName("My_Schedule.txt");
+        fc.getExtensionFilters().add(availableFiles);
+        File saveLocation = fc.showSaveDialog(stage);
+
+        if (saveLocation != null) {
+            try (FileWriter writer = new FileWriter(saveLocation)) {
+                for (Subject subject : subjectArrayList) {
+                    writer.append(subject.getNameOfSubject())
+                            .append(',')
+                            .append(String.valueOf(subject.getGradeInClass()))
+                            .append(',')
+                            .append(String.valueOf(subject.isWeighted()))
+                            .append(',')
+                            .append(String.valueOf(subject.getColor()))
+                            .append(',');
+
+                    ArrayList<Assignment> temp = subject.getAssignmentList();
+                    for (Assignment assignment : temp) {
+                        writer.append(assignment.getNameOfAssignment()).append(',');
+                    }
+                    writer.append("\n");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    /* public void convertSubjectToCSV(ArrayList<Subject> a) {
+        FileChooser.ExtensionFilter availableFiles = new FileChooser.ExtensionFilter("txt files", "*.txt");
+        FileChooser fc = new FileChooser();
+
+        try {
+            Database database = new Database();
+            database.createScheduleTables();
+            Schedule schedule = new Schedule(subjectArrayList);
+            database.createSchedule(schedule);
+
+
+            database.createTables();
+
+
+            for(int i = 0; i < subjectArrayList.size(); i++){
+                Subject subject = new Subject(subjectArrayList.get(i).getNameOfSubject());
+                database.create(subject);
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        /* try {
             Database database = new Database();
             database.createScheduleTables();
             Schedule schedule = new Schedule(subjectArrayList);
@@ -557,7 +633,7 @@ public class ViewStartScreen extends Application {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
+
 
         fc.setTitle("Save Schedule");
         fc.setInitialFileName("My_Schedule.txt");
@@ -584,7 +660,7 @@ public class ViewStartScreen extends Application {
             //msg to javafx success
         } catch (IOException e) {
         }
-    }
+    } */
 
     /**
      * allows the user to import a previously saved schedule in the form of a csv file
