@@ -18,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.h2.server.web.ConnectionInfo;
 
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -535,32 +536,20 @@ public class ViewStartScreen extends Application {
     /**
      * Convert the list of subjects to a CSV file
      *
-     * @param  The list of subjects to be converted.
      */
 
     public void convertSubjectToCSV(ArrayList<Subject> subjectArrayList) {
         FileChooser.ExtensionFilter availableFiles = new FileChooser.ExtensionFilter("txt files", "*.txt");
         FileChooser fc = new FileChooser();
-
         try {
-            // Create a single Database instance
+
             Database database = new Database();
-            database.createScheduleTables();
-            database.createTables();
 
-            // Start a transaction
-            database.getConnection().setAutoCommit(false);
-
-            // Insert schedule
-            Schedule schedule = new Schedule(subjectArrayList);
-            database.createSchedule(schedule);
-
-            // Insert subjects
             for(Subject subject : subjectArrayList) {
                 database.create(subject);
             }
 
-            // Commit the transaction
+            // Commit the transaction `
             database.getConnection().commit();
             database.getConnection().setAutoCommit(true);
         } catch(SQLException e) {
