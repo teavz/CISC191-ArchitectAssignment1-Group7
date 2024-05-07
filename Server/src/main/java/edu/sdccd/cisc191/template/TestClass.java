@@ -278,6 +278,15 @@ public class TestClass extends Sorting {
         assertEquals(arrayList.get(1).getDaysUntilDueDate(), 15);
         assertEquals(arrayList.get(2).getDaysUntilDueDate(), 20);
     }
+    @Test
+    void module11(){
+        int numberOfSubjects = 6000;
+        Subject[] subjects = new Subject[numberOfSubjects];
+        for(int i = 0; i < numberOfSubjects; i++){
+            subjects[i] = new Subject("Math");
+        }
+
+    }
 
 
 }

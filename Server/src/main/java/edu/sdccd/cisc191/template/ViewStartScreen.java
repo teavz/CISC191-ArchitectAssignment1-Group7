@@ -240,6 +240,8 @@ public class ViewStartScreen extends Application {
 
     public static void main(String[] args) {
         launch();
+        TaskClass taskClass = new TaskClass();
+        taskClass.start();
     }
 
 

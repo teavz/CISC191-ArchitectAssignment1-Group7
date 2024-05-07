@@ -47,5 +47,15 @@ public class Client {
             e.printStackTrace();
         }
     }
+
+    public void mainProgramMethod() {
+
+        TaskClass task = new TaskClass();
+
+        Thread thread = new Thread(task);
+
+        thread.start();
+
+    }
 } //end class Client
 

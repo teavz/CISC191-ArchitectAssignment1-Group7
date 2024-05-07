@@ -2,7 +2,7 @@ package edu.sdccd.cisc191.template;
 
 import java.util.ArrayList;
 
-public class Subject {
+public class Subject extends Thread{
     private String nameOfSubject;
     private boolean weighted;
     private double gradeInClass;
@@ -18,6 +18,14 @@ public class Subject {
         gradeInClass = 0.0;
         assignmentList = new ArrayList<Assignment>();
         color = 0;
+    }
+    public Subject(String name){
+        nameOfSubject =name;
+        weighted = false;
+        gradeInClass = 0.0;
+        assignmentList = new ArrayList<Assignment>();
+        color = 0;
+        id = 0;
     }
     public Subject(String name, int id){
         nameOfSubject = name;
@@ -52,9 +60,6 @@ public class Subject {
         assignmentList = subject.getAssignmentList();
         color = 0;
 
-    }
-    public Subject(String name){
-        nameOfSubject = name;
     }
 
     public String getNameOfSubject() {
