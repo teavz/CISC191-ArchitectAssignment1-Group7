@@ -545,8 +545,12 @@ public class ViewStartScreen extends Application {
 
             Database database = new Database();
 
+            Schedule schedule = new Schedule(subjectArrayList);
+
+            database.createSchedule(schedule);
+
             for(Subject subject : subjectArrayList) {
-                database.create(subject);
+                database.create(subject, schedule);
             }
 
             // Commit the transaction `
@@ -807,7 +811,5 @@ public class ViewStartScreen extends Application {
             layout.setCenter(resultLabel);
         }
     }
-
-
 
 }

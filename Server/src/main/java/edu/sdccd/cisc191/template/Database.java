@@ -28,7 +28,7 @@ public class Database {
             //putting it all in when Database gets created ig
             Statement statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS schedule(ScheduleID INT AUTO_INCREMENT PRIMARY KEY, gpa DOUBLE)");
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS subject(class INT  AUTO_INCREMENT PRIMARY KEY, nameOfSubject VARCHAR(64), ScheduleID INT, FOREIGN KEY (ScheduleID) REFERENCES schedule(ScheduleID))");
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS subject(nameOfSubject VARCHAR(64), ScheduleID INT, FOREIGN KEY (ScheduleID) REFERENCES schedule(ScheduleID))");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -44,15 +44,18 @@ public class Database {
 */
 
     public void createSchedule(Schedule schedule) throws SQLException {
-        String sql = "INSERT INTO schedule(gpa) VALUES(?)";
+        String sql = "INSERT INTO schedule(gpa, scheduleID) VALUES(?, ?)";
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setDouble(1, schedule.getGpa());
+        ps.setInt(2, schedule.getId());
+
         int numRows = ps.executeUpdate();
         if (numRows == 0) {
             throw new SQLException("No rows affected");
         }
         ResultSet rs = ps.getGeneratedKeys();
         if (rs.next()) {
+
             schedule.setId(rs.getInt(1));
         }
     }
@@ -62,12 +65,13 @@ public class Database {
     }
 
 
-    public void create(Subject subject) throws SQLException {
+    public void create(Subject subject, Schedule schedule) throws SQLException {
 
 
-        String sql = "INSERT INTO subject(nameOfSubject) VALUES(?)";
+        String sql = "INSERT INTO subject(nameOfSubject, ScheduleID) VALUES(?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, subject.getNameOfSubject());
+            ps.setInt(2, schedule.getId());
             int numRows = ps.executeUpdate();
             if (numRows == 0) {
                 throw new SQLException("No rows affected");
@@ -79,6 +83,8 @@ public class Database {
             }
         }
     }
+
+
 
 
 }

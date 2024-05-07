@@ -1,5 +1,8 @@
 package edu.sdccd.cisc191.template;
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 import java.util.*;
+import java.lang.Math;
 
 public class Schedule {
     private ArrayList<Subject> schedule;
@@ -7,12 +10,15 @@ public class Schedule {
     private int id;
     public Schedule(ArrayList<Subject> a){
         schedule = a;
-        gpa = 0;
+        gpa = calculateGPA(a);
+        id = (int)(Math.random() * 10000000);
     }
 
     public Schedule(ArrayList<Subject> a, double gpa) {
         schedule = a;
         this.gpa = gpa;
+        id = (int)(Math.random() * 10000000);
+        matchIDS(a, id);
     }
     public double getGpa() {
         return gpa;
@@ -42,4 +48,13 @@ public class Schedule {
         return totalGrades/a.size();
     }
 
+    /**
+     * @param a
+     * @param id
+     */
+    public static void matchIDS(ArrayList<Subject> a, int id) {
+        for (int i = 0; i < a.size(); i++) {
+            a.get(i).setId(id);
+        }
+    }
 }
