@@ -1,9 +1,11 @@
 package edu.sdccd.cisc191.template;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.*;
+import java.util.ArrayList;
 
 import org.h2.server.web.ConnectionInfo;
 import org.h2.tools.Server;
@@ -68,10 +70,20 @@ public class Database {
     public void create(Subject subject, Schedule schedule) throws SQLException {
 
 
-        String sql = "INSERT INTO subject(nameOfSubject, ScheduleID) VALUES(?, ?)";
+        String sql = "INSERT INTO subject(nameOfSubject, ScheduleID, subjectObject) VALUES(?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, subject.getNameOfSubject());
             ps.setInt(2, schedule.getId());
+
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(bos);
+            oos.writeObject(subject);
+            byte[] subjectBytes = bos.toByteArray();
+
+            // Set the byte array as a BLOB parameter
+            ByteArrayInputStream bais = new ByteArrayInputStream(subjectBytes);
+            ps.setBinaryStream(3, bais, subjectBytes.length);
+
             int numRows = ps.executeUpdate();
             if (numRows == 0) {
                 throw new SQLException("No rows affected");
@@ -81,7 +93,37 @@ public class Database {
                     subject.setId(rs.getInt(1));
                 }
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    public ArrayList<Subject> gatherSubject() throws SQLException {
+        ArrayList<Subject> subjectList = new ArrayList<>();
+        String selectQuery = "SELECT id, nameOfSubject, SubjectObject FROM Subject";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+             ResultSet rs = preparedStatement.executeQuery()) {
+            while (rs.next()) {
+
+                // Deserialize the Subject object from the SubjectObject column
+                byte[] subjectBytes = rs.getBytes("SubjectObject");
+                if (subjectBytes != null) {
+                    try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(subjectBytes))) {
+                        Subject deserializedSubject = (Subject) ois.readObject();
+                        Subject subject = new Subject(deserializedSubject);
+                        subjectList.add(subject);
+
+                    } catch (IOException | ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            }
+        } finally {
+            connection.close();
+        }
+        return subjectList;
     }
 
 

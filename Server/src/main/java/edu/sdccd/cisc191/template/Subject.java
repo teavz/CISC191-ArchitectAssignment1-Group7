@@ -102,7 +102,11 @@ public class Subject extends Thread{
         assignmentList.add(assignment);
     }
 
-    public int getId(){
+    /**
+     * getId is used for thread class.  If there is issues with renaming, just rename old subject getId to getID - simon
+     * @return id
+     */
+    public int getID(){
         return id;
     }
     public void setId(int id){
