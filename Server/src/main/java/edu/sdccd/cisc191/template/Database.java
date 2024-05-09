@@ -45,7 +45,7 @@ public class Database {
     }
 */
 
-    public void createSchedule(Schedule schedule) throws SQLException {
+    public synchronized void createSchedule(Schedule schedule) throws SQLException {
         String sql = "INSERT INTO schedule(gpa, scheduleID) VALUES(?, ?)";
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setDouble(1, schedule.getGpa());
@@ -62,12 +62,12 @@ public class Database {
         }
     }
 
-    public Connection getConnection() {
+    public synchronized Connection getConnection() {
         return connection;
     }
 
 
-    public void create(Subject subject, Schedule schedule) throws SQLException {
+    public synchronized void create(Subject subject, Schedule schedule) throws SQLException {
 
 
         String sql = "INSERT INTO subject(nameOfSubject, ScheduleID, subjectObject) VALUES(?, ?, ?)";
@@ -98,33 +98,65 @@ public class Database {
         }
     }
 
-    public ArrayList<Subject> gatherSubject() throws SQLException {
+    public synchronized ArrayList<Subject> gatherSubject(long courseID) throws SQLException {
         ArrayList<Subject> subjectList = new ArrayList<>();
-        String selectQuery = "SELECT id, nameOfSubject, SubjectObject FROM Subject";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
-             ResultSet rs = preparedStatement.executeQuery()) {
-            while (rs.next()) {
+        String selectQuery = "SELECT id, nameOfSubject, SubjectObject FROM subject WHERE CourseID = ?";
 
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            preparedStatement = connection.prepareStatement(selectQuery);
+            preparedStatement.setLong(1, courseID);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
                 // Deserialize the Subject object from the SubjectObject column
                 byte[] subjectBytes = rs.getBytes("SubjectObject");
                 if (subjectBytes != null) {
-                    try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(subjectBytes))) {
+                    ByteArrayInputStream bais = new ByteArrayInputStream(subjectBytes);
+                    ObjectInputStream ois = new ObjectInputStream(bais);
+                    try {
                         Subject deserializedSubject = (Subject) ois.readObject();
                         Subject subject = new Subject(deserializedSubject);
                         subjectList.add(subject);
-
-                    } catch (IOException | ClassNotFoundException e) {
+                    } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     }
                 }
-
-
             }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+            // Handle SQLException or IOException
         } finally {
-            connection.close();
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+
         return subjectList;
     }
+
+    public synchronized void close() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle SQLException
+        }
+    }
+
 
 
 
