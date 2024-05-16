@@ -562,28 +562,44 @@ public class ViewStartScreen extends Application {
      *
      */
 
-    public void convertSubjectToCSV(ArrayList<Subject> subjectArrayList) {
-        FileChooser.ExtensionFilter availableFiles = new FileChooser.ExtensionFilter("txt files", "*.txt");
-        FileChooser fc = new FileChooser();
-        ConcurrentLinkedDeque<Subject> subjects = new ConcurrentLinkedDeque<>();
+    public void convertSubjectToDatabase(ArrayList<Subject> subjectArrayList) {
         try {
-
             Database database = new Database();
 
             Schedule schedule = new Schedule(subjectArrayList);
 
             database.createSchedule(schedule);
 
-            for(Subject subject : subjectArrayList) {
+            for (Subject subject : subjectArrayList) {
                 database.create(subject, schedule);
             }
 
-            // Commit the transaction `
             database.getConnection().commit();
             database.getConnection().setAutoCommit(true);
-        } catch(SQLException e) {
+
+            showScheduleIDDialog(schedule.getId());
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * so users can actually see their scheduleID without Intellj lol
+     * @param scheduleID
+     */
+    private void showScheduleIDDialog(long scheduleID) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Schedule Saved");
+        alert.setHeaderText(null);
+        alert.setContentText("Schedule saved successfully! Save this ID to access your schedule at a later time!  Schedule ID: " + scheduleID);
+        alert.showAndWait();
+    }
+
+    public void convertSubjectToCSV(ArrayList<Subject> subjectArrayList) {
+        FileChooser.ExtensionFilter availableFiles = new FileChooser.ExtensionFilter("txt files", "*.txt");
+        FileChooser fc = new FileChooser();
+        ConcurrentLinkedDeque<Subject> subjects = new ConcurrentLinkedDeque<>();
 
         fc.setTitle("Save Schedule");
         fc.setInitialFileName("My_Schedule.txt");
@@ -754,7 +770,8 @@ public class ViewStartScreen extends Application {
     public void chooseSchedule(ArrayList<Subject> a) {
         OptionButton saveFile = new OptionButton("Save as File", screenWidth / 3.0, screenHeight / 2.0);
         OptionButton saveRemote = new OptionButton("Save Remotely", screenWidth / 3.0, screenHeight / 2.0);
-        HBox buttons = new HBox(50, saveFile, saveRemote);
+        OptionButton saveDatabase = new OptionButton("Save on Database", screenWidth / 3.0, screenHeight / 2.0);
+        HBox buttons = new HBox(50, saveFile, saveRemote, saveDatabase);
         buttons.setAlignment(Pos.CENTER);
         buttons.setStyle("-fx-background-color: #FFF1DC;");
 
@@ -767,6 +784,12 @@ public class ViewStartScreen extends Application {
             //DOES NOT WORK. Alternate networking implementation:
             // File Upload/Download on web server
             savedSchedule = convertEverythingToString(a);
+        });
+
+        saveDatabase.setOnAction((ActionEvent e) -> {
+            ConcurrentLinkedDeque<Subject> stack = arrayListToQueue(a);
+            convertSubjectToDatabase(a);
+
         });
         //set layout
         layout = new BorderPane(buttons);

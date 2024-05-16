@@ -282,8 +282,41 @@ public class TestClass extends Sorting {
         assertEquals(arrayList.get(1).getDaysUntilDueDate(), 15);
         assertEquals(arrayList.get(2).getDaysUntilDueDate(), 20);
     }
+
+    /**
+     * is this properly comparing database to original subject array????
+     *
+     */
     @Test
     void module10(){
+
+        Platform.runLater(() -> {
+
+
+            ViewStartScreen testClass = new ViewStartScreen();
+
+            Subject testSubject = new Subject("AP Calc", true, 94.0);
+            testSubject.setColor(0);
+            Subject testSubject2 = new Subject("Poetry", false, 89.0);
+            testSubject2.setColor(1);
+
+
+            ArrayList<Subject> testArray = new ArrayList<Subject>();
+            testArray.add(testSubject);
+            testArray.add(testSubject2);
+
+            testClass.convertSubjectToDatabase(testArray);
+
+            ViewStartScreen testClass2 = new ViewStartScreen();
+            testClass2.convertDatabaseToSubject();
+
+
+            assertEquals(testClass2.getAtIndex(0), testSubject);
+            assertEquals(testClass2.getAtIndex(1), testSubject2);
+        });
+
+
+
 
     }
     @Test

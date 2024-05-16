@@ -185,6 +185,25 @@ public class Database {
         return subjectList;
     }
 
+    /**
+     * to gather courseID of the last time a schedule was inserted into database yay
+     * @return
+     * @throws SQLException
+     */
+    public synchronized long getCourseIDOfSchedule() throws SQLException {
+        long courseID = -1;
+        String selectQuery = "SELECT ScheduleID FROM schedule ORDER BY entryDateTime DESC LIMIT 1";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(selectQuery)) {
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                courseID = rs.getLong("ScheduleID");
+            }
+        }
+
+        return courseID;
+    }
+
 
 
 
