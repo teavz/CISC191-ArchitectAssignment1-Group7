@@ -7,13 +7,20 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class Conversions {
+    private Stage stage;
     /**
      * allows the user to import a previously saved schedule in the form of a csv file
      *
@@ -49,47 +56,58 @@ public class Conversions {
         return subjectSave;
     }
 
-//    public void convertPlainTextToSubject() {
-//        // Create a TextArea on new page for the user to input the schedule text
-//        TextArea scheduleText = new TextArea();
-//        scheduleText.setPrefSize(screenWidth, screenHeight / 3.0);
-//
-//        // Creates a confirm button to process the entered text when done
-//        OptionButton confirmButton = new OptionButton("Confirm", screenWidth / 6.0, screenHeight / 10);
-//        ArrayList<Subject> subjectSave = new ArrayList<>();
-//        confirmButton.setOnAction((ActionEvent e) -> {
-//            String[] tokens = scheduleText.getText().split("\n");
-//            String[] tokens1;
-//            for (int i = 0; i < tokens.length; i++) {
-//                ArrayList<Assignment> assignments = new ArrayList<>();
-//                tokens1 = tokens[i].split(",");
-//                Subject tempSubject = new Subject(tokens1[0], Boolean.parseBoolean(tokens1[2]), Double.parseDouble(tokens1[1]));
-//                tempSubject.setColor(Integer.parseInt(tokens1[3]));
-//                for (int j = 4; j < tokens1.length; j++) {
-//                    assignments.add(new Assignment(tokens1[j]));
-//                }
-//                tempSubject.setAssignmentList(assignments);
-//                subjectSave.add(tempSubject);
-//                subjectArrayList = subjectSave;
-//            }
-//            try {
-//                // After processing the text, switch to the main screen
-//                runMainScreen(subjectArrayList, selectedIndex);
-//            } catch (Exception ex) {
-//                throw new RuntimeException(ex);
-//            }
-//        });
-//
-//        // Create a VBox to hold the text input field and the confirm button
-//        VBox buttons = new VBox(20, scheduleText, confirmButton);
-//        buttons.setAlignment(Pos.CENTER);
-//
-//        // Set up the layout
-//        layout = new BorderPane(buttons);
-//        sceneClassName = new Scene(layout, screenWidth, screenHeight); // Set scene dimensions
-//        switchScene(sceneClassName, "Import Schedule From Text");
-//        stage.show();
-//    }
+    public void convertSubjectToCSV(ArrayList<Subject> subjectArrayList, ConcurrentLinkedDeque<Subject> stack) {
+        FileChooser.ExtensionFilter availableFiles = new FileChooser.ExtensionFilter("txt files", "*.txt");
+        FileChooser fc = new FileChooser();
+        try {
+
+            Database database = new Database();
+
+            Schedule schedule = new Schedule(stack);
+
+            database.createSchedule(schedule);
+
+            while (stack.peekFirst() != null)
+                System.out.println("running in Thread " + Thread.currentThread().getName());
+                database.create(stack.pollFirst(), schedule);
+            //grab all subjects out of the stack
+
+            // Commit the transaction `
+            database.getConnection().commit();
+            database.getConnection().setAutoCommit(true);
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        fc.setTitle("Save Schedule");
+        fc.setInitialFileName("My_Schedule.txt");
+        fc.getExtensionFilters().add(availableFiles);
+
+        File saveLocation = fc.showSaveDialog(stage);
+
+        if (saveLocation != null) {
+            try (FileWriter writer = new FileWriter(saveLocation)) {
+                for (Subject subject : subjectArrayList) {
+                    writer.append(subject.getNameOfSubject())
+                            .append(',')
+                            .append(String.valueOf(subject.getGradeInClass()))
+                            .append(',')
+                            .append(String.valueOf(subject.isWeighted()))
+                            .append(',')
+                            .append(String.valueOf(subject.getColor()))
+                            .append(',');
+
+                    ArrayList<Assignment> temp = subject.getAssignmentList();
+                    for (Assignment assignment : temp) {
+                        writer.append(assignment.getNameOfAssignment()).append(',');
+                    }
+                    writer.append("\n");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     /**
      * used for tomcat activities

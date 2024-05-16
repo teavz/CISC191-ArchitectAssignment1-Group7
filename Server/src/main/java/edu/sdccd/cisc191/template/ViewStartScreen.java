@@ -34,6 +34,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedDeque;
+
+import static edu.sdccd.cisc191.template.Schedule.arrayListToQueue;
+
 public class ViewStartScreen extends Application {
     private int screenWidth, screenHeight; //allows buttons to be scaled accordingly
     private int selectedIndex;
@@ -44,6 +47,7 @@ public class ViewStartScreen extends Application {
     private Label time;
     private Scene sceneClassName;
     private ArrayList<Subject> subjectArrayList = new ArrayList<>();
+    private ConcurrentLinkedDeque<Subject> stack = new ConcurrentLinkedDeque<>();
     private boolean done = false;
     private Calendar calendar;
 
@@ -299,7 +303,7 @@ public class ViewStartScreen extends Application {
 
 
                 subjectArrayList.add(tempSubject);
-
+                stack.push(tempSubject);
                 runMainScreen(subjectArrayList, tempColor);
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -544,7 +548,7 @@ public class ViewStartScreen extends Application {
     public void convertSubjectToCSV(ArrayList<Subject> subjectArrayList) {
         FileChooser.ExtensionFilter availableFiles = new FileChooser.ExtensionFilter("txt files", "*.txt");
         FileChooser fc = new FileChooser();
-        ConcurrentLinkedDeque<ArrayList> subjects = new ConcurrentLinkedDeque<>();
+        ConcurrentLinkedDeque<Subject> subjects = new ConcurrentLinkedDeque<>();
         try {
 
             Database database = new Database();
@@ -592,72 +596,7 @@ public class ViewStartScreen extends Application {
             }
         }
     }
-    /* public void convertSubjectToCSV(ArrayList<Subject> a) {
-        FileChooser.ExtensionFilter availableFiles = new FileChooser.ExtensionFilter("txt files", "*.txt");
-        FileChooser fc = new FileChooser();
 
-        try {
-            Database database = new Database();
-            database.createScheduleTables();
-            Schedule schedule = new Schedule(subjectArrayList);
-            database.createSchedule(schedule);
-
-
-            database.createTables();
-
-
-            for(int i = 0; i < subjectArrayList.size(); i++){
-                Subject subject = new Subject(subjectArrayList.get(i).getNameOfSubject());
-                database.create(subject);
-            }
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
-        /* try {
-            Database database = new Database();
-            database.createScheduleTables();
-            Schedule schedule = new Schedule(subjectArrayList);
-            database.createSchedule(schedule);
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
-        for(int i = 0; i < subjectArrayList.size(); i++){
-            try{
-                Database database = new Database();
-                database.createTables();
-                Subject subject = new Subject(subjectArrayList.get(i).getNameOfSubject());
-                database.create(subject);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-
-        fc.setTitle("Save Schedule");
-        fc.setInitialFileName("My_Schedule.txt");
-        fc.getExtensionFilters().add(availableFiles);
-        File saveLocation = fc.showSaveDialog(stage);
-        try (FileWriter writer = new FileWriter(saveLocation)) {
-            for (Subject subject : a) {
-                writer.append(subject.getNameOfSubject())
-                        .append(',')
-                        .append(String.valueOf(subject.getGradeInClass()))
-                        .append(',')
-                        .append(String.valueOf(subject.isWeighted()))
-                        .append(',')
-                        .append(String.valueOf(subject.getColor()))
-                        .append(',');
-                ArrayList<Assignment> temp = subject.getAssignmentList();
-                for (Assignment assignment : temp) {
-                    writer.append(assignment.getNameOfAssignment()).append(',');
-                }
-                writer.append("\n");
-            }
-            writer.close();
-
-            //msg to javafx success
-        } catch (IOException e) {
-        }
-    } */
 
     /**
      * allows the user to import a previously saved schedule in the form of a csv file
@@ -767,6 +706,7 @@ public class ViewStartScreen extends Application {
         buttons.setStyle("-fx-background-color: #FFF1DC;");
 
         saveFile.setOnAction((ActionEvent e) -> {
+            ConcurrentLinkedDeque<Subject> stack = arrayListToQueue(a);
             convertSubjectToCSV(a);
         });
 
