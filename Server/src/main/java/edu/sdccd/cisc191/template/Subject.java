@@ -1,6 +1,7 @@
 package edu.sdccd.cisc191.template;
 
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class Subject extends Thread{
     private String nameOfSubject;
@@ -8,6 +9,7 @@ public class Subject extends Thread{
     private double gradeInClass;
     private ArrayList<Assignment> assignmentList;
     private int id;
+    private ConcurrentLinkedDeque<ArrayList> subjects = new ConcurrentLinkedDeque<>();
 
 
     private int color;

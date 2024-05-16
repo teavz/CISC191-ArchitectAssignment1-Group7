@@ -265,7 +265,11 @@ public class TestClass extends Sorting {
         });
     }
     @Test
-    void module9(){
+    void module7(){
+
+    }
+    @Test
+    void module8and9(){
         Assignment testAssignment1 = new Assignment("homework1", 15, 20, true, 30);
         Assignment testAssignment2 = new Assignment("homework2", 20, 25, false, 50);
         Assignment testAssignment = new Assignment("homework", 10, 5, true, 30);
@@ -273,10 +277,14 @@ public class TestClass extends Sorting {
         arrayList.add(testAssignment1);
         arrayList.add(testAssignment2);
         arrayList.add(testAssignment);
-        sortAssignmentByDueDate(arrayList, 3);
+        sortAssignmentByDueDate(arrayList, arrayList.size());
         assertEquals(arrayList.get(0).getDaysUntilDueDate(), 10);
         assertEquals(arrayList.get(1).getDaysUntilDueDate(), 15);
         assertEquals(arrayList.get(2).getDaysUntilDueDate(), 20);
+    }
+    @Test
+    void module10(){
+
     }
     @Test
     void module11(){

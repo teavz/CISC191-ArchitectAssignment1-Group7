@@ -11,7 +11,7 @@ import org.h2.server.web.ConnectionInfo;
 import org.h2.tools.Server;
 
 public class Database {
-    static final String JDBC_URL = "jdbc:h2:tcp://localhost/~/collegeclass;DB_CLOSE_ON_EXIT=FALSE";
+    static final String JDBC_URL = "jdbc:h2:tcp://localhost:9092/./Server;DB_CLOSE_ON_EXIT=FALSE";
     static final String USER = "Guest";
     static final String PASS = "AppleBanana123";
 

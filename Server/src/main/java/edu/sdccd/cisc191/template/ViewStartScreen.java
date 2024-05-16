@@ -33,6 +33,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentLinkedDeque;
 public class ViewStartScreen extends Application {
     private int screenWidth, screenHeight; //allows buttons to be scaled accordingly
     private int selectedIndex;
@@ -543,6 +544,7 @@ public class ViewStartScreen extends Application {
     public void convertSubjectToCSV(ArrayList<Subject> subjectArrayList) {
         FileChooser.ExtensionFilter availableFiles = new FileChooser.ExtensionFilter("txt files", "*.txt");
         FileChooser fc = new FileChooser();
+        ConcurrentLinkedDeque<ArrayList> subjects = new ConcurrentLinkedDeque<>();
         try {
 
             Database database = new Database();

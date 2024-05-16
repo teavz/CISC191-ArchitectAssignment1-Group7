@@ -3,13 +3,21 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.util.*;
 import java.lang.Math;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class Schedule {
     private ArrayList<Subject> schedule;
+    private ConcurrentLinkedDeque<ArrayList> subjects;
     private double gpa;
     private int id;
     public Schedule(ArrayList<Subject> a){
         schedule = a;
+        gpa = calculateGPA(a);
+        id = (int)(Math.random() * 10000000);
+    }
+    public Schedule(ArrayList<Subject> a, ConcurrentLinkedDeque<ArrayList> stack){
+        schedule = a;
+        subjects = stack;
         gpa = calculateGPA(a);
         id = (int)(Math.random() * 10000000);
     }
