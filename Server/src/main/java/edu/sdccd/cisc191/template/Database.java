@@ -6,12 +6,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.*;
 import java.util.ArrayList;
+import java.time.*;
 
 import org.h2.server.web.ConnectionInfo;
 import org.h2.tools.Server;
 
 public class Database {
-    static final String JDBC_URL = "jdbc:h2:tcp://localhost:9092/./Server;DB_CLOSE_ON_EXIT=FALSE";
+    static final String JDBC_URL = "jdbc:h2:tcp://localhost/~/collegeclass";
     static final String USER = "Guest";
     static final String PASS = "AppleBanana123";
 
@@ -30,7 +31,7 @@ public class Database {
             //putting it all in when Database gets created ig
             Statement statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS schedule(ScheduleID INT AUTO_INCREMENT PRIMARY KEY, gpa DOUBLE)");
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS subject(nameOfSubject VARCHAR(64), ScheduleID INT, FOREIGN KEY (ScheduleID) REFERENCES schedule(ScheduleID))");
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS subject(subjectObject VARBINARY, nameOfSubject VARCHAR(64), ScheduleID INT, entryDateTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (ScheduleID) REFERENCES schedule(ScheduleID))");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,28 +71,24 @@ public class Database {
     public synchronized void create(Subject subject, Schedule schedule) throws SQLException {
 
 
-        String sql = "INSERT INTO subject(nameOfSubject, ScheduleID, subjectObject) VALUES(?, ?, ?)";
-        try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, subject.getNameOfSubject());
-            ps.setInt(2, schedule.getId());
-
+        String sql = "INSERT INTO subject(subjectObject, nameOfSubject, ScheduleID) VALUES(?, ?, ?)";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            // Set subjectObject
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(bos);
             oos.writeObject(subject);
             byte[] subjectBytes = bos.toByteArray();
+            ps.setBytes(1, subjectBytes);
 
-            // Set the byte array as a BLOB parameter
-            ByteArrayInputStream bais = new ByteArrayInputStream(subjectBytes);
-            ps.setBinaryStream(3, bais, subjectBytes.length);
+            // Set nameOfSubject
+            ps.setString(2, subject.getNameOfSubject());
+
+            // Set ScheduleID
+            ps.setInt(3, schedule.getId());
 
             int numRows = ps.executeUpdate();
             if (numRows == 0) {
                 throw new SQLException("No rows affected");
-            }
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    subject.setId(rs.getInt(1));
-                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -100,7 +97,7 @@ public class Database {
 
     public synchronized ArrayList<Subject> gatherSubject(long courseID) throws SQLException {
         ArrayList<Subject> subjectList = new ArrayList<>();
-        String selectQuery = "SELECT id, nameOfSubject, SubjectObject FROM subject WHERE CourseID = ?";
+        String selectQuery = "SELECT id, nameOfSubject, subjectObject FROM subject WHERE ScheduleID = ?";
 
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
@@ -155,6 +152,37 @@ public class Database {
             e.printStackTrace();
             // Handle SQLException
         }
+    }
+
+    public synchronized Subject getSubjectFromBytes(byte[] subjectBytes) {
+        try (ByteArrayInputStream bais = new ByteArrayInputStream(subjectBytes);
+             ObjectInputStream ois = new ObjectInputStream(bais)) {
+            Subject subject = (Subject) ois.readObject();
+            return subject;
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public synchronized ArrayList<Subject> getSubjectsByScheduleID(long scheduleID) throws SQLException {
+        ArrayList<Subject> subjectList = new ArrayList<>();
+        String selectQuery = "SELECT subjectObject FROM subject WHERE ScheduleID = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(selectQuery)) {
+            preparedStatement.setLong(1, scheduleID);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                byte[] subjectBytes = rs.getBytes("subjectObject");
+                Subject subject = getSubjectFromBytes(subjectBytes);
+                if (subject != null) {
+                    subjectList.add(subject);
+                }
+            }
+        }
+
+        return subjectList;
     }
 
 

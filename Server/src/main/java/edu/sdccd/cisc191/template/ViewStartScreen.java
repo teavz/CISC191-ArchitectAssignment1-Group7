@@ -9,7 +9,6 @@ import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -18,13 +17,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.h2.server.web.ConnectionInfo;
 
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -34,6 +31,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.atomic.AtomicReference;
+
 public class ViewStartScreen extends Application {
     private int screenWidth, screenHeight; //allows buttons to be scaled accordingly
     private int selectedIndex;
@@ -131,6 +130,12 @@ public class ViewStartScreen extends Application {
         importCSVButton.setFont(font);
         importCSVButton.setWrapText(true);
 
+        OptionButton importDatabaseButton = new OptionButton("Import from Database", 500, 100);
+        importCSVButton.changeTextColor(Color.web("#34A3ED"));
+        importCSVButton.changeBackGroundColor();
+        importCSVButton.setFont(font);
+        importCSVButton.setWrapText(true);
+
         //button for import from text field (from website save)
         OptionButton importTextButton = new OptionButton("Import from Text", 500, 100);
         importTextButton.changeTextColor(Color.web("#34A3ED"));
@@ -152,12 +157,14 @@ public class ViewStartScreen extends Application {
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(150);
         imageView.setFitWidth(150);
-        VBox buttons = new VBox((double) screenHeight / 120, title, setupButton, importCSVButton, importTextButton, imageView, credits);
+        VBox buttons = new VBox((double) screenHeight / 120, title, setupButton, importDatabaseButton, importCSVButton, importTextButton, imageView, credits);
 
 
         buttonEffects(glow, setupButton, image, color, imageView);
 
         buttonEffects(glow, importCSVButton, image, color, imageView);
+
+        buttonEffects(glow, importDatabaseButton, image, color, imageView);
 
         buttonEffects(glow, importTextButton, image, color, imageView);
 
@@ -175,6 +182,16 @@ public class ViewStartScreen extends Application {
             try {
                 done = true;
                 runMainScreen(subjectArrayList, selectedIndex);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        importDatabaseButton.setOnAction((ActionEvent e) -> {
+            try {
+                done = true;
+                convertDatabaseToSubject();
+
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
@@ -692,6 +709,42 @@ public class ViewStartScreen extends Application {
             System.out.println("Invalid file");
         }
         return subjectSave;
+    }
+
+    /**
+     * lol whoever decided to name AtomicReference
+     * better than synchronized when it comes to concurrency????
+     * it works fine
+     * https://www.baeldung.com/java-atomic-variables#:~:text=The%20most%20commonly%20used%20atomic,which%20can%20be%20atomically%20updated.
+     */
+    public void convertDatabaseToSubject() {
+        TextArea scheduleText = new TextArea();
+        scheduleText.setPrefSize(screenWidth, screenHeight / 3.0);
+
+        OptionButton confirmButton = new OptionButton("Confirm", screenWidth / 6.0, screenHeight / 10);
+        AtomicReference<ArrayList<Subject>> subjectSave = new AtomicReference<>(new ArrayList<>());
+        confirmButton.setOnAction((ActionEvent e) -> {
+            long scheduleID = Long.parseLong(scheduleText.getText());
+            Database database;
+            try {
+                database = new Database();
+                subjectSave.set(database.getSubjectsByScheduleID(scheduleID));
+                subjectArrayList = subjectSave.get();
+                runMainScreen(subjectArrayList, selectedIndex);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+
+        VBox buttons = new VBox(20, scheduleText, confirmButton);
+        buttons.setAlignment(Pos.CENTER);
+
+        BorderPane layout = new BorderPane(buttons);
+        Scene scene = new Scene(layout, screenWidth, screenHeight);
+        stage.setScene(scene);
+        stage.setTitle("Import Schedule From Database");
+        stage.show();
     }
 
     public void convertPlainTextToSubject() {

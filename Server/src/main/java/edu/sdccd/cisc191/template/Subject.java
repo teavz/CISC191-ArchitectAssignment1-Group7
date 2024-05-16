@@ -1,9 +1,10 @@
 package edu.sdccd.cisc191.template;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-public class Subject extends Thread{
+public class Subject  extends Thread implements Serializable{
     private String nameOfSubject;
     private boolean weighted;
     private double gradeInClass;
