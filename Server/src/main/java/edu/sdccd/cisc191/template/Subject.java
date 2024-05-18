@@ -196,6 +196,11 @@ public class Subject  extends Thread implements Serializable{
 
         return result;
     }
+
+    @Override
+    public void run() {
+        System.out.println("running in Thread " + Thread.currentThread().getName());
+    }
 }
 
 

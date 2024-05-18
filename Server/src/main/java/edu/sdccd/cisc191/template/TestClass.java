@@ -22,7 +22,9 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
+import static edu.sdccd.cisc191.template.Conversions.convertSubjectToDatabase;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -267,6 +269,7 @@ public class TestClass extends Sorting {
     @Test
     void module7(){
 
+
     }
     @Test
     void module8and9(){
@@ -314,18 +317,16 @@ public class TestClass extends Sorting {
             assertEquals(testClass2.getAtIndex(0), testSubject);
             assertEquals(testClass2.getAtIndex(1), testSubject2);
         });
-
-
-
-
     }
     @Test
-    void module11(){
-        int numberOfSubjects = 6000;
-        Subject[] subjects = new Subject[numberOfSubjects];
-        for(int i = 0; i < numberOfSubjects; i++){
-            subjects[i] = new Subject("Math");
+    void module11() throws InterruptedException {
+        int numberOfSubjects = 2000;
+        ConcurrentLinkedDeque<Subject> subjects = new ConcurrentLinkedDeque<>();
+        for(int i = 0; i < numberOfSubjects; i++) {
+            Subject subject = new Subject("Math " + i);
+            subjects.addFirst(subject);
         }
+        convertSubjectToDatabase(subjects);
 
     }
 

@@ -56,9 +56,7 @@ public class Conversions {
         return subjectSave;
     }
 
-    public void convertSubjectToCSV(ArrayList<Subject> subjectArrayList, ConcurrentLinkedDeque<Subject> stack) {
-        FileChooser.ExtensionFilter availableFiles = new FileChooser.ExtensionFilter("txt files", "*.txt");
-        FileChooser fc = new FileChooser();
+    public static void convertSubjectToDatabase(ConcurrentLinkedDeque<Subject> stack) {
         try {
 
             Database database = new Database();
@@ -70,42 +68,11 @@ public class Conversions {
             while (stack.peekFirst() != null)
                 System.out.println("running in Thread " + Thread.currentThread().getName());
                 database.create(stack.pollFirst(), schedule);
-            //grab all subjects out of the stack
 
-            // Commit the transaction `
             database.getConnection().commit();
             database.getConnection().setAutoCommit(true);
         } catch(SQLException e) {
             e.printStackTrace();
-        }
-
-        fc.setTitle("Save Schedule");
-        fc.setInitialFileName("My_Schedule.txt");
-        fc.getExtensionFilters().add(availableFiles);
-
-        File saveLocation = fc.showSaveDialog(stage);
-
-        if (saveLocation != null) {
-            try (FileWriter writer = new FileWriter(saveLocation)) {
-                for (Subject subject : subjectArrayList) {
-                    writer.append(subject.getNameOfSubject())
-                            .append(',')
-                            .append(String.valueOf(subject.getGradeInClass()))
-                            .append(',')
-                            .append(String.valueOf(subject.isWeighted()))
-                            .append(',')
-                            .append(String.valueOf(subject.getColor()))
-                            .append(',');
-
-                    ArrayList<Assignment> temp = subject.getAssignmentList();
-                    for (Assignment assignment : temp) {
-                        writer.append(assignment.getNameOfAssignment()).append(',');
-                    }
-                    writer.append("\n");
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
