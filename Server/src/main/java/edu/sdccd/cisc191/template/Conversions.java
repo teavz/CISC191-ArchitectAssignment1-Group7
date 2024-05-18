@@ -56,24 +56,29 @@ public class Conversions {
         return subjectSave;
     }
 
-    public static void convertSubjectToDatabase(ConcurrentLinkedDeque<Subject> stack) {
+
+
+    public static ConcurrentLinkedDeque<Subject> convertSubjectToDatabase(ConcurrentLinkedDeque<Subject> stack, Schedule schedule) {
+        Database database = null;
+        ConcurrentLinkedDeque<Subject> subjects = stack;
         try {
 
-            Database database = new Database();
-
-            Schedule schedule = new Schedule(stack);
+            database = new Database();
 
             database.createSchedule(schedule);
 
-            while (stack.peekFirst() != null)
+            while (stack.peekFirst() != null) {
                 System.out.println("running in Thread " + Thread.currentThread().getName());
-                database.create(stack.pollFirst(), schedule);
+                database.create(subjects.pollFirst(), schedule);
+            }
 
             database.getConnection().commit();
             database.getConnection().setAutoCommit(true);
+            // return database;
         } catch(SQLException e) {
             e.printStackTrace();
         }
+        return subjects;
     }
 
     /**

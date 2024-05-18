@@ -16,10 +16,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import javafx.scene.paint.Paint;
+
+import javax.swing.text.View;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -41,7 +44,8 @@ public class TestClass extends Sorting {
     }
 
 
-    /** Unit Test 1
+    /**
+     * Unit Test 1
      * 1. creates a new ViewStartScreen class for test screen
      * 2. Create subjects to be put into an ArrayList
      * 3. Adds subjects into ArrayLists
@@ -63,7 +67,6 @@ public class TestClass extends Sorting {
         Subject testSubject6 = new Subject("CISC191", true, 22);
 
 
-
         testClass.addSubject(testSubject);
         testClass.addSubject(testSubject2);
         testClass.addSubject(testSubject3);
@@ -79,14 +82,14 @@ public class TestClass extends Sorting {
     }
 
 
-
-
-    /** Unit Test 2
-     *  1. Create new test ViewStartScreen, subject for unit test
-     *  2. Create a Calendar object which contains a 2D Array of Arraylists of Assignments
-     *  3. This means an infinite amount of assignments can be added to a day with no bounds
-     *  4. Add multiple assignments to one day and confirm a variety of 2D Array methods
-     *  5. Do the same for another day to confirm that the 2D Array works
+    /**
+     * Unit Test 2
+     * 1. Create new test ViewStartScreen, subject for unit test
+     * 2. Create a Calendar object which contains a 2D Array of Arraylists of Assignments
+     * 3. This means an infinite amount of assignments can be added to a day with no bounds
+     * 4. Add multiple assignments to one day and confirm a variety of 2D Array methods
+     * 5. Do the same for another day to confirm that the 2D Array works
+     *
      * @author Willy Do
      */
     @Test
@@ -101,7 +104,7 @@ public class TestClass extends Sorting {
         assertEquals(calendar.getAssignment(24, 0), testAssignment);
         Assignment testAssignment2 = new Assignment("Test 2", 5, 50, false, 70);
         calendar.addAssignment(24, testAssignment2);
-        assertEquals(calendar.getAssignment(24,1), testAssignment2);
+        assertEquals(calendar.getAssignment(24, 1), testAssignment2);
         Assignment testAssignment3 = new Assignment("Test 3", 6, 50, false, 100);
         calendar.addAssignment(24, testAssignment3);
         Assignment testAssignment4 = new Assignment("Test 4", 1, 30, false, 100);
@@ -125,11 +128,10 @@ public class TestClass extends Sorting {
     }
 
 
-
-
-    /** Unit 3 Test
+    /**
+     * Unit 3 Test
      * -  like test 5, Platform.runLater makes sure the UI stuff runs on JavaFX thread.  This
-     *  fixed the annoying IllegalStateException error
+     * fixed the annoying IllegalStateException error
      * 1. create a sample test class, and make some sample subjects and assignments.
      * 2.  Create a new stage and new scene and button for our class
      * 3. Replicates the same stage
@@ -174,10 +176,8 @@ public class TestClass extends Sorting {
     }
 
 
-
-
-
-    /** Unit Test 4
+    /**
+     * Unit Test 4
      * - goal is to verify that moving between different classes work, thus
      * proving Object-Oriented Programming.  Or so I think.
      * 1. Create a new subject and a sample assignment, which will be added to the
@@ -212,10 +212,11 @@ public class TestClass extends Sorting {
     }
 
 
-    /** Unit Test 5
+    /**
+     * Unit Test 5
      * - Platform.runLater makes sure the UI stuff runs on JavaFX thread.  This
      * fixed the annoying IllegalStateException error
-     *
+     * <p>
      * 1. create new testClass and two sample test subjects with different attributes
      * for testing.  Put these subjects in an arraylist.
      * 2.  Create a sample string of what the CSV file is supposed to look like.
@@ -233,46 +234,57 @@ public class TestClass extends Sorting {
         Platform.runLater(() -> {
             ViewStartScreen testClass = new ViewStartScreen();
 
-        Subject testSubject = new Subject("Subject", true, 94.0);
-        testSubject.setColor(0);
-        Subject testSubject2 = new Subject("Subject2", false, 89.0);
-        testSubject2.setColor(1);
+            Subject testSubject = new Subject("Subject", true, 94.0);
+            testSubject.setColor(0);
+            Subject testSubject2 = new Subject("Subject2", false, 89.0);
+            testSubject2.setColor(1);
 
-        ArrayList<Subject> testArray = new ArrayList<Subject>();
-        testArray.add(testSubject);
-        testArray.add(testSubject2);
+            ArrayList<Subject> testArray = new ArrayList<Subject>();
+            testArray.add(testSubject);
+            testArray.add(testSubject2);
 
 
-        File testFile = new File("My_Schedule.txt");
-        String actual = "Subject,94.0,false,0,\nSubject2,89.0,false,1,";
+            File testFile = new File("My_Schedule.txt");
+            String actual = "Subject,94.0,false,0,\nSubject2,89.0,false,1,";
 
-        testClass.convertSubjectToCSV(testArray);
-        //file created is My_Schedule.txt right
+            testClass.convertSubjectToCSV(testArray);
+            //file created is My_Schedule.txt right
 
-        String test = "";
-        try {
-            Scanner readFile = new Scanner(testFile);
-            readFile.useDelimiter(",");
+            String test = "";
+            try {
+                Scanner readFile = new Scanner(testFile);
+                readFile.useDelimiter(",");
 
-            while (readFile.hasNextLine()) {
-                String temp = readFile.nextLine();
-                test += temp;
-            }
+                while (readFile.hasNextLine()) {
+                    String temp = readFile.nextLine();
+                    test += temp;
+                }
                 assertEquals(actual, test);
 
-        }
-        catch (FileNotFoundException ex) {
-            throw new RuntimeException(ex);
-        }
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
+
     @Test
-    void module7(){
+    void module7() {
+        ViewStartScreen testClass = new ViewStartScreen();
 
-
+        Subject testSubject = new Subject("AP Physics", true, 76);
+        Subject testSubject1 = new Subject("AP Calculus", true, 97);
+        testClass.addSubject(testSubject);
+        testClass.addSubject(testSubject1);
+        ArrayList<Subject> test = new ArrayList<Subject>();
+        test.add(testSubject);
+        test.add(testSubject1);
+        ArrayList<Subject> example = testClass.getSubjectArray();
+        assertEquals(testClass.getSubjectArray().get(0), test.get(0));
+        assertEquals(testClass.getSubjectArray().get(1), test.get(1));
     }
+
     @Test
-    void module8and9(){
+    void module8and9() {
         Assignment testAssignment1 = new Assignment("homework1", 15, 20, true, 30);
         Assignment testAssignment2 = new Assignment("homework2", 20, 25, false, 50);
         Assignment testAssignment = new Assignment("homework", 10, 5, true, 30);
@@ -288,10 +300,9 @@ public class TestClass extends Sorting {
 
     /**
      * is this properly comparing database to original subject array????
-     *
      */
     @Test
-    void module10(){
+    void module10() {
 
         Platform.runLater(() -> {
 
@@ -318,17 +329,33 @@ public class TestClass extends Sorting {
             assertEquals(testClass2.getAtIndex(1), testSubject2);
         });
     }
+
     @Test
-    void module11() throws InterruptedException {
-        int numberOfSubjects = 2000;
+    void module11() throws InterruptedException, SQLException {
+
+
+        int numberOfSubjects = 500;
+
+
         ConcurrentLinkedDeque<Subject> subjects = new ConcurrentLinkedDeque<>();
-        for(int i = 0; i < numberOfSubjects; i++) {
+        ArrayList<Subject> listOfSubjects = new ArrayList<>();
+
+        //add all subjects to the deque and arraylist, start each thread
+        for (int i = 0; i < numberOfSubjects; i++) {
             Subject subject = new Subject("Math " + i);
             subjects.addFirst(subject);
+            listOfSubjects.add(subject);
+            subject.start();
         }
-        convertSubjectToDatabase(subjects);
 
+        //synchronize execution of threads: prevents overlap
+        for (int i = 0; i < numberOfSubjects; i++) {
+            listOfSubjects.get(i).join();
+        }
+        Schedule schedule = new Schedule(subjects);
+        ConcurrentLinkedDeque<Subject> test = convertSubjectToDatabase(subjects, schedule);
+
+        //deque should have no more subjects left if all subjects are transferred to database
+        assertEquals(test.peekFirst(), null);
     }
-
-
 }

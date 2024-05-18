@@ -562,7 +562,7 @@ public class ViewStartScreen extends Application {
      *
      */
 
-    public void convertSubjectToDatabase(ArrayList<Subject> subjectArrayList) {
+    public static void convertSubjectToDatabase(ArrayList<Subject> subjectArrayList) {
         try {
             Database database = new Database();
 
@@ -572,6 +572,7 @@ public class ViewStartScreen extends Application {
 
             for (Subject subject : subjectArrayList) {
                 database.create(subject, schedule);
+                System.out.println("running in " + Thread.currentThread().getName());
             }
 
             database.getConnection().commit();
@@ -588,7 +589,7 @@ public class ViewStartScreen extends Application {
      * so users can actually see their scheduleID without Intellj lol
      * @param scheduleID
      */
-    private void showScheduleIDDialog(long scheduleID) {
+    private static void showScheduleIDDialog(long scheduleID) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Schedule Saved");
         alert.setHeaderText(null);

@@ -31,7 +31,8 @@ public class Database {
             //putting it all in when Database gets created ig
             Statement statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS schedule(ScheduleID INT AUTO_INCREMENT PRIMARY KEY, gpa DOUBLE)");
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS subject(subjectObject VARBINARY, nameOfSubject VARCHAR(64), ScheduleID INT, entryDateTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (ScheduleID) REFERENCES schedule(ScheduleID))");
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS subject(subjectObject VARBINARY, nameOfSubject VARCHAR(64), " +
+                    "ScheduleID INT, entryDateTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (ScheduleID) REFERENCES schedule(ScheduleID))");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -95,6 +96,7 @@ public class Database {
         }
     }
 
+    /*
     public synchronized ArrayList<Subject> gatherSubject(long courseID) throws SQLException {
         ArrayList<Subject> subjectList = new ArrayList<>();
         String selectQuery = "SELECT id, nameOfSubject, subjectObject FROM subject WHERE ScheduleID = ?";
@@ -142,6 +144,8 @@ public class Database {
 
         return subjectList;
     }
+
+     */
 
     public synchronized void close() {
         try {
