@@ -268,6 +268,16 @@ public class TestClass extends Sorting {
     }
 
     @Test
+    /**
+     * Unit Test 7
+     * Create new ViewStartScreen object (our application).
+     * Create two test subjects and add them to the object's ArrayList<Subject> instance variable.
+     * Create another ArrayList<Subject> variable and add the two subjects.
+     * Confirm that index 0 and index 1 of both ArrayLists are the same,
+     * therefore showcasing use of generics (ArrayList) in our project.
+     *
+     * @author Willy Do
+     */
     void module7() {
         ViewStartScreen testClass = new ViewStartScreen();
 
@@ -284,6 +294,16 @@ public class TestClass extends Sorting {
     }
 
     @Test
+    /**
+     * Unit Tests 8 & 9
+     * Create three test assignments with due dates in incorrect order.
+     * Create a new ArrayList<Assignment> and add the three assignments in it.
+     * Use sorting method that takes both the ArrayList and size of ArrayList.
+     * Confirm that the ArrayList was sorted by due date.
+     * sortAssignmentByDueDate method utilizes recursion within it and is itself a sorting method.
+     * Therefore modules 8 and 9 are fulfilled by the two parts above respectively.
+     * @author Willy Do
+     */
     void module8and9() {
         Assignment testAssignment1 = new Assignment("homework1", 15, 20, true, 30);
         Assignment testAssignment2 = new Assignment("homework2", 20, 25, false, 50);
@@ -299,7 +319,14 @@ public class TestClass extends Sorting {
     }
 
     /**
-     * is this properly comparing database to original subject array????
+     * Unit Test 10
+     * Start a new ViewStartScreen and add two test subjects
+     * Add both test subjects into an ArrayList
+     * with the convertSubjectToDatabase method, input subjects into Database
+     * Restart a new ViewStartScreen program
+     * call convertDatabaseToSubject to retrieve subjects from Database based on scheduleID (see notes below)
+     * assert that the original arraylist contents match the retrieved Database contents
+     * @author Simon Nguyen
      */
     @Test
     void module10() {
@@ -320,6 +347,12 @@ public class TestClass extends Sorting {
             testArray.add(testSubject2);
 
             testClass.convertSubjectToDatabase(testArray);
+            /* convertSubjectToDatabase automatically creates a new Schedule object that is paired with the subjects.
+            convertSubjectToDatabase uses the scheduleID of that Schedule object for the Database entry.
+            testClass2 is still using the same Schedule object's scheduleID.  In a real-life use, the user would
+            enter their own scheduleID in a given textbox and retrieve whatever subjects they please based on ScheduleID
+
+             */
 
             ViewStartScreen testClass2 = new ViewStartScreen();
             testClass2.convertDatabaseToSubject();
@@ -329,6 +362,26 @@ public class TestClass extends Sorting {
             assertEquals(testClass2.getAtIndex(1), testSubject2);
         });
     }
+
+
+    /**
+     * Unit Test 11
+     * set number of subjects we want to make to 500, just cause why not
+     * Create ConcurrentLinkedDeque queue that is threadsafe for subjects, and an ArrayList listOfSubjects
+     * Add a new subject with a generic name to arraylist and deque and start each thread.
+     * Create a new Schedule object with it's own unique ScheduleID
+     * this convertSubjectToDatabase, from Conversions.java takes subject from the deque and inserts it into the database
+     * each thread running should print in the console stating "running in Thread #"
+     *
+     * assert that all subjects in deque from all the threads are successfully submitted to database and no subjects are left in deque
+     *
+     *
+     *
+     * @throws InterruptedException
+     * @throws SQLException
+     *
+     * @author Theo Dela Cruz
+     */
 
     @Test
     void module11() throws InterruptedException, SQLException {

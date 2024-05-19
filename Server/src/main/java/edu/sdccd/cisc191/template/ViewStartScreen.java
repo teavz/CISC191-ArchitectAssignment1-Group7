@@ -135,10 +135,10 @@ public class ViewStartScreen extends Application {
         importCSVButton.setWrapText(true);
 
         OptionButton importDatabaseButton = new OptionButton("Import from Database", 500, 100);
-        importCSVButton.changeTextColor(Color.web("#34A3ED"));
-        importCSVButton.changeBackGroundColor();
-        importCSVButton.setFont(font);
-        importCSVButton.setWrapText(true);
+        importDatabaseButton.changeTextColor(Color.web("#34A3ED"));
+        importDatabaseButton.changeBackGroundColor();
+        importDatabaseButton.setFont(font);
+        importDatabaseButton.setWrapText(true);
 
         //button for import from text field (from website save)
         OptionButton importTextButton = new OptionButton("Import from Text", 500, 100);
